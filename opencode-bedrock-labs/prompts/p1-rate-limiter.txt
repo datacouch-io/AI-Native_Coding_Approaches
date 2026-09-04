@@ -1,0 +1,1 @@
+Write a rate limiter for a REST API in Python using the token bucket algorithm. Return the code directly in your response text; do not create any files.

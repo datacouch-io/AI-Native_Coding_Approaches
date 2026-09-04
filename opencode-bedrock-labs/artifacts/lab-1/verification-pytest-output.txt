@@ -1,0 +1,32 @@
+$ python3 -m pytest test_claude_sonnet_5.py test_claude_opus_5.py test_gpt_5_6_sol.py test_gpt_5_6_terra.py -q
+
+    
+>       assert result == datetime(2026, 9, 4, 12, 34, 56, tzinfo=timezone.utc)
+E       assert datetime.datetime(2026, 9, 4, 12, 34, 56, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))) == datetime.datetime(2026, 9, 4, 12, 34, 56, tzinfo=datetime.timezone.utc)
+E        +  where datetime.datetime(2026, 9, 4, 12, 34, 56, tzinfo=datetime.timezone.utc) = datetime(2026, 9, 4, 12, 34, 56, tzinfo=datetime.timezone.utc)
+E        +    where datetime.timezone.utc = timezone.utc
+
+test_gpt_5_6_terra.py:12: AssertionError
+=========================== short test summary info ============================
+FAILED test_claude_sonnet_5.py::TestParseIso8601Basic::test_date_only_midnight
+FAILED test_claude_sonnet_5.py::TestMissingTimezone::test_missing_timezone_is_naive
+FAILED test_claude_sonnet_5.py::TestMissingTimezone::test_missing_timezone_with_fractional_seconds
+FAILED test_claude_sonnet_5.py::TestInvalidFormats::test_invalid_formats_raise[2023-06-15 14:30:00Z]
+FAILED test_claude_opus_5.py::TestZSuffix::test_lowercase_z_accepted - ValueE...
+FAILED test_claude_opus_5.py::TestMissingTimezone::test_naive_when_no_offset_present
+FAILED test_claude_opus_5.py::TestMissingTimezone::test_naive_is_not_silently_treated_as_utc
+FAILED test_claude_opus_5.py::TestMissingTimezone::test_date_only_defaults_to_midnight_naive
+FAILED test_claude_opus_5.py::TestFractionalSeconds::test_trailing_dot_without_digits_is_invalid
+FAILED test_claude_opus_5.py::TestInvalidInput::test_invalid_strings_raise_value_error[2024-03-01 12:34:56Z]
+FAILED test_claude_opus_5.py::TestInvalidInput::test_non_string_input_raises_type_error[None]
+FAILED test_claude_opus_5.py::TestInvalidInput::test_non_string_input_raises_type_error[1709295296]
+FAILED test_claude_opus_5.py::TestInvalidInput::test_non_string_input_raises_type_error[3.14]
+FAILED test_claude_opus_5.py::TestInvalidInput::test_non_string_input_raises_type_error[2024-03-01T12:34:56Z]
+FAILED test_claude_opus_5.py::TestInvalidInput::test_non_string_input_raises_type_error[value4]
+FAILED test_gpt_5_6_terra.py::test_parses_timezone_aware_timestamp - assert d...
+16 failed, 64 passed in 0.05s
+--- per-suite summary ---
+test_claude_sonnet_5     4 failed, 18 passed in 0.02s
+test_claude_opus_5       11 failed, 31 passed in 0.04s
+test_gpt_5_6_sol         8 passed in 0.00s
+test_gpt_5_6_terra       1 failed, 7 passed in 0.01s

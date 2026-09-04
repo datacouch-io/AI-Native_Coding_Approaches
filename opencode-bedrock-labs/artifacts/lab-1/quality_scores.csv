@@ -1,0 +1,17 @@
+model,prompt,quality_1_5
+claude-opus-5,p1-rate-limiter,5
+claude-opus-5,p2-refactor,5
+claude-opus-5,p3-caching-layer,5
+claude-opus-5,p4-unit-tests,5
+claude-sonnet-5,p1-rate-limiter,4
+claude-sonnet-5,p2-refactor,3
+claude-sonnet-5,p3-caching-layer,4
+claude-sonnet-5,p4-unit-tests,4
+gpt-5.6-sol,p1-rate-limiter,4
+gpt-5.6-sol,p2-refactor,3
+gpt-5.6-sol,p3-caching-layer,4
+gpt-5.6-sol,p4-unit-tests,4
+gpt-5.6-terra,p1-rate-limiter,4
+gpt-5.6-terra,p2-refactor,2
+gpt-5.6-terra,p3-caching-layer,3
+gpt-5.6-terra,p4-unit-tests,2

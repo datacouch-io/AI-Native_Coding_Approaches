@@ -1,0 +1,1 @@
+Design a caching layer for a read-heavy product catalog service (millions of reads/day, catalog updates a few times per hour). Describe your approach (eviction policy, invalidation strategy, cache-aside vs write-through) and provide the core cache logic in code. Return everything directly in your response text; do not create any files.

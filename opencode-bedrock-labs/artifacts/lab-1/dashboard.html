@@ -1,0 +1,95 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Lab 1 - Model Comparison Scorecard</title>
+<style>
+ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0f1117;
+      color:#e8eaf0;margin:0;padding:32px}
+ h1{font-size:22px;margin:0 0 4px}
+ .sub{color:#9aa1b2;font-size:13px;margin-bottom:28px}
+ .section{font-size:11px;color:#9aa1b2;margin:28px 0 10px;text-transform:uppercase;
+          letter-spacing:.06em}
+ .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+ .card{background:#171b28;border:1px solid #262b3a;border-radius:8px;padding:16px}
+ .card-head{margin-bottom:12px}
+ .row{display:flex;justify-content:space-between;font-size:12px;margin:8px 0 4px;color:#c4c9d6}
+ .row b{color:#e8eaf0}
+ .track{background:#1c2130;border-radius:3px;height:8px;overflow:hidden}
+ .fill{height:100%;border-radius:3px}
+ .badge{display:inline-block;padding:2px 6px;border-radius:4px;font-weight:600;font-size:11px;
+         white-space:nowrap}
+ table{border-collapse:collapse;width:100%;margin-top:4px;table-layout:fixed}
+ th,td{text-align:left;padding:6px 7px;border-bottom:1px solid #262b3a;font-size:11px}
+ th{color:#9aa1b2;font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.04em}
+ tr:hover td{background:#171b28}
+ .stars{color:#f5c518;letter-spacing:1px}
+ .stars .empty{color:#3a3f4f}
+ .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;
+        align-items:start}
+ .verdict{margin-top:22px;background:#141a2a;border:1px solid #26324a;border-left:3px solid #4a8fe7;
+          border-radius:6px;padding:14px 16px;font-size:13px;line-height:1.6;color:#c4c9d6}
+</style></head><body>
+<h1>Lab 1 &mdash; Model Comparison Scorecard</h1>
+<div class="sub">4 standardized prompts &times;
+ 4 Bedrock model tiers &middot; 16 live OpenCode runs &middot;
+ 2026-09-04 &middot; total real spend $1.145</div>
+
+<div class="section">Per-model summary (avg of 4 prompts)</div>
+<div class="grid">
+    <div class="card">
+      <div class="card-head"><span class="badge" style="background:#3a2a5c;color:#c9aef6">claude-sonnet-5</span></div>
+      <div class="row"><span>Avg cost</span><b>$0.0234</b></div>
+      <div class="track"><div class="fill" style="width:16.6%;background:#c9aef6"></div></div>
+      <div class="row"><span>Avg latency</span><b>22.1s</b></div>
+      <div class="track"><div class="fill" style="width:36.6%;background:#c9aef6"></div></div>
+      <div class="row"><span>Avg quality</span><b>3.75/5</b></div>
+      <div class="stars">★★★★<span class="empty">★</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><span class="badge" style="background:#5c2a3a;color:#f6aec2">claude-opus-5</span></div>
+      <div class="row"><span>Avg cost</span><b>$0.1411</b></div>
+      <div class="track"><div class="fill" style="width:100.0%;background:#f6aec2"></div></div>
+      <div class="row"><span>Avg latency</span><b>60.5s</b></div>
+      <div class="track"><div class="fill" style="width:100.0%;background:#f6aec2"></div></div>
+      <div class="row"><span>Avg quality</span><b>5.00/5</b></div>
+      <div class="stars">★★★★★<span class="empty"></span></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><span class="badge" style="background:#2a4a5c;color:#ade4f6">gpt-5.6-sol</span></div>
+      <div class="row"><span>Avg cost</span><b>$0.0824</b></div>
+      <div class="track"><div class="fill" style="width:58.4%;background:#ade4f6"></div></div>
+      <div class="row"><span>Avg latency</span><b>17.3s</b></div>
+      <div class="track"><div class="fill" style="width:28.6%;background:#ade4f6"></div></div>
+      <div class="row"><span>Avg quality</span><b>3.75/5</b></div>
+      <div class="stars">★★★★<span class="empty">★</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><span class="badge" style="background:#2a5c3a;color:#aef6c2">gpt-5.6-terra</span></div>
+      <div class="row"><span>Avg cost</span><b>$0.0394</b></div>
+      <div class="track"><div class="fill" style="width:27.9%;background:#aef6c2"></div></div>
+      <div class="row"><span>Avg latency</span><b>8.8s</b></div>
+      <div class="track"><div class="fill" style="width:14.5%;background:#aef6c2"></div></div>
+      <div class="row"><span>Avg quality</span><b>2.75/5</b></div>
+      <div class="stars">★★★<span class="empty">★★</span></div>
+    </div>
+</div>
+
+<div class="section">Full results — all 16 runs</div>
+<div class="cols"><table><colgroup><col style="width:23%"><col style="width:21%"><col style="width:13%"><col style="width:13%"><col style="width:15%"><col style="width:15%"></colgroup><tr><th>Model</th><th>Prompt</th><th>Latency</th><th>Cost</th><th>Tok in/out</th><th>Quality</th></tr><tr><td><span class="badge" style="background:#3a2a5c;color:#c9aef6">claude-sonnet-5</span></td><td>p1-rate-limiter</td><td>20.1s</td><td>$0.0235</td><td>1 / 1985</td><td class="stars">★★★★<span class="empty">★</span></td></tr>
+<tr><td><span class="badge" style="background:#3a2a5c;color:#c9aef6">claude-sonnet-5</span></td><td>p2-refactor</td><td>7.0s</td><td>$0.0065</td><td>1 / 259</td><td class="stars">★★★<span class="empty">★★</span></td></tr>
+<tr><td><span class="badge" style="background:#3a2a5c;color:#c9aef6">claude-sonnet-5</span></td><td>p3-caching-layer</td><td>42.7s</td><td>$0.0412</td><td>1 / 3734</td><td class="stars">★★★★<span class="empty">★</span></td></tr>
+<tr><td><span class="badge" style="background:#3a2a5c;color:#c9aef6">claude-sonnet-5</span></td><td>p4-unit-tests</td><td>18.8s</td><td>$0.0224</td><td>1 / 1856</td><td class="stars">★★★★<span class="empty">★</span></td></tr>
+<tr><td><span class="badge" style="background:#5c2a3a;color:#f6aec2">claude-opus-5</span></td><td>p1-rate-limiter</td><td>53.7s</td><td>$0.1830</td><td>2 / 4556</td><td class="stars">★★★★★<span class="empty"></span></td></tr>
+<tr><td><span class="badge" style="background:#5c2a3a;color:#f6aec2">claude-opus-5</span></td><td>p2-refactor</td><td>12.1s</td><td>$0.0271</td><td>2 / 695</td><td class="stars">★★★★★<span class="empty"></span></td></tr>
+<tr><td><span class="badge" style="background:#5c2a3a;color:#f6aec2">claude-opus-5</span></td><td>p3-caching-layer</td><td>136.7s</td><td>$0.2579</td><td>2 / 9898</td><td class="stars">★★★★★<span class="empty"></span></td></tr>
+<tr><td><span class="badge" style="background:#5c2a3a;color:#f6aec2">claude-opus-5</span></td><td>p4-unit-tests</td><td>39.6s</td><td>$0.0965</td><td>2 / 3225</td><td class="stars">★★★★★<span class="empty"></span></td></tr>
+</table><table><colgroup><col style="width:23%"><col style="width:21%"><col style="width:13%"><col style="width:13%"><col style="width:15%"><col style="width:15%"></colgroup><tr><th>Model</th><th>Prompt</th><th>Latency</th><th>Cost</th><th>Tok in/out</th><th>Quality</th></tr><tr><td><span class="badge" style="background:#2a4a5c;color:#ade4f6">gpt-5.6-sol</span></td><td>p1-rate-limiter</td><td>8.0s</td><td>$0.0720</td><td>6263 / 781</td><td class="stars">★★★★<span class="empty">★</span></td></tr>
+<tr><td><span class="badge" style="background:#2a4a5c;color:#ade4f6">gpt-5.6-sol</span></td><td>p2-refactor</td><td>3.6s</td><td>$0.0581</td><td>6319 / 63</td><td class="stars">★★★<span class="empty">★★</span></td></tr>
+<tr><td><span class="badge" style="background:#2a4a5c;color:#ade4f6">gpt-5.6-sol</span></td><td>p3-caching-layer</td><td>50.2s</td><td>$0.1336</td><td>6300 / 3843</td><td class="stars">★★★★<span class="empty">★</span></td></tr>
+<tr><td><span class="badge" style="background:#2a4a5c;color:#ade4f6">gpt-5.6-sol</span></td><td>p4-unit-tests</td><td>7.4s</td><td>$0.0659</td><td>6302 / 462</td><td class="stars">★★★★<span class="empty">★</span></td></tr>
+<tr><td><span class="badge" style="background:#2a5c3a;color:#aef6c2">gpt-5.6-terra</span></td><td>p1-rate-limiter</td><td>7.3s</td><td>$0.0362</td><td>6265 / 671</td><td class="stars">★★★★<span class="empty">★</span></td></tr>
+<tr><td><span class="badge" style="background:#2a5c3a;color:#aef6c2">gpt-5.6-terra</span></td><td>p2-refactor</td><td>3.6s</td><td>$0.0292</td><td>6321 / 60</td><td class="stars">★★<span class="empty">★★★</span></td></tr>
+<tr><td><span class="badge" style="background:#2a5c3a;color:#aef6c2">gpt-5.6-terra</span></td><td>p3-caching-layer</td><td>18.7s</td><td>$0.0574</td><td>6302 / 2325</td><td class="stars">★★★<span class="empty">★★</span></td></tr>
+<tr><td><span class="badge" style="background:#2a5c3a;color:#aef6c2">gpt-5.6-terra</span></td><td>p4-unit-tests</td><td>5.6s</td><td>$0.0348</td><td>6304 / 443</td><td class="stars">★★<span class="empty">★★★</span></td></tr>
+</table></div>
+<div class="verdict"><b>Verdict:</b> <b>claude-sonnet-5</b> is the cost-effective default &mdash; 3.75/5 average quality at $0.0234 and 22.1s per task, <b>6.0&times; cheaper</b> than claude-opus-5 (5.00/5, $0.1411, 60.5s). Reserve claude-opus-5 for the tasks where that quality gap actually pays for itself &mdash; and note this ranking is yours, not a vendor&rsquo;s: it came from your prompts and your ratings.</div>
+</body></html>

@@ -1,0 +1,23 @@
+{
+  "started_at": "2026-09-04T09:15:17+00:00",
+  "fault_injected": "throttle",
+  "failover_enabled": false,
+  "attempts": [
+    {
+      "role": "primary",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-sonnet-5",
+      "endpoint": "faulted-mock",
+      "outcome": "failure",
+      "elapsed_s": 67.11,
+      "cost_usd": null,
+      "error_class": "rate_limited",
+      "status_code": 429,
+      "provider_retryable": true,
+      "error": "undefined: Too many requests, please wait before trying again."
+    }
+  ],
+  "delivered": false,
+  "delivered_by": null,
+  "delivered_by_vendor": null
+}

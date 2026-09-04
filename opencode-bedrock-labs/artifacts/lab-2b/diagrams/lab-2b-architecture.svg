@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1340" height="1420" viewBox="0 0 1340 1420" xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b6480"/></marker>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f6829a"/></marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8fd694"/></marker>
+  </defs>
+  <rect width="1340" height="1420" fill="#0f1117"/>
+
+  <text x="36" y="46" fill="#e8eaf0" font-size="22" font-weight="700">Lab 2B — Context Continuity Across Model Switches</text>
+  <text x="36" y="72" fill="#9aa1b2" font-size="13">Three models, three fresh sessions, one task — and the only variable is what gets handed between them</text>
+
+  <!-- 1 the pipeline -->
+  <text x="36" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">1 · THREE HOPS, THREE SEPARATE SESSIONS — each model starts with an empty context</text>
+  <rect x="36" y="124" width="1268" height="158" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <rect x="58" y="146" width="360" height="66" rx="6" fill="#5c2a3a"/>
+  <text x="74" y="170" fill="#f6aec2" font-size="12" font-weight="600">HOP 1 · DESIGN</text>
+  <text x="74" y="192" fill="#f6aec2" font-size="11">claude-opus-5 → CONTRACT.md</text>
+  <rect x="490" y="146" width="360" height="66" rx="6" fill="#3a2a5c"/>
+  <text x="506" y="170" fill="#c9aef6" font-size="12" font-weight="600">HOP 2 · IMPLEMENT</text>
+  <text x="506" y="192" fill="#c9aef6" font-size="11">claude-sonnet-5 → expenses.py</text>
+  <rect x="922" y="146" width="360" height="66" rx="6" fill="#2a5c3a"/>
+  <text x="938" y="170" fill="#aef6c2" font-size="12" font-weight="600">HOP 3 · TEST</text>
+  <text x="938" y="192" fill="#aef6c2" font-size="11">gpt-5.6-terra → test_expenses.py</text>
+
+  <line x1="426" y1="179" x2="482" y2="179" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="858" y1="179" x2="914" y2="179" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <text x="58" y="238" fill="#c4c9d6" font-size="12">Hop 1 is generated ONCE and reused by every strategy, so the design is never the variable. Each hop is a separate</text>
+  <text x="58" y="258" fill="#c4c9d6" font-size="12">`opencode run` in an EMPTY sandbox directory — plan mode can read files, so a shared folder would leak the contract.</text>
+  <text x="58" y="276" fill="#6c7590" font-size="11">Everything a model is allowed to know must arrive in its prompt, and nowhere else.</text>
+
+  <!-- 2 strategies -->
+  <text x="36" y="320" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">2 · THREE HANDOFF STRATEGIES — the only thing that changes between runs</text>
+
+  <rect x="36" y="332" width="400" height="250" rx="8" fill="#26161c" stroke="#5c2a3a" stroke-width="1.5"/>
+  <text x="56" y="358" fill="#f6aec2" font-size="12.5" font-weight="700">isolated</text>
+  <text x="56" y="382" fill="#c4c9d6" font-size="11.5">Each hop sees only TASK.md.</text>
+  <text x="56" y="402" fill="#c4c9d6" font-size="11.5">No contract, no state, no code.</text>
+  <rect x="56" y="416" width="360" height="72" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="70" y="437" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">hop2 writes:  summarize()</text>
+  <text x="70" y="455" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">              summarize_by_category()</text>
+  <text x="70" y="477" fill="#f6829a" font-size="10.5" font-family="ui-monospace,Menlo,monospace">hop3 imports: summarize_expenses</text>
+  <text x="56" y="512" fill="#c4c9d6" font-size="11.5">Neither model is wrong. They simply</text>
+  <text x="56" y="532" fill="#c4c9d6" font-size="11.5">never agreed on a name — and no</text>
+  <text x="56" y="552" fill="#c4c9d6" font-size="11.5">later hop can discover the earlier</text>
+  <text x="56" y="572" fill="#c4c9d6" font-size="11.5">one's decisions.</text>
+
+  <rect x="470" y="332" width="400" height="250" rx="8" fill="#16261c" stroke="#2a5c3a" stroke-width="1.5"/>
+  <text x="490" y="358" fill="#aef6c2" font-size="12.5" font-weight="700">★ contract</text>
+  <text x="490" y="382" fill="#c4c9d6" font-size="11.5">Hops also receive CONTRACT.md</text>
+  <text x="490" y="402" fill="#c4c9d6" font-size="11.5">plus a compact STATE.md.</text>
+  <rect x="490" y="416" width="360" height="72" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="504" y="437" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">STATE.md is EXTRACTED from the</text>
+  <text x="504" y="455" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">code with ast — not written by</text>
+  <text x="504" y="473" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">a model, so it cannot drift.</text>
+  <text x="490" y="512" fill="#c4c9d6" font-size="11.5">Prose notes about an API go stale.</text>
+  <text x="490" y="532" fill="#c4c9d6" font-size="11.5">A signature list generated from the</text>
+  <text x="490" y="552" fill="#c4c9d6" font-size="11.5">source is true by construction, and</text>
+  <text x="490" y="572" fill="#c4c9d6" font-size="11.5">costs nothing to produce.</text>
+
+  <rect x="904" y="332" width="400" height="250" rx="8" fill="#1b1c26" stroke="#3a4560"/>
+  <text x="924" y="358" fill="#e0b877" font-size="12.5" font-weight="700">full</text>
+  <text x="924" y="382" fill="#c4c9d6" font-size="11.5">Hops receive CONTRACT.md plus</text>
+  <text x="924" y="402" fill="#c4c9d6" font-size="11.5">the ENTIRE implementation source.</text>
+  <rect x="924" y="416" width="360" height="72" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="938" y="437" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">test prompt: 24,504 chars</text>
+  <text x="938" y="455" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">vs contract: 15,988 chars</text>
+  <text x="938" y="477" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">+53% prompt, +18% input tokens</text>
+  <text x="924" y="512" fill="#c4c9d6" font-size="11.5">The obvious fix — "just paste</text>
+  <text x="924" y="532" fill="#c4c9d6" font-size="11.5">everything" — works, but pays for</text>
+  <text x="924" y="552" fill="#c4c9d6" font-size="11.5">context the next hop did not need.</text>
+  <text x="924" y="572" fill="#c4c9d6" font-size="11.5">It does not scale past a few hops.</text>
+
+  <line x1="236" y1="590" x2="236" y2="640" stroke="#f6829a" stroke-width="1.6" marker-end="url(#arr)"/>
+  <line x1="670" y1="590" x2="670" y2="640" stroke="#8fd694" stroke-width="1.6" marker-end="url(#arg)"/>
+  <line x1="1104" y1="590" x2="1104" y2="640" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <!-- 3 results -->
+  <text x="36" y="678" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">3 · MEASURED RESULT — same task, same design hop, pytest run on all three</text>
+  <rect x="36" y="690" width="1268" height="240" rx="8" fill="#171b28" stroke="#3a4560"/>
+
+  <text x="58" y="720" fill="#6c7590" font-size="11" font-weight="700">STRATEGY</text>
+  <text x="238" y="720" fill="#6c7590" font-size="11" font-weight="700">COLLECTS?</text>
+  <text x="400" y="720" fill="#6c7590" font-size="11" font-weight="700">TESTS PASSED</text>
+  <text x="600" y="720" fill="#6c7590" font-size="11" font-weight="700">PROMPT CHARS</text>
+  <text x="800" y="720" fill="#6c7590" font-size="11" font-weight="700">INPUT TOKENS</text>
+  <text x="980" y="720" fill="#6c7590" font-size="11" font-weight="700">COST</text>
+  <text x="1130" y="720" fill="#6c7590" font-size="11" font-weight="700">VERDICT</text>
+  <line x1="58" y1="732" x2="1282" y2="732" stroke="#262b3a" stroke-width="1"/>
+
+  <text x="58" y="762" fill="#f6aec2" font-size="12" font-weight="600">isolated</text>
+  <text x="238" y="762" fill="#f6829a" font-size="12" font-weight="600">NO</text>
+  <text x="400" y="762" fill="#c4c9d6" font-size="12">0</text>
+  <text x="600" y="762" fill="#c4c9d6" font-size="12">1,059</text>
+  <text x="800" y="762" fill="#c4c9d6" font-size="12">6,497</text>
+  <text x="980" y="762" fill="#c4c9d6" font-size="12">$0.1427</text>
+  <text x="1130" y="762" fill="#f6829a" font-size="12" font-weight="700">BROKEN</text>
+
+  <text x="58" y="794" fill="#aef6c2" font-size="12" font-weight="600">contract</text>
+  <text x="238" y="794" fill="#8fd694" font-size="12">yes</text>
+  <text x="400" y="794" fill="#e8eaf0" font-size="12" font-weight="600">57</text>
+  <text x="600" y="794" fill="#c4c9d6" font-size="12">15,988</text>
+  <text x="800" y="794" fill="#c4c9d6" font-size="12">10,723</text>
+  <text x="980" y="794" fill="#e8eaf0" font-size="12" font-weight="600">$0.1320</text>
+  <text x="1130" y="794" fill="#8fd694" font-size="12" font-weight="700">WORKS</text>
+
+  <text x="58" y="826" fill="#e0b877" font-size="12" font-weight="600">full</text>
+  <text x="238" y="826" fill="#8fd694" font-size="12">yes</text>
+  <text x="400" y="826" fill="#c4c9d6" font-size="12">48</text>
+  <text x="600" y="826" fill="#c4c9d6" font-size="12">24,504</text>
+  <text x="800" y="826" fill="#c4c9d6" font-size="12">12,658</text>
+  <text x="980" y="826" fill="#c4c9d6" font-size="12">$0.1455</text>
+  <text x="1130" y="826" fill="#8fd694" font-size="12" font-weight="700">WORKS</text>
+
+  <rect x="58" y="848" width="1224" height="62" rx="5" fill="#0f1117" stroke="#5c2a3a"/>
+  <text x="72" y="870" fill="#f6829a" font-size="11" font-family="ui-monospace,Menlo,monospace">isolated: E  ImportError: cannot import name 'summarize_expenses' from 'expenses'</text>
+  <text x="72" y="890" fill="#c4c9d6" font-size="11">Collection fails before a single test runs. The pieces were individually reasonable and collectively useless.</text>
+
+  <!-- 4 conclusions -->
+  <text x="36" y="968" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">4 · THE TWO FINDINGS WORTH TAKING BACK</text>
+
+  <rect x="36" y="980" width="620" height="176" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="1008" fill="#e8eaf0" font-size="12.5" font-weight="700">The broken run was also the EXPENSIVE one</text>
+  <text x="58" y="1036" fill="#c4c9d6" font-size="12">isolated cost <tspan fill="#f6829a" font-weight="600">$0.1427</tspan> and produced nothing runnable.</text>
+  <text x="58" y="1058" fill="#c4c9d6" font-size="12">contract cost <tspan fill="#8fd694" font-weight="600">$0.1320</tspan> and produced 57 passing tests.</text>
+  <text x="58" y="1086" fill="#c4c9d6" font-size="12">Skipping the handoff did not save money. Every hop had</text>
+  <text x="58" y="1106" fill="#c4c9d6" font-size="12">to re-derive decisions from scratch, so it wrote MORE</text>
+  <text x="58" y="1126" fill="#c4c9d6" font-size="12">output tokens — and then disagreed anyway.</text>
+  <text x="58" y="1148" fill="#6c7590" font-size="11">Context discipline is not a tax. It is the cheaper option.</text>
+
+  <rect x="684" y="980" width="620" height="176" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="706" y="1008" fill="#e8eaf0" font-size="12.5" font-weight="700">More context is not better context</text>
+  <text x="706" y="1036" fill="#c4c9d6" font-size="12">full pasted the whole implementation: <tspan fill="#e0b877" font-weight="600">+53%</tspan> prompt,</text>
+  <text x="706" y="1058" fill="#c4c9d6" font-size="12"><tspan fill="#e0b877" font-weight="600">+18%</tspan> input tokens, <tspan fill="#e0b877" font-weight="600">+10%</tspan> cost — and wrote <tspan fill="#e0b877" font-weight="600">9 fewer</tspan> tests</text>
+  <text x="706" y="1078" fill="#c4c9d6" font-size="12">than the compact contract handoff.</text>
+  <text x="706" y="1106" fill="#c4c9d6" font-size="12">A 12-line extracted signature list beat 300 lines of</text>
+  <text x="706" y="1126" fill="#c4c9d6" font-size="12">source. Hand over the INTERFACE, not the transcript.</text>
+  <text x="706" y="1148" fill="#6c7590" font-size="11">This is what scales when the chain is 6 hops, not 3.</text>
+
+  <rect x="36" y="1188" width="1268" height="88" rx="8" fill="#141a2a" stroke="#4a8fe7" stroke-width="1.5"/>
+  <text x="58" y="1216" fill="#e8eaf0" font-size="13" font-weight="700">★ THE DELIVERABLE — two directories, side by side</text>
+  <text x="58" y="1240" fill="#c4c9d6" font-size="12">runs/isolated/ — collection error, zero tests run.    runs/contract/ — 57 tests passing, assembled from three models that never shared a session.</text>
+  <text x="58" y="1262" fill="#c4c9d6" font-size="12">Same task, same designer, same implementer model. The only difference is that state was handed forward deliberately.</text>
+</svg>

@@ -1,0 +1,16 @@
+$ python3 router.py --prompt-file prompt.txt --fault throttle --no-failover
+
+Task:  Write a Python function `slugify(title: str) -> str` that converts a...
+Fault: throttle    Failover: OFF
+
+  [fault] mock outage endpoint up on :8099 mode=throttle
+-> [primary] Anthropic | us.anthropic.claude-sonnet-5   (endpoint faulted)
+   FAIL failed in 67.1s  [rate_limited]
+        HTTP 429  provider says retryable=True
+        undefined: Too many requests, please wait before trying again.
+   ->   no routes left
+
+----------------------------------------------------------------------
+TASK FAILED - 1 attempt(s), no answer produced
+----------------------------------------------------------------------
+trace written to ../evidence/lab-1b/traces/03-no-failover.json

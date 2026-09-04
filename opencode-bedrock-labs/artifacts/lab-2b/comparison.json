@@ -1,0 +1,35 @@
+{
+  "isolated": {
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "collected": false,
+    "usable": false,
+    "first_error": "E   ImportError: cannot import name 'summarize_expenses' from 'expenses' (runs/isolated/expenses.py)",
+    "raw_tail": "1 error in 0.05s",
+    "handoff_input_tokens": 6497,
+    "handoff_cost_usd": 0.142692,
+    "test_prompt_chars": 1059
+  },
+  "contract": {
+    "tests_passed": 57,
+    "tests_failed": 0,
+    "collected": true,
+    "usable": true,
+    "first_error": "",
+    "raw_tail": "57 passed in 0.02s",
+    "handoff_input_tokens": 10723,
+    "handoff_cost_usd": 0.131954,
+    "test_prompt_chars": 15988
+  },
+  "full": {
+    "tests_passed": 48,
+    "tests_failed": 0,
+    "collected": true,
+    "usable": true,
+    "first_error": "",
+    "raw_tail": "48 passed in 0.01s",
+    "handoff_input_tokens": 12658,
+    "handoff_cost_usd": 0.145478,
+    "test_prompt_chars": 24504
+  }
+}

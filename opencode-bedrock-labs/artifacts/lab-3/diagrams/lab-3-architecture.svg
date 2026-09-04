@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1340" height="1420" viewBox="0 0 1340 1420" xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b6480"/></marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8fd694"/></marker>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f6829a"/></marker>
+  </defs>
+  <rect width="1340" height="1420" fill="#0f1117"/>
+
+  <text x="36" y="46" fill="#e8eaf0" font-size="22" font-weight="700">Lab 3 — Plan and Execute, With a Gate Between Every Step</text>
+  <text x="36" y="72" fill="#9aa1b2" font-size="13">Buy the reasoning once from the expensive model; let the cheap model do the repetitive work — but never let it move on unverified</text>
+
+  <!-- 1 plan -->
+  <text x="36" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">1 · PLAN MODE — one expensive call, bought once</text>
+  <rect x="36" y="124" width="1268" height="182" rx="8" fill="#171b28" stroke="#5c2a3a"/>
+  <rect x="58" y="146" width="330" height="52" rx="6" fill="#5c2a3a"/>
+  <text x="74" y="168" fill="#f6aec2" font-size="12" font-weight="600">claude-opus-5</text>
+  <text x="74" y="188" fill="#f6aec2" font-size="11">plan.py · PLAN_TEMPLATE</text>
+  <line x1="396" y1="172" x2="446" y2="172" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <rect x="454" y="146" width="300" height="52" rx="6" fill="#0f1117" stroke="#262b3a"/>
+  <text x="470" y="168" fill="#e8eaf0" font-size="12" font-weight="600">PLAN.md</text>
+  <text x="470" y="188" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">18,116 chars · $0.3635 · 184s</text>
+
+  <text x="786" y="164" fill="#c4c9d6" font-size="12">The planner is told the implementer will see</text>
+  <text x="786" y="184" fill="#c4c9d6" font-size="12">ONLY the plan, the task, and the current file.</text>
+  <text x="786" y="204" fill="#c4c9d6" font-size="12">Anything left implicit will be guessed.</text>
+
+  <rect x="58" y="216" width="1224" height="72" rx="5" fill="#0f1117" stroke="#3a4560"/>
+  <text x="72" y="238" fill="#e0b877" font-size="11.5" font-weight="600">What paying for reasoning actually bought — Opus spotted this unprompted:</text>
+  <text x="72" y="260" fill="#c4c9d6" font-size="11.5">the acceptance suite imports all five public names at import time, so M1 must define stubs for to_json, filter_rows and export</text>
+  <text x="72" y="278" fill="#c4c9d6" font-size="11.5">or every test errors on collection. A fast model told only "implement M1" writes one function and fails the whole suite.</text>
+
+  <!-- 2 execute -->
+  <text x="36" y="346" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">2 · EXECUTE MODE — one cheap call per milestone, each one gated</text>
+  <rect x="36" y="358" width="1268" height="234" rx="8" fill="#171b28" stroke="#3a2a5c"/>
+
+  <rect x="58" y="380" width="290" height="52" rx="6" fill="#3a2a5c"/>
+  <text x="74" y="402" fill="#c9aef6" font-size="12" font-weight="600">claude-sonnet-5</text>
+  <text x="74" y="422" fill="#c9aef6" font-size="11">execute.py · STEP_TEMPLATE</text>
+
+  <text x="58" y="458" fill="#c4c9d6" font-size="12">Each step's prompt carries exactly four things:</text>
+  <text x="74" y="480" fill="#c4c9d6" font-size="11.5">1. TASK.md      2. PLAN.md      3. the current exporter.py      4. on a retry, the real pytest output</text>
+  <text x="58" y="508" fill="#c4c9d6" font-size="12">The model never sees <tspan font-family="ui-monospace,Menlo,monospace" fill="#8fd694">tests/test_acceptance.py</tspan> — every hop runs in an empty sandbox.</text>
+  <text x="58" y="528" fill="#6c7590" font-size="11.5">A grader you can read is a grader you can overfit to. The gate has to mark the work, not be copied from it.</text>
+
+  <rect x="58" y="546" width="1224" height="32" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="567" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">opencode run --dir .sandbox --agent plan --model &lt;sonnet&gt; --format json   →   write exporter.py   →   run the gate</text>
+
+  <!-- 3 the gate -->
+  <text x="36" y="632" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">3 · THE CUMULATIVE GATE — milestone N runs the tests for milestones 1..N</text>
+  <rect x="36" y="644" width="1268" height="212" rx="8" fill="#171b28" stroke="#3a4560"/>
+
+  <rect x="58" y="666" width="280" height="46" rx="5" fill="#16261c" stroke="#2a5c3a"/>
+  <text x="72" y="684" fill="#aef6c2" font-size="11.5" font-weight="600">M1 to_csv</text>
+  <text x="72" y="702" fill="#c4c9d6" font-size="11">gate: TestM1 → 7 tests</text>
+  <rect x="350" y="666" width="280" height="46" rx="5" fill="#16261c" stroke="#2a5c3a"/>
+  <text x="364" y="684" fill="#aef6c2" font-size="11.5" font-weight="600">M2 to_json</text>
+  <text x="364" y="702" fill="#c4c9d6" font-size="11">gate: TestM1+M2 → 12 tests</text>
+  <rect x="642" y="666" width="280" height="46" rx="5" fill="#16261c" stroke="#2a5c3a"/>
+  <text x="656" y="684" fill="#aef6c2" font-size="11.5" font-weight="600">M3 filter_rows</text>
+  <text x="656" y="702" fill="#c4c9d6" font-size="11">gate: M1+M2+M3 → 21 tests</text>
+  <rect x="934" y="666" width="348" height="46" rx="5" fill="#16261c" stroke="#2a5c3a"/>
+  <text x="948" y="684" fill="#aef6c2" font-size="11.5" font-weight="600">M4 export</text>
+  <text x="948" y="702" fill="#c4c9d6" font-size="11">gate: all four → 28 tests</text>
+
+  <line x1="338" y1="689" x2="344" y2="689" stroke="#5b6480" stroke-width="1.4" marker-end="url(#ar)"/>
+  <line x1="630" y1="689" x2="636" y2="689" stroke="#5b6480" stroke-width="1.4" marker-end="url(#ar)"/>
+  <line x1="922" y1="689" x2="928" y2="689" stroke="#5b6480" stroke-width="1.4" marker-end="url(#ar)"/>
+
+  <text x="58" y="748" fill="#c4c9d6" font-size="12">The gate grows: 7 → 12 → 21 → 28. That is what stops step 4 from quietly breaking step 1.</text>
+  <rect x="58" y="762" width="1224" height="76" rx="5" fill="#0f1117" stroke="#5c2a3a"/>
+  <text x="72" y="784" fill="#f6aec2" font-size="11.5" font-weight="600">Proof, run for real: change the CSV line terminator from CRLF to LF in the finished module —</text>
+  <text x="72" y="806" fill="#f6829a" font-size="11" font-family="ui-monospace,Menlo,monospace">5 failed, 23 passed  ·  FAILED TestM1ToCsv::test_crlf_line_endings_and_trailing_newline  (+4 more)</text>
+  <text x="72" y="828" fill="#c4c9d6" font-size="11.5">A one-character edit during M4 would have been caught the moment it happened, not at code review.</text>
+
+  <!-- 4 retry loop -->
+  <text x="36" y="896" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">4 · WHEN THE GATE FAILS — feed the real pytest output back, do not just retry</text>
+  <rect x="36" y="908" width="620" height="196" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="934" fill="#e8eaf0" font-size="12" font-weight="600">The measured retry — M1, attempt 1</text>
+  <rect x="58" y="948" width="576" height="60" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="968" fill="#f6829a" font-size="10.5" font-family="ui-monospace,Menlo,monospace">M1 to_csv  attempt 1  FAIL  6 passed / 1 failed  $0.0586</text>
+  <text x="72" y="986" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">→ last 25 lines of pytest output appended to the prompt</text>
+  <text x="72" y="1002" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">M1 to_csv  attempt 2  PASS  7 passed / 0 failed  $0.0394</text>
+  <text x="58" y="1036" fill="#c4c9d6" font-size="11.5">The retry is not "try again" — it carries the failing</text>
+  <text x="58" y="1056" fill="#c4c9d6" font-size="11.5">assertion. That is why one extra call fixed it, and</text>
+  <text x="58" y="1076" fill="#c4c9d6" font-size="11.5">why the executor stops rather than looping forever.</text>
+  <text x="58" y="1096" fill="#6c7590" font-size="11">Cost of the correction: 4 cents.</text>
+
+  <rect x="684" y="908" width="620" height="196" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="706" y="934" fill="#e8eaf0" font-size="12" font-weight="600">Where the money went</text>
+  <text x="706" y="962" fill="#c4c9d6" font-size="11.5">plan (Opus, once)</text>
+  <text x="1010" y="962" fill="#f6aec2" font-size="11.5" font-weight="600">$0.3635</text>
+  <text x="1120" y="962" fill="#6c7590" font-size="11">66% of spend</text>
+  <text x="706" y="986" fill="#c4c9d6" font-size="11.5">execute (Sonnet, 5 calls)</text>
+  <text x="1010" y="986" fill="#c9aef6" font-size="11.5" font-weight="600">$0.1896</text>
+  <text x="1120" y="986" fill="#6c7590" font-size="11">34%</text>
+  <line x1="706" y1="1000" x2="1282" y2="1000" stroke="#262b3a" stroke-width="1"/>
+  <text x="706" y="1022" fill="#e8eaf0" font-size="12" font-weight="700">total</text>
+  <text x="1010" y="1022" fill="#e8eaf0" font-size="12" font-weight="700">$0.5530</text>
+  <text x="706" y="1052" fill="#c4c9d6" font-size="11.5">The plan is written once and reused by every step.</text>
+  <text x="706" y="1072" fill="#c4c9d6" font-size="11.5">Add milestones and its share falls; the reasoning</text>
+  <text x="706" y="1092" fill="#c4c9d6" font-size="11.5">does not have to be re-bought per step.</text>
+
+  <!-- deliverable -->
+  <rect x="36" y="1144" width="1268" height="106" rx="8" fill="#141a2a" stroke="#4a8fe7" stroke-width="1.5"/>
+  <text x="58" y="1174" fill="#e8eaf0" font-size="13" font-weight="700">★ THE DELIVERABLE — the blueprint and the working software it produced</text>
+  <text x="58" y="1198" fill="#c4c9d6" font-size="12">artifacts/lab-3/PLAN.md — the 18KB blueprint Opus wrote</text>
+  <text x="58" y="1218" fill="#c4c9d6" font-size="12">artifacts/lab-3/exporter.py — 197 lines built by Sonnet, 28/28 acceptance tests green</text>
+  <text x="700" y="1198" fill="#c4c9d6" font-size="12">artifacts/lab-3/execution_ledger.json — every attempt, its gate</text>
+  <text x="700" y="1218" fill="#c4c9d6" font-size="12">result, which tests it caught, its latency and its cost</text>
+  <text x="58" y="1242" fill="#6c7590" font-size="11">You can read the blueprint, run the module, and audit what each step cost — which is the whole argument for splitting plan from execute.</text>
+
+  <path d="M670 592 L670 638" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M346 856 L346 902" stroke="#f6829a" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <path d="M994 856 L994 902" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M670 1104 L670 1138" stroke="#4a8fe7" stroke-width="1.6" fill="none" marker-end="url(#arg)"/>
+  <path d="M1200 306 L1200 352" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+</svg>

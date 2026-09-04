@@ -1,0 +1,33 @@
+# ---- secrets: never commit these -------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+credentials
+aws_credentials
+
+# ---- python ----------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# ---- node ------------------------------------------------------------------
+node_modules/
+
+# ---- os / editor -----------------------------------------------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# ---- lab scratch -----------------------------------------------------------
+# raw per-attempt stdout/stderr captured while debugging a failover run
+artifacts/lab-1b/traces/raw/
+# sandboxes: empty working dirs that give each model hop nothing to read
+**/.sandbox/

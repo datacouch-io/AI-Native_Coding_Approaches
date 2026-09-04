@@ -1,0 +1,27 @@
+{
+  "strategy": "full",
+  "hops": [
+    {
+      "hop": "implement",
+      "model": "us.anthropic.claude-sonnet-5",
+      "prompt_chars": 15271,
+      "input_tokens": 2,
+      "output_tokens": 3757,
+      "cache_read": 24721,
+      "cost_usd": 0.0514457,
+      "elapsed_s": 128.24
+    },
+    {
+      "hop": "test",
+      "model": "global.openai.gpt-5.6-terra",
+      "prompt_chars": 24504,
+      "input_tokens": 12656,
+      "output_tokens": 2927,
+      "cache_read": 9806,
+      "cost_usd": 0.0940322,
+      "elapsed_s": 20.34
+    }
+  ],
+  "total_cost_usd": 0.145478,
+  "total_input_tokens": 12658
+}

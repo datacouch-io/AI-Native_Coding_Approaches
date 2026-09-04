@@ -1,0 +1,17 @@
+$ python3 -m pytest tests/test_acceptance.py -q      # finished module
+............................                                             [100%]
+28 passed in 0.01s
+
+$ # inject an M1 regression: CRLF -> LF, the kind of change a step-4 edit could make
+$ sed -i '' 's/"\r\n"/"\n"/' exporter.py
+$ python3 -m pytest tests/test_acceptance.py -q      # the cumulative gate
+=========================== short test summary info ============================
+FAILED tests/test_acceptance.py::TestM1ToCsv::test_crlf_line_endings_and_trailing_newline
+FAILED tests/test_acceptance.py::TestM1ToCsv::test_quotes_commas_and_embedded_quotes
+FAILED tests/test_acceptance.py::TestM1ToCsv::test_quotes_embedded_newline - ...
+FAILED tests/test_acceptance.py::TestM1ToCsv::test_missing_and_none_render_empty
+FAILED tests/test_acceptance.py::TestM1ToCsv::test_dotted_path_missing_is_empty_not_error
+5 failed, 23 passed in 0.03s
+
+$ # restored
+28 passed in 0.01s

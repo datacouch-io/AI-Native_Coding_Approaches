@@ -1,0 +1,27 @@
+$ python3 router.py --prompt-file prompt.txt --fault throttle
+
+Task:  Write a Python function `slugify(title: str) -> str` that converts a...
+Fault: throttle    Failover: ON
+
+  [fault] mock outage endpoint up on :8099 mode=throttle
+-> [primary] Anthropic | us.anthropic.claude-sonnet-5   (endpoint faulted)
+   FAIL failed in 75.0s  [rate_limited]
+        HTTP 429  provider says retryable=True
+        undefined: Too many requests, please wait before trying again.
+   ->   re-routing to the next provider
+
+-> [fallback] OpenAI | global.openai.gpt-5.6-terra
+   OK   succeeded in 3.5s  cost=$0.0143724  (121 chars)
+
+----------------------------------------------------------------------
+TASK COMPLETED - delivered by OpenAI (global.openai.gpt-5.6-terra) after 2 attempt(s)
+----------------------------------------------------------------------
+```python
+import re
+
+
+def slugify(title: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+```
+----------------------------------------------------------------------
+trace written to ../evidence/lab-1b/traces/02-failover-throttle.json

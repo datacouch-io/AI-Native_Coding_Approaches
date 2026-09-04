@@ -1,0 +1,27 @@
+{
+  "strategy": "contract",
+  "hops": [
+    {
+      "hop": "implement",
+      "model": "us.anthropic.claude-sonnet-5",
+      "prompt_chars": 15271,
+      "input_tokens": 2,
+      "output_tokens": 3721,
+      "cache_read": 29471,
+      "cost_usd": 0.0437407,
+      "elapsed_s": 142.48
+    },
+    {
+      "hop": "test",
+      "model": "global.openai.gpt-5.6-terra",
+      "prompt_chars": 15988,
+      "input_tokens": 10721,
+      "output_tokens": 3236,
+      "cache_read": 5710,
+      "cost_usd": 0.0882135,
+      "elapsed_s": 23.3
+    }
+  ],
+  "total_cost_usd": 0.131954,
+  "total_input_tokens": 10723
+}

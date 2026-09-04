@@ -1,0 +1,31 @@
+=== AFTER (final verification) ===
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- /Users/hadez/Documents/Company/training content/AI-Native_Coding_Approaches/opencode-bedrock-labs/lab-2-taskapi/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /Users/hadez/Documents/Company/training content/AI-Native_Coding_Approaches/opencode-bedrock-labs/lab-2-taskapi
+plugins: anyio-4.15.0
+collecting ... collected 11 items
+
+tests/test_crud.py::test_create_and_get_task PASSED                      [  9%]
+tests/test_crud.py::test_get_missing_task_404 PASSED                     [ 18%]
+tests/test_crud.py::test_list_tasks PASSED                               [ 27%]
+tests/test_crud.py::test_update_task PASSED                              [ 36%]
+tests/test_crud.py::test_delete_task PASSED                              [ 45%]
+tests/test_search.py::test_search_by_text_query PASSED                   [ 54%]
+tests/test_search.py::test_search_by_status PASSED                       [ 63%]
+tests/test_search.py::test_search_by_priority_range PASSED               [ 72%]
+tests/test_search.py::test_search_pagination_returns_next_cursor PASSED  [ 81%]
+tests/test_search.py::test_search_pagination_stable_under_concurrent_insert PASSED [ 90%]
+tests/test_search.py::test_search_limit_capped_at_100 PASSED             [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/fastapi/testclient.py:1
+  /Users/hadez/Documents/Company/training content/AI-Native_Coding_Approaches/opencode-bedrock-labs/lab-2-taskapi/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv/lib/python3.14/site-packages/starlette/testclient.py:53
+  /Users/hadez/Documents/Company/training content/AI-Native_Coding_Approaches/opencode-bedrock-labs/lab-2-taskapi/.venv/lib/python3.14/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 11 passed, 2 warnings in 0.37s ========================

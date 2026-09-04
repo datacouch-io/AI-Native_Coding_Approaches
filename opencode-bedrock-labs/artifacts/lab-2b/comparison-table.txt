@@ -1,0 +1,11 @@
+$ python3 compare.py
+
+strategy    collects?  passed   failed   prompt chars  input tok  cost      verdict
+--------------------------------------------------------------------------------------------
+isolated    NO         0        0        1059          6497       $0.1427   BROKEN
+contract    yes        57       0        15988         10723      $0.1320   WORKS
+full        yes        48       0        24504         12658      $0.1455   WORKS
+--------------------------------------------------------------------------------------------
+isolated: E   ImportError: cannot import name 'summarize_expenses' from 'expenses' (runs/isolated/expenses.py)
+
+wrote evidence/lab-2b/comparison.json

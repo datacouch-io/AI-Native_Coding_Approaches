@@ -1,0 +1,7 @@
+{
+  "model": "amazon-bedrock/us.anthropic.claude-opus-5",
+  "elapsed_s": 184.25,
+  "cost_usd": 0.3634765,
+  "output_tokens": 12851,
+  "plan_chars": 18116
+}

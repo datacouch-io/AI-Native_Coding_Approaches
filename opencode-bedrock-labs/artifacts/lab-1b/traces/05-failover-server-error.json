@@ -1,0 +1,33 @@
+{
+  "started_at": "2026-09-04T09:10:07+00:00",
+  "fault_injected": "server-error",
+  "failover_enabled": true,
+  "attempts": [
+    {
+      "role": "primary",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-sonnet-5",
+      "endpoint": "faulted-mock",
+      "outcome": "failure",
+      "elapsed_s": 71.74,
+      "cost_usd": null,
+      "error_class": "provider_unavailable",
+      "status_code": 503,
+      "provider_retryable": true,
+      "error": "undefined: The service is temporarily unavailable."
+    },
+    {
+      "role": "fallback",
+      "vendor": "OpenAI",
+      "model": "amazon-bedrock/global.openai.gpt-5.6-terra",
+      "endpoint": "aws-bedrock",
+      "outcome": "success",
+      "elapsed_s": 4.11,
+      "cost_usd": 0.0143724,
+      "response_chars": 121
+    }
+  ],
+  "delivered": true,
+  "delivered_by": "amazon-bedrock/global.openai.gpt-5.6-terra",
+  "delivered_by_vendor": "OpenAI"
+}

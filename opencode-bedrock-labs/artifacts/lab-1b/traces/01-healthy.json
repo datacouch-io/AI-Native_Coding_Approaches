@@ -1,0 +1,20 @@
+{
+  "started_at": "2026-09-04T09:06:38+00:00",
+  "fault_injected": "none",
+  "failover_enabled": true,
+  "attempts": [
+    {
+      "role": "primary",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-sonnet-5",
+      "endpoint": "aws-bedrock",
+      "outcome": "success",
+      "elapsed_s": 8.25,
+      "cost_usd": 0.0296145,
+      "response_chars": 472
+    }
+  ],
+  "delivered": true,
+  "delivered_by": "amazon-bedrock/us.anthropic.claude-sonnet-5",
+  "delivered_by_vendor": "Anthropic"
+}

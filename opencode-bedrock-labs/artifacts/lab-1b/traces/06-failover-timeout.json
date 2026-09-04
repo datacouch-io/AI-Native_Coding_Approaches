@@ -1,0 +1,33 @@
+{
+  "started_at": "2026-09-04T09:11:31+00:00",
+  "fault_injected": "timeout",
+  "failover_enabled": true,
+  "attempts": [
+    {
+      "role": "primary",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-sonnet-5",
+      "endpoint": "faulted-mock",
+      "outcome": "failure",
+      "elapsed_s": 30.03,
+      "cost_usd": null,
+      "error_class": "timeout",
+      "status_code": null,
+      "provider_retryable": null,
+      "error": "client gave up waiting for the provider"
+    },
+    {
+      "role": "fallback",
+      "vendor": "OpenAI",
+      "model": "amazon-bedrock/global.openai.gpt-5.6-terra",
+      "endpoint": "aws-bedrock",
+      "outcome": "success",
+      "elapsed_s": 5.23,
+      "cost_usd": 0.0165204,
+      "response_chars": 271
+    }
+  ],
+  "delivered": true,
+  "delivered_by": "amazon-bedrock/global.openai.gpt-5.6-terra",
+  "delivered_by_vendor": "OpenAI"
+}

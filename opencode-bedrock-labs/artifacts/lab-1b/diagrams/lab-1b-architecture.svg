@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1340" height="1400" viewBox="0 0 1340 1400" xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b6480"/></marker>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f6829a"/></marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8fd694"/></marker>
+  </defs>
+  <rect width="1340" height="1400" fill="#0f1117"/>
+
+  <text x="36" y="46" fill="#e8eaf0" font-size="22" font-weight="700">Lab 1B — Vendor Failover Under a Simulated Outage</text>
+  <text x="36" y="72" fill="#9aa1b2" font-size="13">One task, two vendors, a real HTTP-level fault — and a routing decision that has to know the difference between their outage and your bug</text>
+
+  <!-- 1 task -->
+  <text x="36" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">1 · THE TASK AND THE ROUTER</text>
+  <rect x="36" y="124" width="1268" height="120" rx="8" fill="#171b28" stroke="#262b3a"/>
+  <text x="58" y="150" fill="#c9aef6" font-size="12.5" font-weight="600">prompt.txt</text>
+  <text x="58" y="172" fill="#c4c9d6" font-size="12">"Write a Python function slugify(title: str) -&gt; str …"</text>
+  <rect x="58" y="186" width="700" height="42" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="204" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">python3 router.py --prompt-file prompt.txt \</text>
+  <text x="72" y="220" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">    --fault throttle</text>
+  <text x="786" y="206" fill="#c4c9d6" font-size="12">The task never changes. Only which provider</text>
+  <text x="786" y="226" fill="#c4c9d6" font-size="12">answers it, and whether one is reachable.</text>
+
+  <!-- 2 fault injection -->
+  <text x="36" y="284" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">2 · FAULT INJECTION — a real HTTP failure, not a mocked function</text>
+  <rect x="36" y="296" width="1268" height="196" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <rect x="58" y="316" width="380" height="86" rx="6" fill="#0f1117" stroke="#5c2a3a"/>
+  <text x="72" y="338" fill="#f6aec2" font-size="11.5" font-weight="600">configs/faulted/opencode.json</text>
+  <text x="72" y="360" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">"amazon-bedrock": { "options": {</text>
+  <text x="72" y="376" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">  "baseURL":</text>
+  <text x="72" y="392" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">    "http://127.0.0.1:8099" }}</text>
+
+  <rect x="58" y="416" width="380" height="56" rx="6" fill="#0f1117" stroke="#3a4560"/>
+  <text x="72" y="438" fill="#aef6c2" font-size="11.5" font-weight="600">configs/healthy/opencode.json</text>
+  <text x="72" y="460" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">"options": { "region": "us-east-1" }</text>
+
+  <line x1="446" y1="358" x2="516" y2="358" stroke="#f6829a" stroke-width="1.6" marker-end="url(#arr)"/>
+  <line x1="446" y1="444" x2="516" y2="444" stroke="#8fd694" stroke-width="1.6" marker-end="url(#arg)"/>
+
+  <rect x="524" y="328" width="330" height="60" rx="6" fill="#2a1620" stroke="#5c2a3a"/>
+  <text x="540" y="350" fill="#f6aec2" font-size="12" font-weight="600">mock_outage.py — 127.0.0.1:8099</text>
+  <text x="540" y="372" fill="#c4c9d6" font-size="11">returns 429 / 503 / 400, or just hangs</text>
+
+  <rect x="524" y="418" width="330" height="56" rx="6" fill="#16261c" stroke="#2a5c3a"/>
+  <text x="540" y="440" fill="#aef6c2" font-size="12" font-weight="600">AWS Bedrock — the real endpoint</text>
+  <text x="540" y="460" fill="#c4c9d6" font-size="11">us-east-1, live models</text>
+
+  <text x="884" y="344" fill="#c4c9d6" font-size="12">The two attempts differ only by which</text>
+  <text x="884" y="364" fill="#c4c9d6" font-size="12">directory OpenCode reads its config from:</text>
+  <text x="884" y="388" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">opencode run --dir configs/&lt;which&gt;</text>
+  <text x="884" y="420" fill="#c4c9d6" font-size="12">So the primary fails inside the AWS SDK,</text>
+  <text x="884" y="440" fill="#c4c9d6" font-size="12">at the HTTP layer, after OpenCode's own</text>
+  <text x="884" y="460" fill="#c4c9d6" font-size="12">internal retries are exhausted.</text>
+
+  <!-- 3 routes -->
+  <text x="36" y="532" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">3 · THE ROUTING TABLE — the fallback must be a DIFFERENT VENDOR</text>
+  <rect x="36" y="544" width="1268" height="112" rx="8" fill="#171b28" stroke="#262b3a"/>
+  <rect x="58" y="564" width="560" height="34" rx="5" fill="#3a2a5c"/>
+  <text x="74" y="586" fill="#c9aef6" font-size="11.5" font-weight="600">primary   ·  Anthropic  ·  us.anthropic.claude-sonnet-5</text>
+  <rect x="58" y="606" width="560" height="34" rx="5" fill="#2a5c3a"/>
+  <text x="74" y="628" fill="#aef6c2" font-size="11.5" font-weight="600">fallback  ·  OpenAI     ·  global.openai.gpt-5.6-terra</text>
+  <text x="646" y="580" fill="#c4c9d6" font-size="12">A second Anthropic model would not survive an</text>
+  <text x="646" y="600" fill="#c4c9d6" font-size="12">Anthropic-wide incident. Cross-vendor is the</text>
+  <text x="646" y="620" fill="#c4c9d6" font-size="12">entire point — and on Bedrock both live behind</text>
+  <text x="646" y="640" fill="#c4c9d6" font-size="12">one endpoint, one credential, one bill.</text>
+
+  <!-- 4 decision -->
+  <text x="36" y="696" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">4 · THE DECISION — classify the failure before re-routing</text>
+  <rect x="36" y="708" width="1268" height="216" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="734" fill="#c4c9d6" font-size="12">OpenCode reports failures as a JSON event on <tspan font-family="ui-monospace,Menlo,monospace" fill="#8fd694">stdout</tspan> — stderr stays empty — carrying the fields the router keys on:</text>
+  <rect x="58" y="746" width="600" height="76" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="766" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">{"type":"error","error":{"name":"APIError","data":{</text>
+  <text x="72" y="784" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">   "statusCode": 429, "isRetryable": true,</text>
+  <text x="72" y="802" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">   "responseBody": "{\"__type\":\"ThrottlingException\"…"}}}</text>
+
+  <text x="686" y="766" fill="#8fd694" font-size="11.5" font-weight="600">FAIL OVER — their problem</text>
+  <text x="686" y="786" fill="#c4c9d6" font-size="11.5">429 rate_limited · 5xx provider_unavailable</text>
+  <text x="686" y="806" fill="#c4c9d6" font-size="11.5">timeout · connection_refused</text>
+  <text x="686" y="836" fill="#f6aec2" font-size="11.5" font-weight="600">DO NOT FAIL OVER — your problem</text>
+  <text x="686" y="856" fill="#c4c9d6" font-size="11.5">4xx client_error (bad model id, malformed</text>
+  <text x="686" y="876" fill="#c4c9d6" font-size="11.5">request) — re-routing only hides the bug and</text>
+  <text x="686" y="896" fill="#c4c9d6" font-size="11.5">pays a second vendor to reject it again.</text>
+
+  <text x="58" y="846" fill="#c4c9d6" font-size="11.5">Measured tell: a 429 took <tspan fill="#e8eaf0" font-weight="600">74.8s</tspan> to fail</text>
+  <text x="58" y="866" fill="#c4c9d6" font-size="11.5">(OpenCode retried it internally); a 400</text>
+  <text x="58" y="886" fill="#c4c9d6" font-size="11.5">failed in <tspan fill="#e8eaf0" font-weight="600">1.7s</tspan> with no retries at all.</text>
+  <text x="58" y="908" fill="#6c7590" font-size="11">The client already knows the difference.</text>
+
+  <!-- 5 outcomes -->
+  <text x="36" y="964" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">5 · MEASURED OUTCOMES — all three were run for real</text>
+
+  <rect x="36" y="976" width="400" height="210" rx="8" fill="#16261c" stroke="#2a5c3a" stroke-width="1.5"/>
+  <text x="56" y="1002" fill="#aef6c2" font-size="12.5" font-weight="700">★ failover ON + throttle</text>
+  <text x="56" y="1028" fill="#c4c9d6" font-size="11.5">primary  429 after 74.8s</text>
+  <text x="56" y="1050" fill="#c4c9d6" font-size="11.5">fallback OK in 3.5s, $0.0144</text>
+  <text x="56" y="1080" fill="#e8eaf0" font-size="12" font-weight="600">TASK COMPLETED</text>
+  <text x="56" y="1102" fill="#c4c9d6" font-size="11.5">delivered by OpenAI</text>
+  <text x="56" y="1136" fill="#6c7590" font-size="11">The user still gets working code,</text>
+  <text x="56" y="1156" fill="#6c7590" font-size="11">from a vendor that was never</text>
+  <text x="56" y="1176" fill="#6c7590" font-size="11">part of the original plan.</text>
+
+  <rect x="470" y="976" width="400" height="210" rx="8" fill="#26161c" stroke="#5c2a3a"/>
+  <text x="490" y="1002" fill="#f6aec2" font-size="12.5" font-weight="700">failover OFF + throttle</text>
+  <text x="490" y="1028" fill="#c4c9d6" font-size="11.5">primary  429 after 71.6s</text>
+  <text x="490" y="1050" fill="#c4c9d6" font-size="11.5">no second route configured</text>
+  <text x="490" y="1080" fill="#e8eaf0" font-size="12" font-weight="600">TASK FAILED</text>
+  <text x="490" y="1102" fill="#c4c9d6" font-size="11.5">no answer produced</text>
+  <text x="490" y="1136" fill="#6c7590" font-size="11">Same fault, same 71s wait —</text>
+  <text x="490" y="1156" fill="#6c7590" font-size="11">and nothing to show for it.</text>
+  <text x="490" y="1176" fill="#6c7590" font-size="11">This is the lock-in cost.</text>
+
+  <rect x="904" y="976" width="400" height="210" rx="8" fill="#1b1c26" stroke="#3a4560"/>
+  <text x="924" y="1002" fill="#e0b877" font-size="12.5" font-weight="700">failover ON + client-error</text>
+  <text x="924" y="1028" fill="#c4c9d6" font-size="11.5">primary  400 after 1.7s</text>
+  <text x="924" y="1050" fill="#c4c9d6" font-size="11.5">retryable=false → halt</text>
+  <text x="924" y="1080" fill="#e8eaf0" font-size="12" font-weight="600">TASK FAILED, ON PURPOSE</text>
+  <text x="924" y="1102" fill="#c4c9d6" font-size="11.5">fallback never attempted</text>
+  <text x="924" y="1136" fill="#6c7590" font-size="11">A router that fails over on</text>
+  <text x="924" y="1156" fill="#6c7590" font-size="11">everything is worse than none:</text>
+  <text x="924" y="1176" fill="#6c7590" font-size="11">it turns your bug into a bill.</text>
+
+  <rect x="36" y="1214" width="1268" height="72" rx="8" fill="#141a2a" stroke="#4a8fe7" stroke-width="1.5"/>
+  <text x="58" y="1242" fill="#e8eaf0" font-size="13" font-weight="700">★ THE DELIVERABLE — evidence/lab-1b/traces/*.json</text>
+  <text x="58" y="1266" fill="#c4c9d6" font-size="12">A machine-readable failover trace per run: every attempt, its vendor, HTTP status, error class, latency, cost, and who finally delivered.</text>
+</svg>

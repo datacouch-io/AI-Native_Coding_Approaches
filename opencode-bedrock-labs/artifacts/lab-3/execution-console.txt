@@ -1,0 +1,16 @@
+$ python3 report.py
+
+PLAN MODE
+  us.anthropic.claude-opus-5    184.2s  $0.3634765   18116 chars of plan
+
+EXECUTE MODE  (us.anthropic.claude-sonnet-5)
+  milestone             attempt  gate   cumulative tests   time     cost
+  --------------------------------------------------------------------------
+  M1 to_csv             1        FAIL   6 passed / 1 failed 13.5s   $0.0585595
+  M1 to_csv             2        PASS   7 passed / 0 failed 52.4s   $0.0394407
+  M2 to_json            1        PASS   12 passed / 0 failed 27.0s   $0.021264
+  M3 filter_rows        1        PASS   21 passed / 0 failed 38.8s   $0.0341072
+  M4 export             1        PASS   28 passed / 0 failed 36.6s   $0.0361959
+  --------------------------------------------------------------------------
+  final gate: 28 passed, 0 failed   milestones accepted: 4/4
+  plan $0.3635 + execute $0.1896 = $0.5530 total

@@ -1,0 +1,1 @@
+Write a Python function `slugify(title: str) -> str` that converts a string into a URL-safe slug: lowercase, spaces and punctuation replaced with single hyphens, no leading or trailing hyphens. Return the code directly in your response text; do not create any files.

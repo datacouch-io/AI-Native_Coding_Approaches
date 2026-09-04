@@ -1,0 +1,306 @@
+[
+  {
+    "model": "claude-sonnet-5",
+    "prompt": "p1-rate-limiter",
+    "wall_clock_s": 20.105,
+    "status": "OK",
+    "cost_usd": 0.023549,
+    "tokens": {
+      "total": 13111,
+      "input": 1,
+      "output": 1985,
+      "reasoning": 0,
+      "cache": {
+        "write": 640,
+        "read": 10485
+      }
+    },
+    "response_chars": 5282,
+    "quality_1_5": 4
+  },
+  {
+    "model": "claude-sonnet-5",
+    "prompt": "p2-refactor",
+    "wall_clock_s": 6.963,
+    "status": "OK",
+    "cost_usd": 0.006484,
+    "tokens": {
+      "total": 11463,
+      "input": 1,
+      "output": 259,
+      "reasoning": 0,
+      "cache": {
+        "write": 718,
+        "read": 10485
+      }
+    },
+    "response_chars": 555,
+    "quality_1_5": 3
+  },
+  {
+    "model": "claude-sonnet-5",
+    "prompt": "p3-caching-layer",
+    "wall_clock_s": 42.728,
+    "status": "OK",
+    "cost_usd": 0.0411815,
+    "tokens": {
+      "total": 14917,
+      "input": 1,
+      "output": 3734,
+      "reasoning": 0,
+      "cache": {
+        "write": 697,
+        "read": 10485
+      }
+    },
+    "response_chars": 9712,
+    "quality_1_5": 4
+  },
+  {
+    "model": "claude-sonnet-5",
+    "prompt": "p4-unit-tests",
+    "wall_clock_s": 18.797,
+    "status": "OK",
+    "cost_usd": 0.0224215,
+    "tokens": {
+      "total": 13047,
+      "input": 1,
+      "output": 1856,
+      "reasoning": 0,
+      "cache": {
+        "write": 705,
+        "read": 10485
+      }
+    },
+    "response_chars": 4239,
+    "quality_1_5": 4
+  },
+  {
+    "model": "claude-opus-5",
+    "prompt": "p1-rate-limiter",
+    "wall_clock_s": 53.652,
+    "status": "OK",
+    "cost_usd": 0.182985,
+    "tokens": {
+      "total": 15610,
+      "input": 2,
+      "output": 4556,
+      "reasoning": 0,
+      "cache": {
+        "write": 11052,
+        "read": 0
+      }
+    },
+    "response_chars": 8536,
+    "quality_1_5": 5
+  },
+  {
+    "model": "claude-opus-5",
+    "prompt": "p2-refactor",
+    "wall_clock_s": 12.065,
+    "status": "OK",
+    "cost_usd": 0.02707275,
+    "tokens": {
+      "total": 11827,
+      "input": 2,
+      "output": 695,
+      "reasoning": 0,
+      "cache": {
+        "write": 717,
+        "read": 10413
+      }
+    },
+    "response_chars": 1493,
+    "quality_1_5": 5
+  },
+  {
+    "model": "claude-opus-5",
+    "prompt": "p3-caching-layer",
+    "wall_clock_s": 136.661,
+    "status": "OK",
+    "cost_usd": 0.25792075,
+    "tokens": {
+      "total": 21794,
+      "input": 2,
+      "output": 9898,
+      "reasoning": 0,
+      "cache": {
+        "write": 785,
+        "read": 11109
+      }
+    },
+    "response_chars": 19777,
+    "quality_1_5": 5
+  },
+  {
+    "model": "claude-opus-5",
+    "prompt": "p4-unit-tests",
+    "wall_clock_s": 39.626,
+    "status": "OK",
+    "cost_usd": 0.09646225,
+    "tokens": {
+      "total": 15987,
+      "input": 2,
+      "output": 3225,
+      "reasoning": 0,
+      "cache": {
+        "write": 1643,
+        "read": 11117
+      }
+    },
+    "response_chars": 7464,
+    "quality_1_5": 5
+  },
+  {
+    "model": "gpt-5.6-sol",
+    "prompt": "p1-rate-limiter",
+    "wall_clock_s": 8.026,
+    "status": "OK",
+    "cost_usd": 0.071977,
+    "tokens": {
+      "total": 13305,
+      "input": 6263,
+      "output": 781,
+      "reasoning": 0,
+      "cache": {
+        "write": 6261,
+        "read": 0
+      }
+    },
+    "response_chars": 3058,
+    "quality_1_5": 4
+  },
+  {
+    "model": "gpt-5.6-sol",
+    "prompt": "p2-refactor",
+    "wall_clock_s": 3.585,
+    "status": "OK",
+    "cost_usd": 0.058121,
+    "tokens": {
+      "total": 12699,
+      "input": 6319,
+      "output": 63,
+      "reasoning": 0,
+      "cache": {
+        "write": 6317,
+        "read": 0
+      }
+    },
+    "response_chars": 211,
+    "quality_1_5": 3
+  },
+  {
+    "model": "gpt-5.6-sol",
+    "prompt": "p3-caching-layer",
+    "wall_clock_s": 50.205,
+    "status": "OK",
+    "cost_usd": 0.13355,
+    "tokens": {
+      "total": 16441,
+      "input": 6300,
+      "output": 3843,
+      "reasoning": 0,
+      "cache": {
+        "write": 6298,
+        "read": 0
+      }
+    },
+    "response_chars": 9533,
+    "quality_1_5": 4
+  },
+  {
+    "model": "gpt-5.6-sol",
+    "prompt": "p4-unit-tests",
+    "wall_clock_s": 7.443,
+    "status": "OK",
+    "cost_usd": 0.065948,
+    "tokens": {
+      "total": 13064,
+      "input": 6302,
+      "output": 462,
+      "reasoning": 0,
+      "cache": {
+        "write": 6300,
+        "read": 0
+      }
+    },
+    "response_chars": 1150,
+    "quality_1_5": 4
+  },
+  {
+    "model": "gpt-5.6-terra",
+    "prompt": "p1-rate-limiter",
+    "wall_clock_s": 7.257,
+    "status": "OK",
+    "cost_usd": 0.0362395,
+    "tokens": {
+      "total": 13199,
+      "input": 6265,
+      "output": 671,
+      "reasoning": 0,
+      "cache": {
+        "write": 6263,
+        "read": 0
+      }
+    },
+    "response_chars": 2827,
+    "quality_1_5": 4
+  },
+  {
+    "model": "gpt-5.6-terra",
+    "prompt": "p2-refactor",
+    "wall_clock_s": 3.566,
+    "status": "OK",
+    "cost_usd": 0.0291595,
+    "tokens": {
+      "total": 12700,
+      "input": 6321,
+      "output": 60,
+      "reasoning": 0,
+      "cache": {
+        "write": 6319,
+        "read": 0
+      }
+    },
+    "response_chars": 175,
+    "quality_1_5": 2
+  },
+  {
+    "model": "gpt-5.6-terra",
+    "prompt": "p3-caching-layer",
+    "wall_clock_s": 18.658,
+    "status": "OK",
+    "cost_usd": 0.057396,
+    "tokens": {
+      "total": 20637,
+      "input": 6302,
+      "output": 2325,
+      "reasoning": 0,
+      "cache": {
+        "write": 6300,
+        "read": 5710
+      }
+    },
+    "response_chars": 10286,
+    "quality_1_5": 3
+  },
+  {
+    "model": "gpt-5.6-terra",
+    "prompt": "p4-unit-tests",
+    "wall_clock_s": 5.612,
+    "status": "OK",
+    "cost_usd": 0.034821,
+    "tokens": {
+      "total": 18759,
+      "input": 6304,
+      "output": 443,
+      "reasoning": 0,
+      "cache": {
+        "write": 6302,
+        "read": 5710
+      }
+    },
+    "response_chars": 1383,
+    "quality_1_5": 2
+  }
+]

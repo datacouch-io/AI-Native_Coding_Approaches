@@ -1,0 +1,24 @@
+{
+  "started_at": "2026-09-04T09:09:55+00:00",
+  "fault_injected": "client-error",
+  "failover_enabled": true,
+  "attempts": [
+    {
+      "role": "primary",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-sonnet-5",
+      "endpoint": "faulted-mock",
+      "outcome": "failure",
+      "elapsed_s": 1.73,
+      "cost_usd": null,
+      "error_class": "client_error",
+      "status_code": 400,
+      "provider_retryable": false,
+      "error": "undefined: The provided model identifier is invalid."
+    }
+  ],
+  "delivered": false,
+  "delivered_by": null,
+  "delivered_by_vendor": null,
+  "halted_because": "client_error is not failover-worthy - this is a fault in OUR request, not the provider. Re-routing would hide the bug."
+}

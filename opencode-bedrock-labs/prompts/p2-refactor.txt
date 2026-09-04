@@ -1,0 +1,11 @@
+Refactor the following Python function for readability. Keep behavior identical. Return the refactored code directly in your response text; do not create any files.
+
+def calc(a,b,c,d,type):
+    if type=="sum":
+        x=a+b+c+d
+        return x
+    elif type=="avg":
+        x=(a+b+c+d)/4
+        return x
+    else:
+        return None

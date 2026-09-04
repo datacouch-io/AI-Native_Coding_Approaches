@@ -1,0 +1,16 @@
+Real captured output, 2026-09-04, run against main.py BEFORE the plan+build orchestration
+(GET /tasks/search did not exist yet - main.py only had a trailing spec comment).
+
+FAILED tests/test_search.py::test_search_by_text_query - assert 422 == 200
+FAILED tests/test_search.py::test_search_by_status - KeyError: 'results'
+FAILED tests/test_search.py::test_search_by_priority_range - KeyError: 'results'
+FAILED tests/test_search.py::test_search_pagination_returns_next_cursor - KeyError: 'results'
+FAILED tests/test_search.py::test_search_pagination_stable_under_concurrent_insert - KeyError: 'results'
+FAILED tests/test_search.py::test_search_limit_capped_at_100 - assert 422 == 200
+=================== 6 failed, 5 passed in 0.33s ====================
+
+Note: the 422s (rather than 404s) are themselves a real, useful signal -
+FastAPI matched "search" against the existing GET /tasks/{task_id} route
+and failed int coercion on the path parameter. This is exactly the
+route-ordering hazard the Opus 5 design step (plan-opus5-design.md) later
+found and empirically verified before writing the implementation guidance.

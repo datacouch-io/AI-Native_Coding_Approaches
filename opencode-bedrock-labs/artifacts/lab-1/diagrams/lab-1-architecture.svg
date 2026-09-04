@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1340" height="1380" viewBox="0 0 1340 1380" xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b6480"/></marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4a8fe7"/></marker>
+  </defs>
+  <rect width="1340" height="1380" fill="#0f1117"/>
+
+  <text x="36" y="46" fill="#e8eaf0" font-size="22" font-weight="700">Lab 1 — Benchmark Architecture</text>
+  <text x="36" y="72" fill="#9aa1b2" font-size="13">4 identical prompts × 4 Bedrock model tiers = 16 measured runs → one scorecard</text>
+
+  <text x="36" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">1 · STANDARDIZED PROMPTS</text>
+  <rect x="36" y="124" width="610" height="176" rx="8" fill="#171b28" stroke="#262b3a"/>
+  <text x="58" y="150" fill="#c9aef6" font-size="12.5" font-weight="600">prompts/</text>
+  <text x="58" y="176" fill="#c4c9d6" font-size="12.5">p1-rate-limiter.txt — algorithmic implementation</text>
+  <text x="58" y="202" fill="#c4c9d6" font-size="12.5">p2-refactor.txt — small, well-defined edit</text>
+  <text x="58" y="228" fill="#c4c9d6" font-size="12.5">p3-caching-layer.txt — open-ended design</text>
+  <text x="58" y="254" fill="#c4c9d6" font-size="12.5">p4-unit-tests.txt — test generation</text>
+  <text x="58" y="284" fill="#6c7590" font-size="11.5">byte-identical for every model — that is what makes it a benchmark</text>
+
+  <text x="690" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">2 · RUNNER</text>
+  <rect x="690" y="124" width="614" height="176" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="712" y="150" fill="#e8eaf0" font-size="12.5" font-weight="600">run_benchmark.py</text>
+  <rect x="712" y="164" width="570" height="66" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="726" y="185" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">opencode run --agent plan \</text>
+  <text x="726" y="203" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">  --model &lt;id&gt; --format json \</text>
+  <text x="726" y="221" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">  "$(cat prompts/pN.txt)"</text>
+  <text x="712" y="252" fill="#c4c9d6" font-size="11.5">--agent plan  → read-only, so nothing is written to disk</text>
+  <text x="712" y="272" fill="#c4c9d6" font-size="11.5">--format json → parseable events instead of printed text</text>
+  <text x="712" y="291" fill="#6c7590" font-size="11">loops 4 prompts × 4 models = 16 calls</text>
+  <line x1="646" y1="212" x2="684" y2="212" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <text x="36" y="340" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">3 · AWS BEDROCK — 4 MODEL TIERS ACROSS TWO VENDORS</text>
+  <rect x="36" y="352" width="1268" height="104" rx="8" fill="#121620" stroke="#262b3a" stroke-dasharray="4 3"/>
+  <rect x="56" y="370" width="296" height="40" rx="5" fill="#3a2a5c"/>
+  <text x="72" y="395" fill="#c9aef6" font-size="11.5" font-weight="600">us.anthropic.claude-sonnet-5</text>
+  <rect x="368" y="370" width="296" height="40" rx="5" fill="#5c2a3a"/>
+  <text x="384" y="395" fill="#f6aec2" font-size="11.5" font-weight="600">us.anthropic.claude-opus-5</text>
+  <rect x="680" y="370" width="296" height="40" rx="5" fill="#2a4a5c"/>
+  <text x="696" y="395" fill="#ade4f6" font-size="11.5" font-weight="600">global.openai.gpt-5.6-sol</text>
+  <rect x="992" y="370" width="292" height="40" rx="5" fill="#2a5c3a"/>
+  <text x="1008" y="395" fill="#aef6c2" font-size="11.5" font-weight="600">global.openai.gpt-5.6-terra</text>
+  <text x="56" y="438" fill="#6c7590" font-size="11">gotcha: the GPT-5.6 tiers are listed only under the global. prefix in OpenCode's catalog — not us.</text>
+  <line x1="997" y1="300" x2="997" y2="346" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <text x="36" y="496" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">4 · PER-CALL TELEMETRY — the step_finish event</text>
+  <rect x="36" y="508" width="1268" height="130" rx="8" fill="#171b28" stroke="#262b3a"/>
+  <rect x="56" y="526" width="700" height="94" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="70" y="547" fill="#e0b877" font-size="11" font-family="ui-monospace,Menlo,monospace">{"type":"step_finish","part":{</text>
+  <text x="70" y="565" fill="#e0b877" font-size="11" font-family="ui-monospace,Menlo,monospace">   "cost": 0.023549,</text>
+  <text x="70" y="583" fill="#e0b877" font-size="11" font-family="ui-monospace,Menlo,monospace">   "tokens": {"input":1,"output":1985,</text>
+  <text x="70" y="601" fill="#e0b877" font-size="11" font-family="ui-monospace,Menlo,monospace">              "cache":{"write":640,"read":10485}}}}</text>
+  <text x="786" y="552" fill="#c4c9d6" font-size="12">cost is computed by OpenCode from the real</text>
+  <text x="786" y="574" fill="#c4c9d6" font-size="12">per-token price of whichever model answered</text>
+  <text x="786" y="596" fill="#c4c9d6" font-size="12">— there is no pricing table to maintain.</text>
+  <text x="786" y="618" fill="#6c7590" font-size="11">cache.write on a cold call is why cost varies run to run.</text>
+  <line x1="670" y1="456" x2="670" y2="502" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <text x="36" y="678" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">5 · POST-PROCESSING PIPELINE</text>
+  <rect x="36" y="690" width="400" height="150" rx="8" fill="#171b28" stroke="#262b3a"/>
+  <text x="56" y="716" fill="#e8eaf0" font-size="12" font-weight="600">tools/extract_responses.py</text>
+  <text x="56" y="740" fill="#c4c9d6" font-size="11.5">splits raw JSONL into:</text>
+  <text x="56" y="762" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">responses/*.md</text>
+  <text x="56" y="782" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">code/&lt;prompt&gt;/&lt;model&gt;.py</text>
+  <text x="56" y="812" fill="#6c7590" font-size="11">readable output + runnable code</text>
+
+  <rect x="470" y="690" width="400" height="150" rx="8" fill="#171b28" stroke="#262b3a"/>
+  <text x="490" y="716" fill="#e8eaf0" font-size="12" font-weight="600">tools/score.py --interactive</text>
+  <text x="490" y="740" fill="#c4c9d6" font-size="11.5">1–5 quality rating per run,</text>
+  <text x="490" y="762" fill="#c4c9d6" font-size="11.5">informed by step 6 verification</text>
+  <text x="490" y="784" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">quality_scores.csv</text>
+  <text x="490" y="812" fill="#6c7590" font-size="11">ratings live in a file, not in your head</text>
+
+  <rect x="904" y="690" width="400" height="150" rx="8" fill="#171b28" stroke="#262b3a"/>
+  <text x="924" y="716" fill="#e8eaf0" font-size="12" font-weight="600">tools/build_dashboard.py</text>
+  <text x="924" y="740" fill="#c4c9d6" font-size="11.5">joins cost + latency + quality</text>
+  <text x="924" y="762" fill="#c4c9d6" font-size="11.5">into a per-model summary</text>
+  <text x="924" y="784" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">scorecard.csv</text>
+  <text x="924" y="812" fill="#6c7590" font-size="11">+ renders the HTML deliverable</text>
+
+  <line x1="436" y1="765" x2="464" y2="765" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="870" y1="765" x2="898" y2="765" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <path d="M620 638 L620 684" stroke="#4a8fe7" stroke-width="1.6" fill="none" marker-end="url(#arg)"/>
+  <text x="636" y="664" fill="#4a8fe7" font-size="11">16 × runs/&lt;model&gt;__&lt;prompt&gt;.jsonl</text>
+
+  <text x="36" y="880" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">6 · INDEPENDENT VERIFICATION — run the code, don't just read it</text>
+  <rect x="36" y="892" width="600" height="282" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="918" fill="#e8eaf0" font-size="12" font-weight="600">p4 — model-written pytest suites vs. a reference impl you wrote</text>
+  <rect x="58" y="932" width="556" height="72" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="952" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">your_module.py   # known-good parse_iso8601()</text>
+  <text x="72" y="970" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">pytest test_&lt;model&gt;.py</text>
+  <text x="72" y="992" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">→ 64 passed, 16 failed  (4 suites, measured)</text>
+  <text x="58" y="1034" fill="#c4c9d6" font-size="12">A failure is a bug only if it is wrong under <tspan font-style="italic">every</tspan> reading of the spec.</text>
+  <text x="58" y="1064" fill="#c4c9d6" font-size="12">15 failures = spec disagreement (is a timestamp with no</text>
+  <text x="58" y="1084" fill="#c4c9d6" font-size="12">timezone invalid, or merely naive?) — a judgement call.</text>
+  <text x="58" y="1114" fill="#f6aec2" font-size="12">1 failure = a genuine bug: terra asserted that</text>
+  <text x="58" y="1134" fill="#f6aec2" font-size="12">12:34:56+02:00 equals 12:34:56 UTC. It does not.</text>
+  <text x="58" y="1160" fill="#6c7590" font-size="11">This is what turns a gut-feel star rating into a defensible one.</text>
+
+  <rect x="656" y="892" width="600" height="282" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="678" y="918" fill="#e8eaf0" font-size="12" font-weight="600">p1 — model-written rate limiters, exercised behaviourally</text>
+  <rect x="678" y="932" width="556" height="72" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="692" y="952" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">b = TokenBucket(capacity=5, refill_rate=2)</text>
+  <text x="692" y="970" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">5 allowed → 6th rejected → refills after 1.1s</text>
+  <text x="692" y="992" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">→ same contract, 4 incompatible APIs</text>
+  <text x="678" y="1034" fill="#c4c9d6" font-size="12">Every model implemented the algorithm correctly.</text>
+  <text x="678" y="1064" fill="#c4c9d6" font-size="12">They disagreed on everything around it:</text>
+  <text x="678" y="1088" fill="#c4c9d6" font-size="12">• return shape — bool vs (bool, wait) vs a Decision object</text>
+  <text x="678" y="1110" fill="#c4c9d6" font-size="12">• arg order — terra takes (rate, capacity), others (capacity, rate)</text>
+  <text x="678" y="1132" fill="#c4c9d6" font-size="12">• method name — consume() vs allow(); web-framework coupling</text>
+  <text x="678" y="1160" fill="#6c7590" font-size="11">Interface variance — not correctness — is the real switching cost.</text>
+
+  <path d="M560 886 L560 846" stroke="#5b6480" stroke-width="1.4" fill="none"
+        stroke-dasharray="4 3" marker-end="url(#ar)"/>
+  <text x="576" y="872" fill="#6c7590" font-size="11">verification results feed the quality score</text>
+
+  <rect x="36" y="1204" width="1268" height="94" rx="8" fill="#141a2a" stroke="#4a8fe7" stroke-width="1.5"/>
+  <text x="58" y="1234" fill="#e8eaf0" font-size="13.5" font-weight="700">★ evidence/lab-1/dashboard.html — THE DELIVERABLE</text>
+  <text x="58" y="1258" fill="#c4c9d6" font-size="12">Per-model cost / latency / quality cards + a 16-row detail table + a plain-language verdict line.</text>
+  <text x="58" y="1280" fill="#c4c9d6" font-size="12">This is the artifact you screenshot and take back to your team to justify model selection.</text>
+  <path d="M1290 840 L1290 1198" stroke="#4a8fe7" stroke-width="1.6" fill="none" marker-end="url(#arg)"/>
+</svg>

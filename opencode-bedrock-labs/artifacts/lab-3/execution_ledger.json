@@ -1,0 +1,84 @@
+{
+  "model": "amazon-bedrock/us.anthropic.claude-sonnet-5",
+  "milestones": [
+    {
+      "milestone": "M1",
+      "function": "to_csv",
+      "attempts": [
+        {
+          "attempt": 1,
+          "cost_usd": 0.0585595,
+          "elapsed_s": 13.47,
+          "gate_passed": false,
+          "tests_passed": 6,
+          "tests_failed": 1
+        },
+        {
+          "attempt": 2,
+          "cost_usd": 0.0394407,
+          "elapsed_s": 52.44,
+          "gate_passed": true,
+          "tests_passed": 7,
+          "tests_failed": 0
+        }
+      ],
+      "accepted": true,
+      "total_cost_usd": 0.098
+    },
+    {
+      "milestone": "M2",
+      "function": "to_json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "cost_usd": 0.021264,
+          "elapsed_s": 26.96,
+          "gate_passed": true,
+          "tests_passed": 12,
+          "tests_failed": 0
+        }
+      ],
+      "accepted": true,
+      "total_cost_usd": 0.021264
+    },
+    {
+      "milestone": "M3",
+      "function": "filter_rows",
+      "attempts": [
+        {
+          "attempt": 1,
+          "cost_usd": 0.0341072,
+          "elapsed_s": 38.84,
+          "gate_passed": true,
+          "tests_passed": 21,
+          "tests_failed": 0
+        }
+      ],
+      "accepted": true,
+      "total_cost_usd": 0.034107
+    },
+    {
+      "milestone": "M4",
+      "function": "export",
+      "attempts": [
+        {
+          "attempt": 1,
+          "cost_usd": 0.0361959,
+          "elapsed_s": 36.64,
+          "gate_passed": true,
+          "tests_passed": 28,
+          "tests_failed": 0
+        }
+      ],
+      "accepted": true,
+      "total_cost_usd": 0.036196
+    }
+  ],
+  "final_gate": {
+    "passed": 28,
+    "failed": 0,
+    "green": true
+  },
+  "total_cost_usd": 0.189567,
+  "milestones_accepted": 4
+}

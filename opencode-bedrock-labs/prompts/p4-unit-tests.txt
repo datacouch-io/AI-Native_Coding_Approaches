@@ -1,0 +1,1 @@
+Write unit tests (pytest) for a function `parse_iso8601(s: str) -> datetime` that parses ISO-8601 timestamps, covering at least 4 edge cases (e.g. missing timezone, fractional seconds, 'Z' suffix, invalid format). Return the test code directly in your response text; do not create any files.
