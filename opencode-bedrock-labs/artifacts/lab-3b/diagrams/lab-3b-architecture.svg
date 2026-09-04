@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="1560" viewBox="0 0 1600 1560" xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b6480"/></marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8fd694"/></marker>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f6829a"/></marker>
+  </defs>
+  <rect width="1600" height="1560" fill="#0f1117"/>
+
+  <text x="36" y="46" fill="#e8eaf0" font-size="22" font-weight="700">Lab 3B — Cross-Model Verification: make the reviewer prove it</text>
+  <text x="36" y="72" fill="#9aa1b2" font-size="13">Getting a critique is easy. Deciding whether the critique is TRUE is the engineering problem — so every claimed defect must ship a failing test</text>
+
+  <!-- 1 setup -->
+  <text x="36" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">1 · THE SETUP — a module that looks fine and is not</text>
+  <rect x="36" y="124" width="1268" height="164" rx="8" fill="#171b28" stroke="#5c2a3a"/>
+  <text x="58" y="150" fill="#e8eaf0" font-size="12.5" font-weight="600">lru_cache.py — three defects planted deliberately, so the exercise is deterministic</text>
+  <rect x="58" y="164" width="600" height="76" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="184" fill="#f6829a" font-size="10.5" font-family="ui-monospace,Menlo,monospace">A  get() never refreshes recency        → LRU becomes FIFO</text>
+  <text x="72" y="202" fill="#f6829a" font-size="10.5" font-family="ui-monospace,Menlo,monospace">B  put(): `if len(_order) &gt; capacity`   → holds capacity+1</text>
+  <text x="72" y="220" fill="#f6829a" font-size="10.5" font-family="ui-monospace,Menlo,monospace">C  re-put an existing key: no refresh   → stale recency</text>
+  <text x="58" y="262" fill="#c4c9d6" font-size="12">The hidden ground-truth suite scores 4 passed / 5 failed on this module. It does not look broken —</text>
+  <text x="58" y="280" fill="#c4c9d6" font-size="12">basic put/get, capacity validation and value updates all work. That is what makes it worth reviewing.</text>
+
+  <text x="686" y="188" fill="#c4c9d6" font-size="12">tests/test_hidden.py is the ground truth</text>
+  <text x="686" y="208" fill="#c4c9d6" font-size="12">and is never shown to any model. It only</text>
+  <text x="686" y="228" fill="#c4c9d6" font-size="12">answers one question, at the end: did the</text>
+  <text x="686" y="248" fill="#c4c9d6" font-size="12">revision actually fix the real defects?</text>
+
+  <!-- 2 the loop -->
+  <text x="36" y="328" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">2 · THE LOOP — critique, validate, revise, re-verify</text>
+  <rect x="36" y="340" width="1268" height="120" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <rect x="58" y="362" width="270" height="76" rx="6" fill="#2a4a5c"/>
+  <text x="74" y="384" fill="#ade4f6" font-size="12" font-weight="600">1 · CRITIQUE</text>
+  <text x="74" y="404" fill="#c4c9d6" font-size="11">verifier reads SPEC + code</text>
+  <text x="74" y="424" fill="#c4c9d6" font-size="11">returns findings + pytest file</text>
+
+  <rect x="352" y="362" width="270" height="76" rx="6" fill="#3a4560"/>
+  <text x="368" y="384" fill="#e8eaf0" font-size="12" font-weight="600">2 · VALIDATE</text>
+  <text x="368" y="404" fill="#c4c9d6" font-size="11">run those tests twice —</text>
+  <text x="368" y="424" fill="#c4c9d6" font-size="11">this is the whole trick</text>
+
+  <rect x="646" y="362" width="270" height="76" rx="6" fill="#3a2a5c"/>
+  <text x="662" y="384" fill="#c9aef6" font-size="12" font-weight="600">3 · REVISE</text>
+  <text x="662" y="404" fill="#c4c9d6" font-size="11">author fixes ONLY the</text>
+  <text x="662" y="424" fill="#c4c9d6" font-size="11">confirmed defects</text>
+
+  <rect x="940" y="362" width="342" height="76" rx="6" fill="#2a5c3a"/>
+  <text x="956" y="384" fill="#aef6c2" font-size="12" font-weight="600">4 · RE-VERIFY</text>
+  <text x="956" y="404" fill="#c4c9d6" font-size="11">reviewer tests + hidden suite</text>
+  <text x="956" y="424" fill="#c4c9d6" font-size="11">against the revised module</text>
+
+  <line x1="328" y1="400" x2="346" y2="400" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="622" y1="400" x2="640" y2="400" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="916" y1="400" x2="934" y2="400" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <!-- 3 validation rule -->
+  <text x="36" y="500" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">3 · THE VALIDATION RULE — what separates a finding from a confident sentence</text>
+  <rect x="36" y="512" width="1268" height="196" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="540" fill="#c4c9d6" font-size="12">Every reproducing test the reviewer submits is run against BOTH modules, in an isolated temp directory:</text>
+
+  <rect x="58" y="556" width="384" height="60" rx="5" fill="#26161c" stroke="#5c2a3a"/>
+  <text x="74" y="578" fill="#f6aec2" font-size="11.5" font-weight="600">against the flawed module</text>
+  <text x="74" y="600" fill="#c4c9d6" font-size="11.5">a real defect makes the test FAIL</text>
+
+  <rect x="466" y="556" width="384" height="60" rx="5" fill="#16261c" stroke="#2a5c3a"/>
+  <text x="482" y="578" fill="#aef6c2" font-size="11.5" font-weight="600">against the correct reference</text>
+  <text x="482" y="600" fill="#c4c9d6" font-size="11.5">a fair test PASSES</text>
+
+  <rect x="874" y="556" width="408" height="60" rx="5" fill="#141a2a" stroke="#4a8fe7"/>
+  <text x="890" y="578" fill="#e8eaf0" font-size="11.5" font-weight="700">CONFIRMED = fails first, passes second</text>
+  <text x="890" y="600" fill="#c4c9d6" font-size="11.5">anything else is not a discovery</text>
+
+  <text x="58" y="646" fill="#c4c9d6" font-size="12">fails on BOTH → the reviewer's test is simply wrong. A confident claim with a broken proof. The harness rejects it.</text>
+  <text x="58" y="668" fill="#c4c9d6" font-size="12">passes on BOTH → the reviewer reproduced nothing. It may still be right, but you have no evidence, so it does not count.</text>
+  <text x="58" y="692" fill="#6c7590" font-size="11.5">This is the difference between a review system and a model that sounds sure of itself.</text>
+
+  <!-- 4 results -->
+  <text x="36" y="748" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">4 · MEASURED — three reviewers, same flawed module, all run live</text>
+  <rect x="36" y="760" width="1268" height="188" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <text x="58" y="788" fill="#6c7590" font-size="11" font-weight="700">REVIEWER</text>
+  <text x="238" y="788" fill="#6c7590" font-size="11" font-weight="700">VENDOR</text>
+  <text x="400" y="788" fill="#6c7590" font-size="11" font-weight="700">TESTS SUBMITTED</text>
+  <text x="620" y="788" fill="#6c7590" font-size="11" font-weight="700">CONFIRMED</text>
+  <text x="790" y="788" fill="#6c7590" font-size="11" font-weight="700">UNFAIR</text>
+  <text x="920" y="788" fill="#6c7590" font-size="11" font-weight="700">DEFECTS</text>
+  <text x="1060" y="788" fill="#6c7590" font-size="11" font-weight="700">TIME</text>
+  <text x="1180" y="788" fill="#6c7590" font-size="11" font-weight="700">COST</text>
+  <line x1="58" y1="798" x2="1282" y2="798" stroke="#262b3a" stroke-width="1"/>
+
+  <text x="58" y="826" fill="#ade4f6" font-size="12" font-weight="600">gpt-5.6-terra</text>
+  <text x="238" y="826" fill="#c4c9d6" font-size="12">OpenAI</text>
+  <text x="400" y="826" fill="#c4c9d6" font-size="12">3</text>
+  <text x="620" y="826" fill="#8fd694" font-size="12" font-weight="600">3</text>
+  <text x="790" y="826" fill="#8fd694" font-size="12">0</text>
+  <text x="920" y="826" fill="#e8eaf0" font-size="12" font-weight="600">3/3</text>
+  <text x="1060" y="826" fill="#8fd694" font-size="12" font-weight="600">7.7s</text>
+  <text x="1180" y="826" fill="#8fd694" font-size="12" font-weight="600">$0.0385</text>
+
+  <text x="58" y="856" fill="#c9aef6" font-size="12" font-weight="600">claude-sonnet-5</text>
+  <text x="238" y="856" fill="#c4c9d6" font-size="12">Anthropic</text>
+  <text x="400" y="856" fill="#c4c9d6" font-size="12">3</text>
+  <text x="620" y="856" fill="#8fd694" font-size="12" font-weight="600">3</text>
+  <text x="790" y="856" fill="#8fd694" font-size="12">0</text>
+  <text x="920" y="856" fill="#e8eaf0" font-size="12" font-weight="600">3/3</text>
+  <text x="1060" y="856" fill="#c4c9d6" font-size="12">82.0s</text>
+  <text x="1180" y="856" fill="#c4c9d6" font-size="12">$0.0848</text>
+
+  <text x="58" y="886" fill="#f6aec2" font-size="12" font-weight="600">claude-opus-5</text>
+  <text x="238" y="886" fill="#c4c9d6" font-size="12">Anthropic</text>
+  <text x="400" y="886" fill="#e8eaf0" font-size="12" font-weight="600">6</text>
+  <text x="620" y="886" fill="#8fd694" font-size="12" font-weight="600">6</text>
+  <text x="790" y="886" fill="#8fd694" font-size="12">0</text>
+  <text x="920" y="886" fill="#e8eaf0" font-size="12" font-weight="600">3/3</text>
+  <text x="1060" y="886" fill="#c4c9d6" font-size="12">75.4s</text>
+  <text x="1180" y="886" fill="#c4c9d6" font-size="12">$0.0600</text>
+
+  <text x="58" y="924" fill="#c4c9d6" font-size="11.5">All three found all three planted defects. 12 reproducing tests submitted in total, and <tspan fill="#8fd694" font-weight="600">not one</tspan> failed against the correct</text>
+  <text x="58" y="942" fill="#c4c9d6" font-size="11.5">reference — zero false positives. Asked for proof, none of them invented a defect.</text>
+
+  <!-- 5 honest reading -->
+  <text x="36" y="988" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">5 · READING THE RESULT HONESTLY</text>
+
+  <rect x="36" y="1000" width="620" height="182" rx="8" fill="#26161c" stroke="#5c2a3a"/>
+  <text x="58" y="1026" fill="#f6aec2" font-size="12.5" font-weight="700">What this run does NOT show</text>
+  <text x="58" y="1052" fill="#c4c9d6" font-size="11.5">Cross-vendor did not out-find same-vendor. Every</text>
+  <text x="58" y="1072" fill="#c4c9d6" font-size="11.5">reviewer caught every defect. If you were told a</text>
+  <text x="58" y="1092" fill="#c4c9d6" font-size="11.5">second vendor finds bugs the first cannot, this</text>
+  <text x="58" y="1112" fill="#c4c9d6" font-size="11.5">task does not support that claim. What differed</text>
+  <text x="58" y="1132" fill="#c4c9d6" font-size="11.5">was price and latency: the same three findings</text>
+  <text x="58" y="1152" fill="#c4c9d6" font-size="11.5">for <tspan fill="#8fd694" font-weight="600">2.2× less money</tspan> and <tspan fill="#8fd694" font-weight="600">10× faster</tspan>.</text>
+
+  <rect x="684" y="1000" width="620" height="182" rx="8" fill="#16261c" stroke="#2a5c3a"/>
+  <text x="706" y="1026" fill="#aef6c2" font-size="12.5" font-weight="700">What it does show</text>
+  <text x="706" y="1052" fill="#c4c9d6" font-size="11.5">An independent check caught three defects sitting</text>
+  <text x="706" y="1072" fill="#c4c9d6" font-size="11.5">in code that passed four of its own tests. The</text>
+  <text x="706" y="1092" fill="#c4c9d6" font-size="11.5">module looked healthy and was not.</text>
+  <text x="706" y="1122" fill="#c4c9d6" font-size="11.5">And the value came from the <tspan fill="#e8eaf0" font-weight="600">requirement to prove</tspan></text>
+  <text x="706" y="1142" fill="#c4c9d6" font-size="11.5"><tspan fill="#e8eaf0" font-weight="600">each finding</tspan>, not from which vendor was asked.</text>
+  <text x="706" y="1164" fill="#6c7590" font-size="11">Design the harness, then pick the model.</text>
+
+  <!-- deliverable -->
+  <text x="36" y="1214" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">6 · THE CONTROL — point a reviewer at code that is already correct</text>
+  <rect x="36" y="1226" width="1268" height="112" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="1252" fill="#c4c9d6" font-size="12">claude-sonnet-5 vs. the correct reference: 6 of 7 rules examined and <tspan fill="#e8eaf0" font-weight="600">nothing claimed</tspan> — "I'm not claiming issues there</text>
+  <text x="58" y="1272" fill="#c4c9d6" font-size="12">since I cannot demonstrate a failing case." One claim submitted, and the harness marked it a false positive.</text>
+  <text x="58" y="1300" fill="#e0b877" font-size="12">But the claim was defensible: rule 1 says "positive integer", and in Python <tspan font-family="ui-monospace,Menlo,monospace">isinstance(True, int)</tspan> is True.</text>
+  <text x="58" y="1322" fill="#c4c9d6" font-size="12">An <tspan font-weight="600">unfair</tspan> verdict does not always mean a bad reviewer. Here it meant an ambiguous <tspan font-weight="600">specification</tspan>. (273s, $0.0181)</text>
+
+  <rect x="36" y="1366" width="1268" height="106" rx="8" fill="#141a2a" stroke="#4a8fe7" stroke-width="1.5"/>
+  <text x="58" y="1396" fill="#e8eaf0" font-size="13" font-weight="700">★ THE DELIVERABLE — the caught bugs, and the corrected code that proves the fix</text>
+  <text x="58" y="1422" fill="#c4c9d6" font-size="12">reviews/terra/review.md — the findings, each naming the contract rule and the exact expression at fault</text>
+  <text x="58" y="1442" fill="#c4c9d6" font-size="12">reviews/terra/test_review.py — the reproducing tests  ·  reviews/terra/lru_cache_fixed.py — the corrected module</text>
+  <text x="58" y="1462" fill="#8fd694" font-size="12" font-weight="600">hidden ground-truth suite: 5 failing before  →  0 failing after   ·   whole loop cost: $0.0534</text>
+
+  <path d="M670 288 L670 334" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M487 460 L487 506" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M670 708 L670 754" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M670 1182 L670 1220" stroke="#4a8fe7" stroke-width="1.6" fill="none" marker-end="url(#arg)"/>
+</svg>

@@ -12,21 +12,20 @@ class LRUCache:
         self._data: dict = {}
         self._order: list = []
 
-    def _touch(self, key) -> None:
-        if key in self._order:
-            self._order.remove(key)
-        self._order.append(key)
-
     def get(self, key):
+        """Return the value for `key`, or None when it is not cached."""
         if key not in self._data:
             return None
-        self._touch(key)
+        self._order.remove(key)
+        self._order.append(key)
         return self._data[key]
 
     def put(self, key, value) -> None:
+        """Store `value` under `key`, evicting the least recently used entry if full."""
         if key in self._data:
             self._data[key] = value
-            self._touch(key)
+            self._order.remove(key)
+            self._order.append(key)
             return
 
         if len(self._order) >= self.capacity:

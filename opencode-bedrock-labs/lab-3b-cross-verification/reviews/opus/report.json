@@ -1,0 +1,25 @@
+{
+  "reviewer": {
+    "key": "opus",
+    "vendor": "Anthropic",
+    "model": "amazon-bedrock/us.anthropic.claude-opus-5"
+  },
+  "critique": {
+    "cost_usd": 0.05997175,
+    "elapsed_s": 75.43,
+    "review_chars": 3699
+  },
+  "validation": {
+    "tests_submitted": 6,
+    "confirmed": [
+      "test_capacity_exceeded_by_one_entry",
+      "test_capacity_one_holds_two_entries",
+      "test_eviction_ignores_recency_from_get",
+      "test_eviction_ignores_recency_from_put",
+      "test_get_does_not_refresh_recency",
+      "test_put_existing_key_does_not_refresh_recency"
+    ],
+    "unfair_tests": [],
+    "no_defect_shown": []
+  }
+}

@@ -1,0 +1,22 @@
+$ python3 report.py --label terra
+
+VERIFICATION RUN  target=flawed
+  reviewer   OpenAI     global.openai.gpt-5.6-terra
+             7.66s   $0.0384675   review 1120 chars
+
+  VALIDATION   3 reproducing tests submitted
+    CONFIRMED  test_get_does_not_refresh_recency
+    CONFIRMED  test_put_allows_cache_to_exceed_capacity
+    CONFIRMED  test_reput_existing_key_does_not_refresh_recency
+
+  REVISION     Anthropic us.anthropic.claude-sonnet-5   29.25s   $0.0148985
+
+  RE-VERIFY    reviewer tests still failing: 0
+               hidden ground truth: 5 failing before -> 0 failing after (of 9)
+                 fixed: test_get_moves_key_to_most_recent_position
+                 fixed: test_never_exceeds_capacity
+                 fixed: test_recent_get_protects_key_from_eviction
+                 fixed: test_reput_makes_key_most_recent
+                 fixed: test_third_insert_evicts_first
+
+  TOTAL COST   $0.053366

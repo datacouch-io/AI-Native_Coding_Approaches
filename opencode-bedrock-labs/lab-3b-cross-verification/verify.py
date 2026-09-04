@@ -148,6 +148,11 @@ def main() -> int:
     ap.add_argument("--fixer", default="sonnet", choices=sorted(MODELS))
     ap.add_argument("--label", default=None)
     ap.add_argument("--no-revise", action="store_true")
+    ap.add_argument("--timeout", type=int, default=900, help="per model call, seconds")
+    ap.add_argument("--target", default="flawed", choices=["flawed", "reference"],
+                    help="control condition: point the reviewer at the CORRECT code. "
+                         "A good reviewer finds nothing; a confident one invents defects, "
+                         "and the harness catches that.")
     args = ap.parse_args()
 
     label = args.label or args.reviewer
@@ -155,20 +160,30 @@ def main() -> int:
     outdir.mkdir(parents=True, exist_ok=True)
 
     spec = (HERE / "SPEC.md").read_text()
-    code = FLAWED.read_text()
+    target = FLAWED if args.target == "flawed" else REFERENCE
+    code = target.read_text()
     r_vendor, r_model = MODELS[args.reviewer]
     report = {"reviewer": {"key": args.reviewer, "vendor": r_vendor, "model": r_model}}
 
     # ---- 1. CRITIQUE -------------------------------------------------------
     print(f"\n[1/4] critique   {r_vendor} / {r_model.split('/')[-1]}")
     start = time.time()
-    text, cost = run_model(r_model, REVIEW_TEMPLATE.format(spec=spec, code=code))
+    text, cost = run_model(r_model, REVIEW_TEMPLATE.format(spec=spec, code=code),
+                           timeout=args.timeout)
     elapsed = time.time() - start
     (outdir / "review.md").write_text(text)
     blocks = CODE_BLOCK.findall(text)
     if not blocks:
-        print("      reviewer returned no test file", file=sys.stderr)
-        return 1
+        # A reviewer that finds nothing has nothing to prove. That is a clean bill
+        # of health, not a failure - and on correct code it is the right answer.
+        print("      no reproducing tests submitted - reviewer reported no defects")
+        report["target"] = args.target
+        report["validation"] = {"tests_submitted": 0, "confirmed": [],
+                                "unfair_tests": [], "no_defect_shown": [],
+                                "reviewer_reported_no_defects": True}
+        (outdir / "report.json").write_text(json.dumps(report, indent=2))
+        print(f"\n      report: {outdir / 'report.json'}")
+        return 0
     test_file = outdir / "test_review.py"
     test_file.write_text(max(blocks, key=len))
     report["critique"] = {"cost_usd": cost, "elapsed_s": round(elapsed, 2),
@@ -177,10 +192,14 @@ def main() -> int:
 
     # ---- 2. VALIDATE THE FINDINGS -----------------------------------------
     print("[2/4] validate   running the reviewer's tests against flawed + reference")
-    all_tests, failed_flawed = pytest_outcomes(FLAWED, test_file)
+    all_tests, failed_flawed = pytest_outcomes(target, test_file)
     _, failed_reference = pytest_outcomes(REFERENCE, test_file)
     verdict = classify(all_tests, failed_flawed, failed_reference)
+    report["target"] = args.target
     report["validation"] = {"tests_submitted": len(all_tests), **verdict}
+    if args.target == "reference":
+        # Reviewing known-good code: every failing test is a false positive.
+        report["validation"]["false_positives"] = sorted(failed_flawed)
     print(f"      {len(all_tests)} tests submitted   "
           f"CONFIRMED {len(verdict['confirmed'])}   "
           f"unfair {len(verdict['unfair_tests'])}   "
@@ -189,6 +208,17 @@ def main() -> int:
         print(f"        confirmed: {name}")
     for name in verdict["unfair_tests"]:
         print(f"        UNFAIR (fails on correct code too): {name}")
+
+    if args.target == "reference":
+        fp = sorted(failed_flawed)
+        print(f"      CONTROL: reviewing known-good code. "
+              f"{len(fp)} of {len(all_tests)} submitted tests fail on correct code "
+              f"= false positives")
+        for name in fp:
+            print(f"        false positive: {name}")
+        (outdir / "report.json").write_text(json.dumps(report, indent=2))
+        print(f"\n      report: {outdir / 'report.json'}")
+        return 0
 
     if args.no_revise or not verdict["confirmed"]:
         (outdir / "report.json").write_text(json.dumps(report, indent=2))
@@ -201,7 +231,8 @@ def main() -> int:
     print(f"[3/4] revise     {f_vendor} / {f_model.split('/')[-1]}")
     start = time.time()
     text, cost = run_model(f_model, REVISE_TEMPLATE.format(spec=spec, code=code,
-                                                           findings=findings))
+                                                           findings=findings),
+                           timeout=args.timeout)
     elapsed = time.time() - start
     blocks = CODE_BLOCK.findall(text)
     if not blocks:

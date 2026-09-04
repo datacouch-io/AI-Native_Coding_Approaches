@@ -200,6 +200,20 @@ Rules for the plan:
 The last rule is the one that earns its keep. It changes the planner's job from *describe the
 solution* to *close every gap a weaker model would otherwise fill by guessing*.
 
+Both scripts reach Bedrock the same way every lab in this course does — by shelling out to the
+OpenCode CLI, once per hop:
+
+```python
+subprocess.run(
+    ["opencode", "run", "--dir", str(SANDBOX), "--agent", "plan",
+     "--model", model, "--format", "json", prompt],
+    capture_output=True, text=True, timeout=timeout)
+```
+
+`--dir` selects the sandbox, `--agent plan` keeps the call read-only, and `--format json` gives
+the `step_finish` event that every cost figure in this lab comes from (Lab 1, Step 3). There is no
+SDK and no direct Bedrock call anywhere in this course.
+
 ### Step 4 — Run Plan Mode
 
 **Why:** One expensive call, up front, whose output every later step reuses.

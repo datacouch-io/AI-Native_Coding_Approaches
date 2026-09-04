@@ -1,0 +1,17 @@
+$ python3 compare_reviews.py
+
+reviewer        vendor     target     tests  confirmed  unfair  defects  time     cost
+--------------------------------------------------------------------------------------------
+opus            Anthropic  flawed     6      6          0       3/3       75.4s   $0.05997175
+sonnet          Anthropic  flawed     3      3          0       3/3       82.0s   $0.084809
+sonnet-control  Anthropic  reference  1      0          1       n/a      273.2s   $0.0181257
+terra           OpenAI     flawed     3      3          0       3/3        7.7s   $0.0384675
+--------------------------------------------------------------------------------------------
+
+planted defect coverage (flawed target only)
+  A: get() does not refresh recency      opus, sonnet, terra
+  B: capacity off-by-one                 opus, sonnet, terra
+  C: re-put does not refresh recency     opus, sonnet, terra
+
+control - reviewing known-good code (any failing test is a false positive)
+  sonnet-control       submitted 1, false positives 1

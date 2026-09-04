@@ -1,0 +1,24 @@
+{
+  "reviewer": {
+    "key": "sonnet",
+    "vendor": "Anthropic",
+    "model": "amazon-bedrock/us.anthropic.claude-sonnet-5"
+  },
+  "critique": {
+    "cost_usd": 0.0181257,
+    "elapsed_s": 273.18,
+    "review_chars": 2491
+  },
+  "target": "reference",
+  "validation": {
+    "tests_submitted": 1,
+    "confirmed": [],
+    "unfair_tests": [
+      "test_init_accepts_bool_true_as_valid_positive_integer_capacity"
+    ],
+    "no_defect_shown": [],
+    "false_positives": [
+      "test_init_accepts_bool_true_as_valid_positive_integer_capacity"
+    ]
+  }
+}

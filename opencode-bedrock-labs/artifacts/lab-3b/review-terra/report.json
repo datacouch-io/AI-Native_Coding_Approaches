@@ -1,0 +1,42 @@
+{
+  "reviewer": {
+    "key": "terra",
+    "vendor": "OpenAI",
+    "model": "amazon-bedrock/global.openai.gpt-5.6-terra"
+  },
+  "critique": {
+    "cost_usd": 0.0384675,
+    "elapsed_s": 7.66,
+    "review_chars": 1120
+  },
+  "validation": {
+    "tests_submitted": 3,
+    "confirmed": [
+      "test_get_does_not_refresh_recency",
+      "test_put_allows_cache_to_exceed_capacity",
+      "test_reput_existing_key_does_not_refresh_recency"
+    ],
+    "unfair_tests": [],
+    "no_defect_shown": []
+  },
+  "revision": {
+    "fixer": "sonnet",
+    "vendor": "Anthropic",
+    "model": "amazon-bedrock/us.anthropic.claude-sonnet-5",
+    "cost_usd": 0.0148985,
+    "elapsed_s": 29.25
+  },
+  "reverify": {
+    "reviewer_tests_still_failing": [],
+    "hidden_total": 9,
+    "hidden_failing_before": [
+      "test_get_moves_key_to_most_recent_position",
+      "test_never_exceeds_capacity",
+      "test_recent_get_protects_key_from_eviction",
+      "test_reput_makes_key_most_recent",
+      "test_third_insert_evicts_first"
+    ],
+    "hidden_failing_after": []
+  },
+  "total_cost_usd": 0.053366
+}
