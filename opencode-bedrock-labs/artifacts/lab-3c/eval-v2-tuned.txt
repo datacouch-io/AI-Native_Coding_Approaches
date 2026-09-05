@@ -1,0 +1,25 @@
+$ python3 run_eval.py --prompt prompts/v2-tuned.txt --label v2-tuned --split all
+
+prompt: prompts/v2-tuned.txt   model: global.anthropic.claude-haiku-4-5-20251001-v1:0   cases: 15
+
+  OK t01 [train  ] 5/5
+  OK t02 [train  ] 5/5
+  OK t03 [train  ] 5/5
+  OK t04 [train  ] 5/5
+  OK t05 [train  ] 5/5
+     t06 [train  ] 4/5   missed: component
+  OK t07 [train  ] 5/5
+  OK t08 [train  ] 5/5
+  OK t09 [holdout] 5/5
+  OK t10 [holdout] 5/5
+  OK t11 [holdout] 5/5
+  OK t12 [holdout] 5/5
+     t13 [holdout] 4/5   missed: severity
+  OK t14 [holdout] 5/5
+  OK t15 [holdout] 5/5
+
+  records exact : 13/15   (87%)
+  fields correct: 73/75   (97%)
+  cost: $0.060554   ->  v2-tuned--all.json
+
+

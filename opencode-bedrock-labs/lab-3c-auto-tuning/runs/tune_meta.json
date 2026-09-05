@@ -1,0 +1,8 @@
+{
+  "tuner": "amazon-bedrock/us.anthropic.claude-opus-5",
+  "elapsed_s": 4146.28,
+  "cost_usd": 0.13716625,
+  "train_failures_shown": 8,
+  "base_prompt_chars": 201,
+  "tuned_prompt_chars": 2767
+}

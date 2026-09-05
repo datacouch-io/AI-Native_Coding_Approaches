@@ -1,0 +1,17 @@
+
+=== pipeline: baseline ===
+step        tier     vendor     model                             time         cost
+------------------------------------------------------------------------------------
+implement   opus     Anthropic  us.anthropic.claude-opus-5       62.5s      $0.2060
+test        opus     Anthropic  us.anthropic.claude-opus-5       70.2s      $0.1870
+refactor    opus     Anthropic  us.anthropic.claude-opus-5      104.9s      $0.1120
+document    opus     Anthropic  us.anthropic.claude-opus-5       26.8s      $0.0771
+------------------------------------------------------------------------------------
+TOTAL                                                           264.5s      $0.5821
+
+  acceptance suite : 56 passed, 0 failed   -> GREEN
+  model-written    : 426 passed, 0 failed
+  README           : 1235 chars
+  ledger           : /Users/hadez/Documents/Company/training content/AI-Native_Coding_Approaches/opencode-bedrock-labs/lab-4-cost-optimization/runs/baseline/ledger.json
+
+

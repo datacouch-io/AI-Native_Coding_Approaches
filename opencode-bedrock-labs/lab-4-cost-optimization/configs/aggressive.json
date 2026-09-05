@@ -1,0 +1,10 @@
+{
+  "label": "aggressive",
+  "note": "First attempt at optimising: push every non-reasoning step to the cheapest tier available and cross vendors for documentation.",
+  "steps": {
+    "implement": "sonnet",
+    "test": "sonnet",
+    "refactor": "haiku",
+    "document": "terra"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": [
+    "PRODUCTION CONTROL - reference only. This lab does NOT apply it.",
+    "Layer 1 (the client gate) and layer 2 (region-bound inference profiles) are",
+    "both demonstrable without changing the account. This is the third layer: an",
+    "identity-based control that denies the call outright.",
+    "",
+    "IMPORTANT: an IAM policy cannot restrict the account ROOT user - root is not",
+    "subject to identity policies attached to itself. Applying this requires a",
+    "scoped IAM role or user (or an Organizations SCP for account-wide enforcement),",
+    "which is a deliberate account change and outside the scope of a lab exercise."
+  ],
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowApprovedInRegionModelsOnly",
+      "Effect": "Allow",
+      "Action": ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream", "bedrock:Converse"],
+      "Resource": [
+        "arn:aws:bedrock:eu-central-1:*:inference-profile/eu.anthropic.claude-sonnet-5",
+        "arn:aws:bedrock:us-east-1:*:inference-profile/us.anthropic.claude-sonnet-5"
+      ]
+    },
+    {
+      "Sid": "DenyEverythingOutsideApprovedRegions",
+      "Effect": "Deny",
+      "Action": "bedrock:*",
+      "Resource": "*",
+      "Condition": {
+        "StringNotEquals": {
+          "aws:RequestedRegion": ["us-east-1", "eu-central-1"]
+        }
+      }
+    },
+    {
+      "Sid": "RequireInvocationLogging",
+      "Effect": "Deny",
+      "Action": ["bedrock:DeleteModelInvocationLoggingConfiguration",
+                 "bedrock:PutModelInvocationLoggingConfiguration"],
+      "Resource": "*"
+    }
+  ]
+}

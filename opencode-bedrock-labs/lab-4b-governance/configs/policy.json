@@ -1,0 +1,40 @@
+{
+  "policy_version": "2026-09-05",
+  "owner": "platform-governance",
+  "description": "Which model endpoints may process which data classification, and where.",
+
+  "classifications": {
+    "public": {
+      "description": "Open-source code, public docs, synthetic examples.",
+      "allowed_residency": ["us", "eu", "global"],
+      "requires_baa": false
+    },
+    "internal": {
+      "description": "Proprietary source code with no personal data.",
+      "allowed_residency": ["us", "eu"],
+      "requires_baa": false
+    },
+    "pii": {
+      "description": "Contains personal data. EU residency and a signed BAA required.",
+      "allowed_residency": ["eu"],
+      "requires_baa": true
+    }
+  },
+
+  "endpoints": {
+    "us.anthropic.claude-sonnet-5":    {"region": "us-east-1",    "residency": "us",     "baa": true},
+    "eu.anthropic.claude-sonnet-5":    {"region": "eu-central-1", "residency": "eu",     "baa": true},
+    "global.openai.gpt-5.6-terra":     {"region": "us-east-1",    "residency": "global", "baa": false},
+    "global.anthropic.claude-haiku-4-5-20251001-v1:0":
+                                       {"region": "us-east-1",    "residency": "global", "baa": false}
+  },
+
+  "detectors": {
+    "pii": [
+      "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\\b",
+      "\\b\\d{3}-\\d{2}-\\d{4}\\b",
+      "\\b(?:\\d[ -]*?){13,16}\\b",
+      "(?i)\\b(patient|date of birth|dob|passport\\s*(no|number))\\b"
+    ]
+  }
+}

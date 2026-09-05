@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1500" height="1560" viewBox="0 0 1500 1560" xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b6480"/></marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8fd694"/></marker>
+  </defs>
+  <rect width="1500" height="1560" fill="#0f1117"/>
+
+  <text x="36" y="46" fill="#e8eaf0" font-size="22" font-weight="700">Lab 3C — Auto-Tuning: fix the prompt, not the model</text>
+  <text x="36" y="72" fill="#9aa1b2" font-size="13">The same cheap model, the same eval set, the same scorer. Only the prompt changes — and it is a high-tier model that rewrites it</text>
+
+  <!-- 1 setup -->
+  <text x="36" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">1 · THE TASK — structured extraction with rules the naive prompt never states</text>
+  <rect x="36" y="124" width="1428" height="158" rx="8" fill="#171b28" stroke="#262b3a"/>
+  <rect x="58" y="146" width="640" height="116" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="167" fill="#c4c9d6" font-size="11" font-family="ui-monospace,Menlo,monospace">input:  "sev2 - SSO token refresh intermittently 401s on</text>
+  <text x="72" y="185" fill="#c4c9d6" font-size="11" font-family="ui-monospace,Menlo,monospace">         release 3.1. Internal staff only for now."</text>
+  <text x="72" y="211" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">expected: severity        "high"      (sev2 -> high)</text>
+  <text x="72" y="229" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">          component       "auth"      (fixed vocabulary)</text>
+  <text x="72" y="247" fill="#8fd694" font-size="11" font-family="ui-monospace,Menlo,monospace">          customer_impact false       (a boolean, not prose)</text>
+
+  <text x="730" y="168" fill="#c4c9d6" font-size="12">15 tickets × 5 fields = <tspan font-weight="600">75 scored field checks</tspan>, split:</text>
+  <text x="730" y="192" fill="#c9aef6" font-size="12">8 train — the only cases the tuner is shown</text>
+  <text x="730" y="214" fill="#aef6c2" font-size="12">7 holdout — never shown to anything but the cheap model</text>
+  <text x="730" y="244" fill="#c4c9d6" font-size="12">The normalisation rules live in the expected answers, not in</text>
+  <text x="730" y="264" fill="#c4c9d6" font-size="12">the prompt. Discovering them is the work being automated.</text>
+
+  <!-- 2 the loop -->
+  <text x="36" y="322" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">2 · THE TUNING LOOP</text>
+  <rect x="36" y="334" width="1428" height="120" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <rect x="58" y="356" width="310" height="76" rx="6" fill="#2a4a5c"/>
+  <text x="74" y="378" fill="#ade4f6" font-size="12" font-weight="600">1 · BASELINE</text>
+  <text x="74" y="398" fill="#c4c9d6" font-size="11">haiku-4.5 + naive prompt</text>
+  <text x="74" y="418" fill="#c4c9d6" font-size="11">over all 15 cases</text>
+
+  <rect x="392" y="356" width="310" height="76" rx="6" fill="#5c2a3a"/>
+  <text x="408" y="378" fill="#f6aec2" font-size="12" font-weight="600">2 · TUNE</text>
+  <text x="408" y="398" fill="#c4c9d6" font-size="11">opus-5 reads the 8 TRAIN</text>
+  <text x="408" y="418" fill="#c4c9d6" font-size="11">failures, rewrites the prompt</text>
+
+  <rect x="726" y="356" width="310" height="76" rx="6" fill="#2a4a5c"/>
+  <text x="742" y="378" fill="#ade4f6" font-size="12" font-weight="600">3 · RE-RUN</text>
+  <text x="742" y="398" fill="#c4c9d6" font-size="11">the SAME haiku-4.5,</text>
+  <text x="742" y="418" fill="#c4c9d6" font-size="11">the SAME 15 cases</text>
+
+  <rect x="1060" y="356" width="404" height="76" rx="6" fill="#2a5c3a"/>
+  <text x="1076" y="378" fill="#aef6c2" font-size="12" font-weight="600">4 · SCORE THE HOLDOUT</text>
+  <text x="1076" y="398" fill="#c4c9d6" font-size="11">train tells you it learned something;</text>
+  <text x="1076" y="418" fill="#c4c9d6" font-size="11">holdout tells you it learned a RULE</text>
+
+  <line x1="368" y1="394" x2="386" y2="394" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="702" y1="394" x2="720" y2="394" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="1036" y1="394" x2="1054" y2="394" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <!-- 3 anti-overfit -->
+  <text x="36" y="494" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">3 · THE TWO RULES THAT MAKE THIS AN EXPERIMENT AND NOT A DEMO</text>
+  <rect x="36" y="506" width="712" height="150" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="532" fill="#e8eaf0" font-size="12" font-weight="600">The tuner never sees the holdout</text>
+  <text x="58" y="556" fill="#c4c9d6" font-size="11.5">It is handed 8 train failures. Cases t09–t15 do not exist</text>
+  <text x="58" y="576" fill="#c4c9d6" font-size="11.5">as far as it is concerned.</text>
+  <text x="58" y="604" fill="#e8eaf0" font-size="12" font-weight="600">The tuner is forbidden to restate the cases</text>
+  <text x="58" y="628" fill="#c4c9d6" font-size="11.5">"State rules, not answers." Verified afterwards: zero</text>
+  <text x="58" y="648" fill="#c4c9d6" font-size="11.5">verbatim strings from any training ticket appear in v2.</text>
+
+  <rect x="772" y="506" width="692" height="150" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="794" y="532" fill="#e8eaf0" font-size="12" font-weight="600">What the tuner actually inferred (excerpt from v2)</text>
+  <rect x="794" y="546" width="648" height="94" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="808" y="566" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">critical: P1, sev1, or wording like outage / unreachable</text>
+  <text x="808" y="584" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">customer_impact: JSON boolean. Never a string.</text>
+  <text x="808" y="602" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">ui: ... wins over the feature's domain whenever the</text>
+  <text x="808" y="620" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">    complaint is about how something looks</text>
+
+  <!-- 4 results -->
+  <text x="36" y="696" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">4 · THE RESULT — same model, same eval set, only the prompt changed</text>
+  <rect x="36" y="708" width="1428" height="212" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <text x="58" y="738" fill="#6c7590" font-size="11" font-weight="700">SPLIT</text>
+  <text x="230" y="738" fill="#6c7590" font-size="11" font-weight="700">RECORDS FULLY CORRECT</text>
+  <text x="600" y="738" fill="#6c7590" font-size="11" font-weight="700">FIELDS CORRECT</text>
+  <text x="1000" y="738" fill="#6c7590" font-size="11" font-weight="700">DELTA</text>
+  <line x1="58" y1="750" x2="1442" y2="750" stroke="#262b3a" stroke-width="1"/>
+
+  <text x="58" y="782" fill="#c4c9d6" font-size="12.5">all 15</text>
+  <text x="230" y="782" fill="#c4c9d6" font-size="12.5">0/15  →  <tspan fill="#8fd694" font-weight="700">13/15</tspan></text>
+  <text x="600" y="782" fill="#c4c9d6" font-size="12.5">24/75 (32%)  →  <tspan fill="#8fd694" font-weight="700">73/75 (97%)</tspan></text>
+  <text x="1000" y="782" fill="#8fd694" font-size="12.5" font-weight="700">+65 pts</text>
+
+  <text x="58" y="814" fill="#c9aef6" font-size="12.5">train (8)</text>
+  <text x="230" y="814" fill="#c4c9d6" font-size="12.5">0/8  →  7/8</text>
+  <text x="600" y="814" fill="#c4c9d6" font-size="12.5">15/40 (38%)  →  39/40 (98%)</text>
+  <text x="1000" y="814" fill="#c4c9d6" font-size="12.5">+60 pts</text>
+
+  <rect x="50" y="828" width="1400" height="34" rx="5" fill="#16261c"/>
+  <text x="58" y="851" fill="#aef6c2" font-size="12.5" font-weight="700">holdout (7)</text>
+  <text x="230" y="851" fill="#e8eaf0" font-size="12.5" font-weight="700">0/7  →  6/7</text>
+  <text x="600" y="851" fill="#e8eaf0" font-size="12.5" font-weight="700">9/35 (26%)  →  34/35 (97%)</text>
+  <text x="1000" y="851" fill="#8fd694" font-size="12.5" font-weight="700">+71 pts</text>
+  <text x="1120" y="851" fill="#aef6c2" font-size="11.5">← never seen by the tuner</text>
+
+  <text x="58" y="890" fill="#c4c9d6" font-size="12">Per-field on the holdout: severity <tspan font-family="ui-monospace,Menlo,monospace">1/7→6/7</tspan>   component <tspan font-family="ui-monospace,Menlo,monospace">0/7→7/7</tspan>   customer_impact <tspan font-family="ui-monospace,Menlo,monospace">0/7→7/7</tspan>   version <tspan font-family="ui-monospace,Menlo,monospace">4/7→7/7</tspan>   date <tspan font-family="ui-monospace,Menlo,monospace">4/7→7/7</tspan></text>
+  <text x="58" y="910" fill="#6c7590" font-size="11.5">The gain is largest exactly where the naive prompt was silent: the two enum fields went from never right to always right.</text>
+
+  <!-- 5 economics + honesty -->
+  <text x="36" y="958" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">5 · TWO THINGS WORTH ARGUING ABOUT</text>
+
+  <rect x="36" y="970" width="712" height="196" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="996" fill="#e8eaf0" font-size="12.5" font-weight="700">The 13× longer prompt was CHEAPER to run</text>
+  <text x="58" y="1022" fill="#c4c9d6" font-size="12">eval cost   $0.0667  →  <tspan fill="#8fd694" font-weight="600">$0.0606</tspan></text>
+  <text x="58" y="1044" fill="#c4c9d6" font-size="12">prompt      201 chars  →  2,767 chars</text>
+  <text x="58" y="1074" fill="#c4c9d6" font-size="11.5">The naive prompt produced rambling values — whole</text>
+  <text x="58" y="1094" fill="#c4c9d6" font-size="11.5">sentences inside customer_impact. Output tokens cost</text>
+  <text x="58" y="1114" fill="#c4c9d6" font-size="11.5">more than input tokens, so tightening the output paid</text>
+  <text x="58" y="1134" fill="#c4c9d6" font-size="11.5">for the longer instruction and then some.</text>
+  <text x="58" y="1156" fill="#6c7590" font-size="11">Tuning itself: <tspan font-family="ui-monospace,Menlo,monospace">$0.137 once</tspan>, amortised over every later run.</text>
+
+  <rect x="772" y="970" width="692" height="196" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="794" y="996" fill="#e8eaf0" font-size="12.5" font-weight="700">Tuning raised the floor. It did not make it perfect.</text>
+  <text x="794" y="1024" fill="#c4c9d6" font-size="11.5">Two cases still fail, and they fail differently:</text>
+  <text x="794" y="1052" fill="#e0b877" font-size="11.5">t13 — "sev2 ... internal only" → said medium, wanted high.</text>
+  <text x="794" y="1072" fill="#c4c9d6" font-size="11.5">The rule <tspan font-style="italic">was</tspan> in the prompt. The cheap model still missed it.</text>
+  <text x="794" y="1100" fill="#e0b877" font-size="11.5">t06 — "pagination on the admin invoice list" → said other,</text>
+  <text x="794" y="1120" fill="#c4c9d6" font-size="11.5">wanted billing. Defensible. That one is arguably a hole in</text>
+  <text x="794" y="1140" fill="#c4c9d6" font-size="11.5">the <tspan font-weight="600">ground truth</tspan>, not in the model.</text>
+  <text x="794" y="1160" fill="#6c7590" font-size="11">Read your residual failures before blaming the model.</text>
+
+  <rect x="36" y="1206" width="1428" height="106" rx="8" fill="#141a2a" stroke="#4a8fe7" stroke-width="1.5"/>
+  <text x="58" y="1236" fill="#e8eaf0" font-size="13" font-weight="700">★ THE DELIVERABLE — a before/after score on the same cheap model</text>
+  <text x="58" y="1262" fill="#c4c9d6" font-size="12">prompt v1: <tspan font-family="ui-monospace,Menlo,monospace">0/15 records, 32% of fields</tspan>   →   auto-tuned prompt v2: <tspan font-family="ui-monospace,Menlo,monospace" fill="#8fd694" font-weight="600">13/15 records, 97% of fields</tspan></text>
+  <text x="58" y="1284" fill="#c4c9d6" font-size="12">On the 7 holdout cases the tuner never saw: <tspan font-family="ui-monospace,Menlo,monospace">26% → 97%</tspan>. Haiku was never swapped for a bigger model.</text>
+  <text x="58" y="1304" fill="#6c7590" font-size="11.5">The gap was never the model's capability. It was that nobody had told it the rules.</text>
+
+  <path d="M750 282 L750 328" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M750 454 L750 500" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M750 656 L750 702" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M750 920 L750 964" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M750 1166 L750 1200" stroke="#4a8fe7" stroke-width="1.6" fill="none" marker-end="url(#arg)"/>
+</svg>

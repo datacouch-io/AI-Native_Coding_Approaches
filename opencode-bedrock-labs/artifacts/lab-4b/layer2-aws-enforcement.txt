@@ -1,0 +1,10 @@
+$ python3 governance.py --bypass-test
+
+LAYER 2 ONLY - the client gate is bypassed entirely.
+If AWS does not enforce residency, a bypassed gate means no control at all.
+
+  endpoint                          region         result                                  time
+  ----------------------------------------------------------------------------------------------
+  us.anthropic.claude-sonnet-5      us-east-1      ALLOWED                                 3.88s
+  us.anthropic.claude-sonnet-5      eu-central-1   BLOCKED BY AWS (ValidationException)    0.9s
+  eu.anthropic.claude-sonnet-5      eu-central-1   ALLOWED                                 2.23s

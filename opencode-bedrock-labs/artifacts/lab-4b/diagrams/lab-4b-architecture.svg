@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1480" height="1520" viewBox="0 0 1480 1520" xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b6480"/></marker>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f6829a"/></marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8fd694"/></marker>
+  </defs>
+  <rect width="1480" height="1520" fill="#0f1117"/>
+
+  <text x="36" y="46" fill="#e8eaf0" font-size="22" font-weight="700">Lab 4B — Enterprise Governance &amp; Compliance</text>
+  <text x="36" y="72" fill="#9aa1b2" font-size="13">A policy gate you own, and a platform control you do not — the second is what makes the first more than a suggestion</text>
+
+  <!-- layer 1 -->
+  <text x="36" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">LAYER 1 · THE CLIENT GATE — classify, then decide, before anything is sent</text>
+  <rect x="36" y="124" width="1408" height="266" rx="8" fill="#171b28" stroke="#3a4560"/>
+
+  <rect x="58" y="146" width="300" height="60" rx="6" fill="#2a4a5c"/>
+  <text x="74" y="168" fill="#ade4f6" font-size="12" font-weight="600">1 · CLASSIFY</text>
+  <text x="74" y="190" fill="#c4c9d6" font-size="11">regex detectors → pii | internal</text>
+  <rect x="382" y="146" width="300" height="60" rx="6" fill="#3a4560"/>
+  <text x="398" y="168" fill="#e8eaf0" font-size="12" font-weight="600">2 · EVALUATE</text>
+  <text x="398" y="190" fill="#c4c9d6" font-size="11">residency + BAA rules</text>
+  <rect x="706" y="146" width="300" height="60" rx="6" fill="#3a4560"/>
+  <text x="722" y="168" fill="#e8eaf0" font-size="12" font-weight="600">3 · ALLOW or BLOCK</text>
+  <text x="722" y="190" fill="#c4c9d6" font-size="11">before a request is sent</text>
+  <rect x="1030" y="146" width="392" height="60" rx="6" fill="#2a5c3a"/>
+  <text x="1046" y="168" fill="#aef6c2" font-size="12" font-weight="600">4 · AUDIT</text>
+  <text x="1046" y="190" fill="#c4c9d6" font-size="11">append-only JSONL, policy version stamped</text>
+
+  <line x1="358" y1="176" x2="376" y2="176" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="682" y1="176" x2="700" y2="176" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="1006" y1="176" x2="1024" y2="176" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <text x="58" y="238" fill="#6c7590" font-size="11" font-weight="700">SCENARIO</text>
+  <text x="200" y="238" fill="#6c7590" font-size="11" font-weight="700">DETECTED</text>
+  <text x="330" y="238" fill="#6c7590" font-size="11" font-weight="700">ENDPOINT</text>
+  <text x="700" y="238" fill="#6c7590" font-size="11" font-weight="700">GATE</text>
+  <text x="810" y="238" fill="#6c7590" font-size="11" font-weight="700">REASON</text>
+  <line x1="58" y1="248" x2="1422" y2="248" stroke="#262b3a" stroke-width="1"/>
+
+  <text x="58" y="274" fill="#c4c9d6" font-size="12">S1 refactor</text>
+  <text x="200" y="274" fill="#c4c9d6" font-size="12">internal</text>
+  <text x="330" y="274" fill="#c9aef6" font-size="12">us.anthropic.claude-sonnet-5</text>
+  <text x="700" y="274" fill="#8fd694" font-size="12" font-weight="700">ALLOW</text>
+  <text x="810" y="274" fill="#c4c9d6" font-size="11.5">internal permitted on a us endpoint · sent, responded 2.3s</text>
+
+  <rect x="50" y="286" width="1380" height="30" rx="5" fill="#26161c"/>
+  <text x="58" y="307" fill="#c4c9d6" font-size="12">S2 PII bug</text>
+  <text x="200" y="307" fill="#f6829a" font-size="12" font-weight="600">pii</text>
+  <text x="330" y="307" fill="#c9aef6" font-size="12">us.anthropic.claude-sonnet-5</text>
+  <text x="700" y="307" fill="#f6829a" font-size="12" font-weight="700">BLOCK</text>
+  <text x="810" y="307" fill="#c4c9d6" font-size="11.5">pii may only be processed in eu; this endpoint is us · nothing sent</text>
+
+  <rect x="50" y="320" width="1380" height="30" rx="5" fill="#16261c"/>
+  <text x="58" y="341" fill="#c4c9d6" font-size="12">S3 PII bug</text>
+  <text x="200" y="341" fill="#f6829a" font-size="12" font-weight="600">pii</text>
+  <text x="330" y="341" fill="#aef6c2" font-size="12">eu.anthropic.claude-sonnet-5</text>
+  <text x="700" y="341" fill="#8fd694" font-size="12" font-weight="700">ALLOW</text>
+  <text x="810" y="341" fill="#c4c9d6" font-size="11.5">eu residency + BAA satisfied · sent to eu-central-1, responded 2.3s</text>
+
+  <text x="58" y="372" fill="#c4c9d6" font-size="12">S4 runbook</text>
+  <text x="200" y="372" fill="#c4c9d6" font-size="12">internal</text>
+  <text x="330" y="372" fill="#e0b877" font-size="12">global.openai.gpt-5.6-terra</text>
+  <text x="700" y="372" fill="#f6829a" font-size="12" font-weight="700">BLOCK</text>
+  <text x="810" y="372" fill="#c4c9d6" font-size="11.5">internal is us/eu only; a global endpoint has no residency guarantee</text>
+
+  <!-- the problem -->
+  <rect x="36" y="418" width="1408" height="74" rx="8" fill="#26161c" stroke="#5c2a3a"/>
+  <text x="58" y="446" fill="#f6aec2" font-size="12.5" font-weight="700">The obvious objection: this gate is your own code. What stops someone calling Bedrock directly?</text>
+  <text x="58" y="472" fill="#c4c9d6" font-size="12">A control that only works when your wrapper is used is documentation, not enforcement. So test it — bypass the gate entirely.</text>
+
+  <!-- layer 2 -->
+  <text x="36" y="536" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">LAYER 2 · THE PLATFORM CONTROL — gate bypassed, calling AWS directly</text>
+  <rect x="36" y="548" width="1408" height="212" rx="8" fill="#171b28" stroke="#2a5c3a"/>
+
+  <text x="58" y="578" fill="#6c7590" font-size="11" font-weight="700">ENDPOINT</text>
+  <text x="420" y="578" fill="#6c7590" font-size="11" font-weight="700">REGION CALLED</text>
+  <text x="640" y="578" fill="#6c7590" font-size="11" font-weight="700">RESULT</text>
+  <line x1="58" y1="588" x2="1422" y2="588" stroke="#262b3a" stroke-width="1"/>
+
+  <text x="58" y="616" fill="#c9aef6" font-size="12.5" font-family="ui-monospace,Menlo,monospace">us.anthropic.claude-sonnet-5</text>
+  <text x="420" y="616" fill="#c4c9d6" font-size="12.5">us-east-1</text>
+  <text x="640" y="616" fill="#8fd694" font-size="12.5" font-weight="600">ALLOWED</text>
+
+  <rect x="50" y="628" width="1380" height="32" rx="5" fill="#26161c"/>
+  <text x="58" y="650" fill="#c9aef6" font-size="12.5" font-family="ui-monospace,Menlo,monospace">us.anthropic.claude-sonnet-5</text>
+  <text x="420" y="650" fill="#c4c9d6" font-size="12.5">eu-central-1</text>
+  <text x="640" y="650" fill="#f6829a" font-size="12.5" font-weight="700">BLOCKED BY AWS — ValidationException</text>
+
+  <rect x="50" y="664" width="1380" height="32" rx="5" fill="#16261c"/>
+  <text x="58" y="686" fill="#aef6c2" font-size="12.5" font-family="ui-monospace,Menlo,monospace">eu.anthropic.claude-sonnet-5</text>
+  <text x="420" y="686" fill="#c4c9d6" font-size="12.5">eu-central-1</text>
+  <text x="640" y="686" fill="#8fd694" font-size="12.5" font-weight="600">ALLOWED</text>
+
+  <text x="58" y="722" fill="#c4c9d6" font-size="12">A <tspan font-family="ui-monospace,Menlo,monospace">us.</tspan> inference profile does not exist in an EU region. The denial comes from the platform, with no cooperation from your code —</text>
+  <text x="58" y="742" fill="#c4c9d6" font-size="12">and no account changes were required to demonstrate it. Residency is bound to the endpoint identifier itself.</text>
+
+  <!-- layer 3 -->
+  <text x="36" y="800" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">LAYER 3 · THE CONTROLS THIS LAB DOES NOT APPLY — and why that is the honest answer</text>
+
+  <rect x="36" y="812" width="700" height="216" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="840" fill="#e8eaf0" font-size="12.5" font-weight="700">Invocation logging — already on, verified read-only</text>
+  <rect x="58" y="854" width="656" height="70" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="874" fill="#8fd694" font-size="10" font-family="ui-monospace,Menlo,monospace">$ aws bedrock get-model-invocation-logging-configuration</text>
+  <text x="72" y="892" fill="#e0b877" font-size="10" font-family="ui-monospace,Menlo,monospace">"cloudWatchConfig": {"logGroupName": "&lt;YOUR_LOG_GROUP&gt;",</text>
+  <text x="72" y="910" fill="#e0b877" font-size="10" font-family="ui-monospace,Menlo,monospace">                     "roleArn": "...&lt;YOUR_LOGGING_ROLE&gt;"}</text>
+  <text x="58" y="948" fill="#c4c9d6" font-size="11.5">Without logging you cannot answer "which model saw that</text>
+  <text x="58" y="968" fill="#c4c9d6" font-size="11.5">payload, and when" — the first question in any incident.</text>
+  <text x="58" y="996" fill="#6c7590" font-size="11">Account identifiers are redacted in every captured artifact:</text>
+  <text x="58" y="1014" fill="#6c7590" font-size="11">a governance lab should not leak the account it ran in.</text>
+
+  <rect x="760" y="812" width="684" height="216" rx="8" fill="#26161c" stroke="#5c2a3a"/>
+  <text x="782" y="840" fill="#f6aec2" font-size="12.5" font-weight="700">IAM / SCP — shipped as a reference, deliberately NOT applied</text>
+  <text x="782" y="866" fill="#c4c9d6" font-size="11.5">configs/iam-policy-reference.json contains the identity control:</text>
+  <text x="782" y="888" fill="#c4c9d6" font-size="11.5">an allow-list of approved profile ARNs, plus an explicit Deny on</text>
+  <text x="782" y="908" fill="#c4c9d6" font-size="11.5">any region outside the approved set.</text>
+  <text x="782" y="940" fill="#e0b877" font-size="12" font-weight="600">Why it is not applied here:</text>
+  <text x="782" y="962" fill="#c4c9d6" font-size="11.5">an IAM policy cannot restrict the account ROOT user — root is not</text>
+  <text x="782" y="982" fill="#c4c9d6" font-size="11.5">subject to identity policies attached to itself. Demonstrating it</text>
+  <text x="782" y="1002" fill="#c4c9d6" font-size="11.5">needs a scoped role or an Organizations SCP: a real, deliberate</text>
+  <text x="782" y="1018" fill="#c4c9d6" font-size="11.5">account change, not a lab step.</text>
+
+  <!-- lesson -->
+  <text x="36" y="1076" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">WHY BOTH LAYERS, AND NOT JUST THE STRONGER ONE</text>
+  <rect x="36" y="1088" width="700" height="150" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="1116" fill="#e8eaf0" font-size="12.5" font-weight="700">The gate alone is advisory</text>
+  <text x="58" y="1142" fill="#c4c9d6" font-size="11.5">It is your code. Anyone who calls the SDK directly, or</text>
+  <text x="58" y="1162" fill="#c4c9d6" font-size="11.5">imports the wrong helper, is outside it. Necessary — but</text>
+  <text x="58" y="1182" fill="#c4c9d6" font-size="11.5">never the thing you tell an auditor about.</text>
+  <text x="58" y="1214" fill="#6c7590" font-size="11">Value: it fails fast, costs nothing, and explains WHY in a reason string.</text>
+
+  <rect x="760" y="1088" width="684" height="150" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="782" y="1116" fill="#e8eaf0" font-size="12.5" font-weight="700">The platform alone is unhelpful</text>
+  <text x="782" y="1142" fill="#c4c9d6" font-size="11.5">AWS returns ValidationException. It does not say "this</text>
+  <text x="782" y="1162" fill="#c4c9d6" font-size="11.5">payload contained PII and your policy requires EU</text>
+  <text x="782" y="1182" fill="#c4c9d6" font-size="11.5">residency" — and it bills you for the round trip to find out.</text>
+  <text x="782" y="1214" fill="#6c7590" font-size="11">Value: it holds when your code does not. That is what makes it enforcement.</text>
+
+  <rect x="36" y="1284" width="1408" height="106" rx="8" fill="#141a2a" stroke="#4a8fe7" stroke-width="1.5"/>
+  <text x="58" y="1314" fill="#e8eaf0" font-size="13" font-weight="700">★ THE DELIVERABLE — a live policy test with a blocked and an allowed request at both layers</text>
+  <text x="58" y="1340" fill="#c4c9d6" font-size="12">Layer 1: PII → us endpoint <tspan fill="#f6829a" font-weight="600">BLOCKED</tspan> (nothing sent) · PII → eu endpoint <tspan fill="#8fd694" font-weight="600">ALLOWED</tspan> and answered. Layer 2, gate bypassed: same us profile in eu-central-1 <tspan fill="#f6829a" font-weight="600">BLOCKED BY AWS</tspan>.</text>
+  <text x="58" y="1362" fill="#c4c9d6" font-size="12">Every decision is written to an append-only audit log stamped with the policy version that made it.</text>
+  <text x="58" y="1382" fill="#6c7590" font-size="11.5">A control you cannot demonstrate failing is a control you have not tested.</text>
+
+  <path d="M740 390 L740 414" stroke="#f6829a" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <path d="M740 492 L740 542" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M740 760 L740 806" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M740 1028 L740 1082" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M740 1238 L740 1278" stroke="#4a8fe7" stroke-width="1.6" fill="none" marker-end="url(#arg)"/>
+</svg>

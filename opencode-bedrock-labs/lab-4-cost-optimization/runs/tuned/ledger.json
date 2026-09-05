@@ -1,0 +1,67 @@
+{
+  "label": "tuned",
+  "config": {
+    "implement": "sonnet",
+    "test": "sonnet",
+    "refactor": "haiku",
+    "document": "terra"
+  },
+  "prompt_style": "strict",
+  "steps": [
+    {
+      "step": "implement",
+      "tier": "sonnet",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-sonnet-5",
+      "cost_usd": 0.0481365,
+      "elapsed_s": 42.87,
+      "output_tokens": 4239,
+      "format_ok": true
+    },
+    {
+      "step": "test",
+      "tier": "sonnet",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-sonnet-5",
+      "cost_usd": 0.0740465,
+      "elapsed_s": 63.83,
+      "output_tokens": 6453,
+      "format_ok": true
+    },
+    {
+      "step": "refactor",
+      "tier": "haiku",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "cost_usd": 0.0104426,
+      "elapsed_s": 12.88,
+      "output_tokens": 1339,
+      "format_ok": true
+    },
+    {
+      "step": "document",
+      "tier": "terra",
+      "vendor": "OpenAI",
+      "model": "amazon-bedrock/global.openai.gpt-5.6-terra",
+      "cost_usd": 0.0402445,
+      "elapsed_s": 6.63,
+      "output_tokens": 470,
+      "format_ok": true
+    }
+  ],
+  "acceptance": {
+    "passed": 56,
+    "failed": 0,
+    "collected": true,
+    "green": true
+  },
+  "generated_tests": {
+    "passed": 81,
+    "failed": 0,
+    "collected": true
+  },
+  "total_cost_usd": 0.17287,
+  "total_elapsed_s": 126.21,
+  "readme_chars": 710,
+  "format_failures": []
+}

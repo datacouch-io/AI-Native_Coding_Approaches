@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1480" height="1560" viewBox="0 0 1480 1560" xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b6480"/></marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8fd694"/></marker>
+  </defs>
+  <rect width="1480" height="1560" fill="#0f1117"/>
+
+  <text x="36" y="46" fill="#e8eaf0" font-size="22" font-weight="700">Lab 4 — Cost-Aware Workflow Optimization</text>
+  <text x="36" y="72" fill="#9aa1b2" font-size="13">Route each step to the cheapest tier that still passes the gate — and refuse to bank a saving that came from a step doing nothing</text>
+
+  <!-- 1 pipeline -->
+  <text x="36" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">1 · THE PIPELINE — four steps, one fixed acceptance gate</text>
+  <rect x="36" y="124" width="1408" height="152" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <rect x="58" y="146" width="300" height="60" rx="6" fill="#3a4560"/>
+  <text x="74" y="168" fill="#e8eaf0" font-size="12" font-weight="600">1 · IMPLEMENT</text>
+  <text x="74" y="190" fill="#c4c9d6" font-size="11">durations.py from SPEC.md</text>
+  <rect x="382" y="146" width="300" height="60" rx="6" fill="#3a4560"/>
+  <text x="398" y="168" fill="#e8eaf0" font-size="12" font-weight="600">2 · TEST</text>
+  <text x="398" y="190" fill="#c4c9d6" font-size="11">the model's own pytest suite</text>
+  <rect x="706" y="146" width="300" height="60" rx="6" fill="#3a4560"/>
+  <text x="722" y="168" fill="#e8eaf0" font-size="12" font-weight="600">3 · REFACTOR</text>
+  <text x="722" y="190" fill="#c4c9d6" font-size="11">clarity only, behaviour frozen</text>
+  <rect x="1030" y="146" width="392" height="60" rx="6" fill="#3a4560"/>
+  <text x="1046" y="168" fill="#e8eaf0" font-size="12" font-weight="600">4 · DOCUMENT</text>
+  <text x="1046" y="190" fill="#c4c9d6" font-size="11">README with usage + format table</text>
+
+  <line x1="358" y1="176" x2="376" y2="176" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="682" y1="176" x2="700" y2="176" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="1006" y1="176" x2="1024" y2="176" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <rect x="58" y="220" width="1364" height="40" rx="5" fill="#16261c" stroke="#2a5c3a"/>
+  <text x="74" y="245" fill="#aef6c2" font-size="12">THE GATE — <tspan font-family="ui-monospace,Menlo,monospace">tests/test_acceptance.py</tspan>: 56 tests, written by the lab, never shown to any model. A cheaper pipeline only counts if this stays green.</text>
+
+  <!-- 2 configs -->
+  <text x="36" y="316" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">2 · THREE ROUTING CONFIGURATIONS — the only thing that changes between runs</text>
+  <rect x="36" y="328" width="1408" height="188" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <text x="58" y="356" fill="#6c7590" font-size="11" font-weight="700">CONFIG</text>
+  <text x="260" y="356" fill="#6c7590" font-size="11" font-weight="700">IMPLEMENT</text>
+  <text x="450" y="356" fill="#6c7590" font-size="11" font-weight="700">TEST</text>
+  <text x="620" y="356" fill="#6c7590" font-size="11" font-weight="700">REFACTOR</text>
+  <text x="800" y="356" fill="#6c7590" font-size="11" font-weight="700">DOCUMENT</text>
+  <text x="1000" y="356" fill="#6c7590" font-size="11" font-weight="700">PROMPTS</text>
+  <line x1="58" y1="366" x2="1422" y2="366" stroke="#262b3a" stroke-width="1"/>
+
+  <text x="58" y="394" fill="#f6aec2" font-size="12" font-weight="600">baseline</text>
+  <text x="260" y="394" fill="#f6aec2" font-size="12">opus</text>
+  <text x="450" y="394" fill="#f6aec2" font-size="12">opus</text>
+  <text x="620" y="394" fill="#f6aec2" font-size="12">opus</text>
+  <text x="800" y="394" fill="#f6aec2" font-size="12">opus</text>
+  <text x="1000" y="394" fill="#c4c9d6" font-size="12">default</text>
+  <text x="1120" y="394" fill="#6c7590" font-size="11">top tier on every step, including the ones needing no reasoning</text>
+
+  <text x="58" y="428" fill="#e0b877" font-size="12" font-weight="600">aggressive</text>
+  <text x="260" y="428" fill="#c9aef6" font-size="12">sonnet</text>
+  <text x="450" y="428" fill="#c9aef6" font-size="12">sonnet</text>
+  <text x="620" y="428" fill="#ade4f6" font-size="12">haiku</text>
+  <text x="800" y="428" fill="#aef6c2" font-size="12">terra (OpenAI)</text>
+  <text x="1000" y="428" fill="#c4c9d6" font-size="12">default</text>
+  <text x="1120" y="428" fill="#6c7590" font-size="11">first guess: push everything mechanical to the floor</text>
+
+  <text x="58" y="462" fill="#8fd694" font-size="12" font-weight="600">tuned</text>
+  <text x="260" y="462" fill="#c9aef6" font-size="12">sonnet</text>
+  <text x="450" y="462" fill="#c9aef6" font-size="12">sonnet</text>
+  <text x="620" y="462" fill="#ade4f6" font-size="12">haiku</text>
+  <text x="800" y="462" fill="#aef6c2" font-size="12">terra (OpenAI)</text>
+  <text x="1000" y="462" fill="#8fd694" font-size="12" font-weight="600">strict</text>
+  <text x="1120" y="462" fill="#6c7590" font-size="11">same routing — only the output contract is hardened</text>
+
+  <text x="58" y="498" fill="#c4c9d6" font-size="11.5">Identical spec, identical prompts, identical gate. Any cost difference is attributable to routing and nothing else.</text>
+
+  <!-- 3 the failure -->
+  <text x="36" y="556" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">3 · WHAT BROKE WHEN THE FLOOR WAS TOO LOW</text>
+  <rect x="36" y="568" width="1408" height="190" rx="8" fill="#26161c" stroke="#5c2a3a"/>
+  <text x="58" y="596" fill="#f6aec2" font-size="12.5" font-weight="700">aggressive · refactor on haiku → no fenced code block</text>
+  <rect x="58" y="610" width="740" height="86" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="631" fill="#c4c9d6" font-size="10.5" font-family="ui-monospace,Menlo,monospace">### Questions for you:</text>
+  <text x="72" y="649" fill="#c4c9d6" font-size="10.5" font-family="ui-monospace,Menlo,monospace">1. Should I add a helper like _validate_unit(), or keep</text>
+  <text x="72" y="667" fill="#c4c9d6" font-size="10.5" font-family="ui-monospace,Menlo,monospace">   the inline validation for simplicity?</text>
+  <text x="72" y="687" fill="#e0b877" font-size="10.5" font-family="ui-monospace,Menlo,monospace">Please confirm ... and I'll proceed!</text>
+
+  <text x="822" y="632" fill="#c4c9d6" font-size="12">Its analysis was correct. It identified real</text>
+  <text x="822" y="652" fill="#c4c9d6" font-size="12">improvements. Then it <tspan font-weight="600">asked permission</tspan> and</text>
+  <text x="822" y="672" fill="#c4c9d6" font-size="12">stopped — in a pipeline with no human to answer.</text>
+  <text x="822" y="700" fill="#e0b877" font-size="12">Not a capability failure. An instruction-</text>
+  <text x="822" y="720" fill="#e0b877" font-size="12">following failure in an autonomous context.</text>
+
+  <text x="58" y="726" fill="#c4c9d6" font-size="11.5">The pipeline records the step as <tspan font-family="ui-monospace,Menlo,monospace">format_ok: false</tspan>, keeps the pre-refactor code, and carries on —</text>
+  <text x="58" y="746" fill="#c4c9d6" font-size="11.5">so the run still finishes and the failure is visible instead of being a crash.</text>
+
+  <!-- 4 results -->
+  <text x="36" y="798" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">4 · THE OPTIMISATION REPORT — measured, all three run live</text>
+  <rect x="36" y="810" width="1408" height="236" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <text x="58" y="838" fill="#6c7590" font-size="11" font-weight="700">CONFIG</text>
+  <text x="240" y="838" fill="#6c7590" font-size="11" font-weight="700">COST</text>
+  <text x="390" y="838" fill="#6c7590" font-size="11" font-weight="700">SAVING</text>
+  <text x="530" y="838" fill="#6c7590" font-size="11" font-weight="700">WALL CLOCK</text>
+  <text x="700" y="838" fill="#6c7590" font-size="11" font-weight="700">SAVING</text>
+  <text x="840" y="838" fill="#6c7590" font-size="11" font-weight="700">ACCEPTANCE</text>
+  <text x="1010" y="838" fill="#6c7590" font-size="11" font-weight="700">VERDICT</text>
+  <line x1="58" y1="848" x2="1422" y2="848" stroke="#262b3a" stroke-width="1"/>
+
+  <text x="58" y="878" fill="#f6aec2" font-size="12.5" font-weight="600">baseline</text>
+  <text x="240" y="878" fill="#c4c9d6" font-size="12.5">$0.5821</text>
+  <text x="390" y="878" fill="#6c7590" font-size="12.5">—</text>
+  <text x="530" y="878" fill="#c4c9d6" font-size="12.5">264s</text>
+  <text x="700" y="878" fill="#6c7590" font-size="12.5">—</text>
+  <text x="840" y="878" fill="#8fd694" font-size="12.5">56 pass</text>
+  <text x="1010" y="878" fill="#c4c9d6" font-size="12.5">reference</text>
+
+  <rect x="50" y="892" width="1380" height="34" rx="5" fill="#26161c"/>
+  <text x="58" y="915" fill="#e0b877" font-size="12.5" font-weight="600">aggressive</text>
+  <text x="240" y="915" fill="#c4c9d6" font-size="12.5">$0.1501</text>
+  <text x="390" y="915" fill="#e0b877" font-size="12.5" font-weight="700">74%</text>
+  <text x="530" y="915" fill="#c4c9d6" font-size="12.5">204s</text>
+  <text x="700" y="915" fill="#c4c9d6" font-size="12.5">23%</text>
+  <text x="840" y="915" fill="#8fd694" font-size="12.5">56 pass</text>
+  <text x="1010" y="915" fill="#f6829a" font-size="12" font-weight="700">NOT CLEAN — refactor produced nothing</text>
+
+  <rect x="50" y="932" width="1380" height="34" rx="5" fill="#16261c"/>
+  <text x="58" y="955" fill="#8fd694" font-size="12.5" font-weight="700">tuned</text>
+  <text x="240" y="955" fill="#e8eaf0" font-size="12.5" font-weight="700">$0.1729</text>
+  <text x="390" y="955" fill="#8fd694" font-size="12.5" font-weight="700">70%</text>
+  <text x="530" y="955" fill="#e8eaf0" font-size="12.5" font-weight="700">126s</text>
+  <text x="700" y="955" fill="#8fd694" font-size="12.5" font-weight="700">52%</text>
+  <text x="840" y="955" fill="#8fd694" font-size="12.5">56 pass</text>
+  <text x="1010" y="955" fill="#8fd694" font-size="12" font-weight="700">clean saving</text>
+
+  <text x="58" y="994" fill="#c4c9d6" font-size="12">The <tspan font-weight="600">bigger</tspan> headline saving is the dishonest one. `aggressive` looks 4 points cheaper than `tuned` only because one of its four</text>
+  <text x="58" y="1014" fill="#c4c9d6" font-size="12">steps silently produced no output. A cost dashboard with no output contract would have reported that as the winner.</text>
+  <text x="58" y="1034" fill="#6c7590" font-size="11.5">Verified: `tuned`'s refactor changed 64 lines and all 56 acceptance tests still pass. `aggressive`'s output is byte-identical to its input.</text>
+
+  <!-- 5 lesson -->
+  <text x="36" y="1086" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">5 · WHAT ACTUALLY FIXED IT</text>
+  <rect x="36" y="1098" width="700" height="176" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="1124" fill="#e8eaf0" font-size="12.5" font-weight="700">Not a bigger model — a firmer contract</text>
+  <text x="58" y="1150" fill="#c4c9d6" font-size="11.5">`tuned` runs the refactor on the SAME haiku tier.</text>
+  <text x="58" y="1170" fill="#c4c9d6" font-size="11.5">The only change is an appended output contract:</text>
+  <rect x="58" y="1184" width="656" height="52" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="1204" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">Do NOT ask questions ... no human to answer you.</text>
+  <text x="72" y="1222" fill="#8fd694" font-size="10.5" font-family="ui-monospace,Menlo,monospace">Your entire reply must be ONE fenced code block.</text>
+  <text x="58" y="1258" fill="#6c7590" font-size="11">Haiku then completed the refactor for $0.0104. Same lesson as Lab 3C: fix the prompt before you fix the model.</text>
+
+  <rect x="760" y="1098" width="684" height="176" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="782" y="1124" fill="#e8eaf0" font-size="12.5" font-weight="700">Where the money actually was</text>
+  <text x="782" y="1152" fill="#c4c9d6" font-size="11.5">implement  <tspan font-family="ui-monospace,Menlo,monospace">$0.2060 → $0.0481</tspan>   the largest single win</text>
+  <text x="782" y="1174" fill="#c4c9d6" font-size="11.5">test       <tspan font-family="ui-monospace,Menlo,monospace">$0.1870 → $0.0740</tspan></text>
+  <text x="782" y="1196" fill="#c4c9d6" font-size="11.5">refactor   <tspan font-family="ui-monospace,Menlo,monospace">$0.1120 → $0.0104</tspan>   11× cheaper, gate still green</text>
+  <text x="782" y="1218" fill="#c4c9d6" font-size="11.5">document   <tspan font-family="ui-monospace,Menlo,monospace">$0.0771 → $0.0402</tspan>   cross-vendor, no quality gate needed</text>
+  <text x="782" y="1252" fill="#6c7590" font-size="11">Prose and mechanical edits were never worth top-tier reasoning. The gate is what let us prove it.</text>
+
+  <rect x="36" y="1320" width="1408" height="106" rx="8" fill="#141a2a" stroke="#4a8fe7" stroke-width="1.5"/>
+  <text x="58" y="1350" fill="#e8eaf0" font-size="13" font-weight="700">★ THE DELIVERABLE — a before/after governance report you can hand to a budget owner</text>
+  <text x="58" y="1376" fill="#c4c9d6" font-size="12">Same 56-test acceptance result. <tspan fill="#8fd694" font-weight="600">70% lower cost</tspan> ($0.5821 → $0.1729) and <tspan fill="#8fd694" font-weight="600">52% lower latency</tspan> (264s → 126s), every step producing real output.</text>
+  <text x="58" y="1398" fill="#c4c9d6" font-size="12">artifacts/lab-4/optimization-report.txt — per-step costs, savings, and the verdict column that catches a fake saving.</text>
+  <text x="58" y="1418" fill="#6c7590" font-size="11.5">The number that matters is not the biggest saving. It is the biggest saving whose pipeline still did the work.</text>
+
+  <path d="M740 276 L740 322" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M740 516 L740 562" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M740 758 L740 804" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M740 1046 L740 1092" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M740 1274 L740 1314" stroke="#4a8fe7" stroke-width="1.6" fill="none" marker-end="url(#arg)"/>
+</svg>

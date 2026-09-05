@@ -1,0 +1,483 @@
+{
+  "summary": {
+    "label": "v1-naive",
+    "prompt_file": "prompts/v1-naive.txt",
+    "model": "amazon-bedrock/global.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "split": "all",
+    "cases": 15,
+    "records_exact": 0,
+    "records_total": 15,
+    "fields_correct": 24,
+    "fields_total": 75,
+    "field_accuracy": 0.32,
+    "record_accuracy": 0.0,
+    "total_cost_usd": 0.066698
+  },
+  "results": [
+    {
+      "id": "t01",
+      "split": "train",
+      "input": "P1 - checkout is down for everyone, payments failing since the 2.4.0 deploy. Reported 2026-08-14.",
+      "expected": {
+        "severity": "critical",
+        "component": "billing",
+        "customer_impact": true,
+        "affected_version": "2.4.0",
+        "reported_at": "2026-08-14"
+      },
+      "got": {
+        "severity": "P1",
+        "component": "checkout",
+        "customer_impact": "payments failing",
+        "affected_version": "2.4.0",
+        "reported_at": "2026-08-14"
+      },
+      "raw": "```json\n{\n  \"severity\": \"P1\",\n  \"component\": \"checkout\",\n  \"customer_impact\": \"payments failing\",\n  \"affected_version\": \"2.4.0\",\n  \"reported_at\": \"2026-08-14\"\n}\n```",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": true,
+        "reported_at": true
+      },
+      "fields_correct": 2,
+      "record_exact": false,
+      "cost_usd": 0.010822,
+      "elapsed_s": 11.86
+    },
+    {
+      "id": "t02",
+      "split": "train",
+      "input": "Minor cosmetic issue: the login button is 2px off centre on mobile. Noticed last Tuesday.",
+      "expected": {
+        "severity": "low",
+        "component": "ui",
+        "customer_impact": true,
+        "affected_version": null,
+        "reported_at": null
+      },
+      "got": {
+        "severity": "minor",
+        "component": "login button",
+        "customer_impact": "cosmetic issue",
+        "affected_version": null,
+        "reported_at": "last Tuesday"
+      },
+      "raw": "```json\n{\n  \"severity\": \"minor\",\n  \"component\": \"login button\",\n  \"customer_impact\": \"cosmetic issue\",\n  \"affected_version\": null,\n  \"reported_at\": \"last Tuesday\"\n}\n```",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": true,
+        "reported_at": false
+      },
+      "fields_correct": 1,
+      "record_exact": false,
+      "cost_usd": 0.00196155,
+      "elapsed_s": 8.66
+    },
+    {
+      "id": "t03",
+      "split": "train",
+      "input": "sev2 - SSO token refresh intermittently 401s on release 3.1. Internal staff only for now.",
+      "expected": {
+        "severity": "high",
+        "component": "auth",
+        "customer_impact": false,
+        "affected_version": "3.1",
+        "reported_at": null
+      },
+      "got": {
+        "severity": "sev2",
+        "component": "SSO token refresh",
+        "customer_impact": "Internal staff only",
+        "affected_version": "3.1",
+        "reported_at": null
+      },
+      "raw": "```json\n{\n  \"severity\": \"sev2\",\n  \"component\": \"SSO token refresh\",\n  \"customer_impact\": \"Internal staff only\",\n  \"affected_version\": \"3.1\",\n  \"reported_at\": null\n}\n```\n\n**Note:** The `reported_at` field is `null` because no timestamp is provided in the ticket text. If you have additional metadata about when this ticket was created, that should be included in that field.",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": true,
+        "reported_at": true
+      },
+      "fields_correct": 2,
+      "record_exact": false,
+      "cost_usd": 0.00221405,
+      "elapsed_s": 7.87
+    },
+    {
+      "id": "t04",
+      "split": "train",
+      "input": "Search results are stale by ~10 minutes. Normal priority. Seen on v2.3.1, logged 14 Aug 2026.",
+      "expected": {
+        "severity": "medium",
+        "component": "search",
+        "customer_impact": true,
+        "affected_version": "2.3.1",
+        "reported_at": "2026-08-14"
+      },
+      "got": {
+        "severity": "normal",
+        "component": "search",
+        "customer_impact": "search results are stale by ~10 minutes",
+        "affected_version": "v2.3.1",
+        "reported_at": "2026-08-14"
+      },
+      "raw": "```json\n{\n  \"severity\": \"normal\",\n  \"component\": \"search\",\n  \"customer_impact\": \"search results are stale by ~10 minutes\",\n  \"affected_version\": \"v2.3.1\",\n  \"reported_at\": \"2026-08-14\"\n}\n```",
+      "per_field": {
+        "severity": false,
+        "component": true,
+        "customer_impact": false,
+        "affected_version": false,
+        "reported_at": true
+      },
+      "fields_correct": 2,
+      "record_exact": false,
+      "cost_usd": 0.0020553,
+      "elapsed_s": 7.96
+    },
+    {
+      "id": "t05",
+      "split": "train",
+      "input": "URGENT: the whole us-east cluster is unreachable. No version info yet. 2026-08-30.",
+      "expected": {
+        "severity": "critical",
+        "component": "infra",
+        "customer_impact": true,
+        "affected_version": null,
+        "reported_at": "2026-08-30"
+      },
+      "got": {
+        "severity": "URGENT",
+        "component": "us-east cluster",
+        "customer_impact": "whole us-east cluster is unreachable",
+        "affected_version": null,
+        "reported_at": "2026-08-30"
+      },
+      "raw": "```json\n{\n  \"severity\": \"URGENT\",\n  \"component\": \"us-east cluster\",\n  \"customer_impact\": \"whole us-east cluster is unreachable\",\n  \"affected_version\": null,\n  \"reported_at\": \"2026-08-30\"\n}\n```",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": true,
+        "reported_at": true
+      },
+      "fields_correct": 2,
+      "record_exact": false,
+      "cost_usd": 0.0020328,
+      "elapsed_s": 7.64
+    },
+    {
+      "id": "t06",
+      "split": "train",
+      "input": "Nice-to-have: add pagination to the internal admin invoice list. No rush.",
+      "expected": {
+        "severity": "low",
+        "component": "billing",
+        "customer_impact": false,
+        "affected_version": null,
+        "reported_at": null
+      },
+      "got": {
+        "severity": "low",
+        "component": "admin invoice list",
+        "customer_impact": "none",
+        "affected_version": null,
+        "reported_at": null
+      },
+      "raw": "I'll extract the fields from the support ticket. Based on the ticket provided, here's the JSON object:\n\n```json\n{\n  \"severity\": \"low\",\n  \"component\": \"admin invoice list\",\n  \"customer_impact\": \"none\",\n  \"affected_version\": null,\n  \"reported_at\": null\n}\n```\n\n**Notes on extraction:**\n- **severity**: Inferred as \"low\" from \"Nice-to-have\" language\n- **component**: \"admin invoice list\" (feature request context)\n- **customer_impact**: \"none\" (described as \"no rush\", indicating non-critical)\n- **affected_version**: Not specified in ticket\n- **reported_at**: Not provided in ticket",
+      "per_field": {
+        "severity": true,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": true,
+        "reported_at": true
+      },
+      "fields_correct": 3,
+      "record_exact": false,
+      "cost_usd": 0.00248155,
+      "elapsed_s": 20.2
+    },
+    {
+      "id": "t07",
+      "split": "train",
+      "input": "P3: /v1/orders returns 500 for about 2% of requests on 4.0.0-rc2. Customers hitting it.",
+      "expected": {
+        "severity": "medium",
+        "component": "api",
+        "customer_impact": true,
+        "affected_version": "4.0.0-rc2",
+        "reported_at": null
+      },
+      "got": {
+        "severity": "P3",
+        "component": "/v1/orders",
+        "customer_impact": "2% of requests returning 500 errors",
+        "affected_version": "4.0.0-rc2",
+        "reported_at": null
+      },
+      "raw": "```json\n{\n  \"severity\": \"P3\",\n  \"component\": \"/v1/orders\",\n  \"customer_impact\": \"2% of requests returning 500 errors\",\n  \"affected_version\": \"4.0.0-rc2\",\n  \"reported_at\": null\n}\n```\n\nNote: The `reported_at` field is `null` because no timestamp is provided in the ticket.",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": true,
+        "reported_at": true
+      },
+      "fields_correct": 2,
+      "record_exact": false,
+      "cost_usd": 0.0021628,
+      "elapsed_s": 14.87
+    },
+    {
+      "id": "t08",
+      "split": "train",
+      "input": "Important - password reset emails delayed 30+ min. Started yesterday. Version v1.9.",
+      "expected": {
+        "severity": "high",
+        "component": "auth",
+        "customer_impact": true,
+        "affected_version": "1.9",
+        "reported_at": null
+      },
+      "got": {
+        "severity": "high",
+        "component": "email",
+        "customer_impact": "password reset emails delayed 30+ minutes",
+        "affected_version": "v1.9",
+        "reported_at": "yesterday"
+      },
+      "raw": "```json\n{\n  \"severity\": \"high\",\n  \"component\": \"email\",\n  \"customer_impact\": \"password reset emails delayed 30+ minutes\",\n  \"affected_version\": \"v1.9\",\n  \"reported_at\": \"yesterday\"\n}\n```",
+      "per_field": {
+        "severity": true,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": false,
+        "reported_at": false
+      },
+      "fields_correct": 1,
+      "record_exact": false,
+      "cost_usd": 0.00199405,
+      "elapsed_s": 19.79
+    },
+    {
+      "id": "t09",
+      "split": "holdout",
+      "input": "sev1 outage: billing webhooks dropped entirely on 2.4.1. Every customer affected. 2026-09-01.",
+      "expected": {
+        "severity": "critical",
+        "component": "billing",
+        "customer_impact": true,
+        "affected_version": "2.4.1",
+        "reported_at": "2026-09-01"
+      },
+      "got": {
+        "severity": "sev1",
+        "component": "billing webhooks",
+        "customer_impact": "Every customer affected",
+        "affected_version": "2.4.1",
+        "reported_at": "2026-09-01"
+      },
+      "raw": "```json\n{\n  \"severity\": \"sev1\",\n  \"component\": \"billing webhooks\",\n  \"customer_impact\": \"Every customer affected\",\n  \"affected_version\": \"2.4.1\",\n  \"reported_at\": \"2026-09-01\"\n}\n```",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": true,
+        "reported_at": true
+      },
+      "fields_correct": 2,
+      "record_exact": false,
+      "cost_usd": 0.01084075,
+      "elapsed_s": 639.2
+    },
+    {
+      "id": "t10",
+      "split": "holdout",
+      "input": "P4 - tooltip text has a typo on the settings screen. Internal QA found it.",
+      "expected": {
+        "severity": "low",
+        "component": "ui",
+        "customer_impact": false,
+        "affected_version": null,
+        "reported_at": null
+      },
+      "got": {
+        "severity": "P4",
+        "component": "tooltip text",
+        "customer_impact": "none",
+        "affected_version": "unknown",
+        "reported_at": "unknown"
+      },
+      "raw": "```json\n{\n  \"severity\": \"P4\",\n  \"component\": \"tooltip text\",\n  \"customer_impact\": \"none\",\n  \"affected_version\": \"unknown\",\n  \"reported_at\": \"unknown\"\n}\n```\n\n**Note:** The extraction is based on the limited information in the ticket. Several fields have incomplete data:\n- `customer_impact`: Set to \"none\" since this is an internal QA finding with no mention of external customer impact\n- `affected_version`: Not specified in the ticket\n- `reported_at`: No timestamp provided in the ticket\n\nIf you need to populate these missing fields, the ticket would need to include additional information such as ",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": false,
+        "reported_at": false
+      },
+      "fields_correct": 0,
+      "record_exact": false,
+      "cost_usd": 0.011302,
+      "elapsed_s": 18.41
+    },
+    {
+      "id": "t11",
+      "split": "holdout",
+      "input": "Search autocomplete times out for large tenants. P2. Observed on release 3.2.0 last week.",
+      "expected": {
+        "severity": "high",
+        "component": "search",
+        "customer_impact": true,
+        "affected_version": "3.2.0",
+        "reported_at": null
+      },
+      "got": {
+        "severity": "P2",
+        "component": "Search autocomplete",
+        "customer_impact": "Search autocomplete times out for large tenants",
+        "affected_version": "3.2.0",
+        "reported_at": "last week"
+      },
+      "raw": "```json\n{\n  \"severity\": \"P2\",\n  \"component\": \"Search autocomplete\",\n  \"customer_impact\": \"Search autocomplete times out for large tenants\",\n  \"affected_version\": \"3.2.0\",\n  \"reported_at\": \"last week\"\n}\n```",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": true,
+        "reported_at": false
+      },
+      "fields_correct": 1,
+      "record_exact": false,
+      "cost_usd": 0.0020328,
+      "elapsed_s": 8.13
+    },
+    {
+      "id": "t12",
+      "split": "holdout",
+      "input": "Normal: rate limiter rejects valid API keys occasionally. v5.0.2, reported 03 Sep 2026.",
+      "expected": {
+        "severity": "medium",
+        "component": "api",
+        "customer_impact": true,
+        "affected_version": "5.0.2",
+        "reported_at": "2026-09-03"
+      },
+      "got": {
+        "severity": "Normal",
+        "component": "rate limiter",
+        "customer_impact": "rejects valid API keys occasionally",
+        "affected_version": "v5.0.2",
+        "reported_at": "03 Sep 2026"
+      },
+      "raw": "```json\n{\n  \"severity\": \"Normal\",\n  \"component\": \"rate limiter\",\n  \"customer_impact\": \"rejects valid API keys occasionally\",\n  \"affected_version\": \"v5.0.2\",\n  \"reported_at\": \"03 Sep 2026\"\n}\n```",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": false,
+        "reported_at": false
+      },
+      "fields_correct": 0,
+      "record_exact": false,
+      "cost_usd": 0.00203905,
+      "elapsed_s": 8.25
+    },
+    {
+      "id": "t13",
+      "split": "holdout",
+      "input": "Staging database replica lagging 4h. Internal only, no customer effect. sev2.",
+      "expected": {
+        "severity": "high",
+        "component": "infra",
+        "customer_impact": false,
+        "affected_version": null,
+        "reported_at": null
+      },
+      "got": {
+        "severity": "sev2",
+        "component": "database replica",
+        "customer_impact": "none",
+        "affected_version": null,
+        "reported_at": null
+      },
+      "raw": "```json\n{\n  \"severity\": \"sev2\",\n  \"component\": \"database replica\",\n  \"customer_impact\": \"none\",\n  \"affected_version\": null,\n  \"reported_at\": null\n}\n```",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": true,
+        "reported_at": true
+      },
+      "fields_correct": 2,
+      "record_exact": false,
+      "cost_usd": 0.010752,
+      "elapsed_s": 724.65
+    },
+    {
+      "id": "t14",
+      "split": "holdout",
+      "input": "OAuth callback rejects valid state param for all SSO logins. Critical outage, v3.3.0, 2026-08-22.",
+      "expected": {
+        "severity": "critical",
+        "component": "auth",
+        "customer_impact": true,
+        "affected_version": "3.3.0",
+        "reported_at": "2026-08-22"
+      },
+      "got": {
+        "severity": "Critical",
+        "component": "OAuth callback",
+        "customer_impact": "all SSO logins rejected",
+        "affected_version": "v3.3.0",
+        "reported_at": "2026-08-22"
+      },
+      "raw": "```json\n{\n  \"severity\": \"Critical\",\n  \"component\": \"OAuth callback\",\n  \"customer_impact\": \"all SSO logins rejected\",\n  \"affected_version\": \"v3.3.0\",\n  \"reported_at\": \"2026-08-22\"\n}\n```",
+      "per_field": {
+        "severity": false,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": false,
+        "reported_at": true
+      },
+      "fields_correct": 1,
+      "record_exact": false,
+      "cost_usd": 0.0020403,
+      "elapsed_s": 10.14
+    },
+    {
+      "id": "t15",
+      "split": "holdout",
+      "input": "Invoice PDF footer misaligned. Cosmetic. Customers see it. Release 2.2.",
+      "expected": {
+        "severity": "low",
+        "component": "billing",
+        "customer_impact": true,
+        "affected_version": "2.2",
+        "reported_at": null
+      },
+      "got": {
+        "severity": "low",
+        "component": "Invoice PDF",
+        "customer_impact": "Customers see it",
+        "affected_version": "2.2",
+        "reported_at": null
+      },
+      "raw": "```json\n{\n  \"severity\": \"low\",\n  \"component\": \"Invoice PDF\",\n  \"customer_impact\": \"Customers see it\",\n  \"affected_version\": \"2.2\",\n  \"reported_at\": null\n}\n```",
+      "per_field": {
+        "severity": true,
+        "component": false,
+        "customer_impact": false,
+        "affected_version": true,
+        "reported_at": true
+      },
+      "fields_correct": 3,
+      "record_exact": false,
+      "cost_usd": 0.00196655,
+      "elapsed_s": 8.94
+    }
+  ]
+}

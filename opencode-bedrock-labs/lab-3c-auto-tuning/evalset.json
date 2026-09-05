@@ -1,0 +1,182 @@
+[
+  {
+    "id": "t01",
+    "split": "train",
+    "input": "P1 - checkout is down for everyone, payments failing since the 2.4.0 deploy. Reported 2026-08-14.",
+    "expected": {
+      "severity": "critical",
+      "component": "billing",
+      "customer_impact": true,
+      "affected_version": "2.4.0",
+      "reported_at": "2026-08-14"
+    }
+  },
+  {
+    "id": "t02",
+    "split": "train",
+    "input": "Minor cosmetic issue: the login button is 2px off centre on mobile. Noticed last Tuesday.",
+    "expected": {
+      "severity": "low",
+      "component": "ui",
+      "customer_impact": true,
+      "affected_version": null,
+      "reported_at": null
+    }
+  },
+  {
+    "id": "t03",
+    "split": "train",
+    "input": "sev2 - SSO token refresh intermittently 401s on release 3.1. Internal staff only for now.",
+    "expected": {
+      "severity": "high",
+      "component": "auth",
+      "customer_impact": false,
+      "affected_version": "3.1",
+      "reported_at": null
+    }
+  },
+  {
+    "id": "t04",
+    "split": "train",
+    "input": "Search results are stale by ~10 minutes. Normal priority. Seen on v2.3.1, logged 14 Aug 2026.",
+    "expected": {
+      "severity": "medium",
+      "component": "search",
+      "customer_impact": true,
+      "affected_version": "2.3.1",
+      "reported_at": "2026-08-14"
+    }
+  },
+  {
+    "id": "t05",
+    "split": "train",
+    "input": "URGENT: the whole us-east cluster is unreachable. No version info yet. 2026-08-30.",
+    "expected": {
+      "severity": "critical",
+      "component": "infra",
+      "customer_impact": true,
+      "affected_version": null,
+      "reported_at": "2026-08-30"
+    }
+  },
+  {
+    "id": "t06",
+    "split": "train",
+    "input": "Nice-to-have: add pagination to the internal admin invoice list. No rush.",
+    "expected": {
+      "severity": "low",
+      "component": "billing",
+      "customer_impact": false,
+      "affected_version": null,
+      "reported_at": null
+    }
+  },
+  {
+    "id": "t07",
+    "split": "train",
+    "input": "P3: /v1/orders returns 500 for about 2% of requests on 4.0.0-rc2. Customers hitting it.",
+    "expected": {
+      "severity": "medium",
+      "component": "api",
+      "customer_impact": true,
+      "affected_version": "4.0.0-rc2",
+      "reported_at": null
+    }
+  },
+  {
+    "id": "t08",
+    "split": "train",
+    "input": "Important - password reset emails delayed 30+ min. Started yesterday. Version v1.9.",
+    "expected": {
+      "severity": "high",
+      "component": "auth",
+      "customer_impact": true,
+      "affected_version": "1.9",
+      "reported_at": null
+    }
+  },
+  {
+    "id": "t09",
+    "split": "holdout",
+    "input": "sev1 outage: billing webhooks dropped entirely on 2.4.1. Every customer affected. 2026-09-01.",
+    "expected": {
+      "severity": "critical",
+      "component": "billing",
+      "customer_impact": true,
+      "affected_version": "2.4.1",
+      "reported_at": "2026-09-01"
+    }
+  },
+  {
+    "id": "t10",
+    "split": "holdout",
+    "input": "P4 - tooltip text has a typo on the settings screen. Internal QA found it.",
+    "expected": {
+      "severity": "low",
+      "component": "ui",
+      "customer_impact": false,
+      "affected_version": null,
+      "reported_at": null
+    }
+  },
+  {
+    "id": "t11",
+    "split": "holdout",
+    "input": "Search autocomplete times out for large tenants. P2. Observed on release 3.2.0 last week.",
+    "expected": {
+      "severity": "high",
+      "component": "search",
+      "customer_impact": true,
+      "affected_version": "3.2.0",
+      "reported_at": null
+    }
+  },
+  {
+    "id": "t12",
+    "split": "holdout",
+    "input": "Normal: rate limiter rejects valid API keys occasionally. v5.0.2, reported 03 Sep 2026.",
+    "expected": {
+      "severity": "medium",
+      "component": "api",
+      "customer_impact": true,
+      "affected_version": "5.0.2",
+      "reported_at": "2026-09-03"
+    }
+  },
+  {
+    "id": "t13",
+    "split": "holdout",
+    "input": "Staging database replica lagging 4h. Internal only, no customer effect. sev2.",
+    "expected": {
+      "severity": "high",
+      "component": "infra",
+      "customer_impact": false,
+      "affected_version": null,
+      "reported_at": null
+    }
+  },
+  {
+    "id": "t14",
+    "split": "holdout",
+    "input": "OAuth callback rejects valid state param for all SSO logins. Critical outage, v3.3.0, 2026-08-22.",
+    "expected": {
+      "severity": "critical",
+      "component": "auth",
+      "customer_impact": true,
+      "affected_version": "3.3.0",
+      "reported_at": "2026-08-22"
+    }
+  },
+  {
+    "id": "t15",
+    "split": "holdout",
+    "input": "Invoice PDF footer misaligned. Cosmetic. Customers see it. Release 2.2.",
+    "expected": {
+      "severity": "low",
+      "component": "billing",
+      "customer_impact": true,
+      "affected_version": "2.2",
+      "reported_at": null
+    }
+  }
+]

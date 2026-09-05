@@ -1,0 +1,7 @@
+Extract the following fields from the support ticket below and return them as JSON:
+severity, component, customer_impact, affected_version, reported_at.
+
+Return only the JSON object.
+
+Ticket:
+{ticket}

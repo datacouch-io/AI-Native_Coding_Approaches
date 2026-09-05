@@ -1,0 +1,10 @@
+{
+  "label": "baseline",
+  "note": "Deliberately over-provisioned: the top tier runs every step, including the ones that need no reasoning at all.",
+  "steps": {
+    "implement": "opus",
+    "test": "opus",
+    "refactor": "opus",
+    "document": "opus"
+  }
+}

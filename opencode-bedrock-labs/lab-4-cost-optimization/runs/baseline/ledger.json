@@ -1,0 +1,61 @@
+{
+  "label": "baseline",
+  "config": {
+    "implement": "opus",
+    "test": "opus",
+    "refactor": "opus",
+    "document": "opus"
+  },
+  "steps": [
+    {
+      "step": "implement",
+      "tier": "opus",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-opus-5",
+      "cost_usd": 0.20597875,
+      "elapsed_s": 62.54,
+      "output_tokens": 5295
+    },
+    {
+      "step": "test",
+      "tier": "opus",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-opus-5",
+      "cost_usd": 0.18701025,
+      "elapsed_s": 70.24,
+      "output_tokens": 6474
+    },
+    {
+      "step": "refactor",
+      "tier": "opus",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-opus-5",
+      "cost_usd": 0.11202075,
+      "elapsed_s": 104.92,
+      "output_tokens": 2595
+    },
+    {
+      "step": "document",
+      "tier": "opus",
+      "vendor": "Anthropic",
+      "model": "amazon-bedrock/us.anthropic.claude-opus-5",
+      "cost_usd": 0.07709775,
+      "elapsed_s": 26.78,
+      "output_tokens": 2037
+    }
+  ],
+  "acceptance": {
+    "passed": 56,
+    "failed": 0,
+    "collected": true,
+    "green": true
+  },
+  "generated_tests": {
+    "passed": 426,
+    "failed": 0,
+    "collected": true
+  },
+  "total_cost_usd": 0.582107,
+  "total_elapsed_s": 264.48,
+  "readme_chars": 1235
+}

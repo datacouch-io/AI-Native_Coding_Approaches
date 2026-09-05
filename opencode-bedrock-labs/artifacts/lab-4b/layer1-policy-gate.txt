@@ -1,0 +1,14 @@
+$ python3 governance.py --live
+
+policy 2026-09-05   4 approved endpoints   3 classifications
+
+      declared  detected  endpoint                          gate      reason
+  ------------------------------------------------------------------------------------------------------------
+  S1  internal  internal  us.anthropic.claude-sonnet-5      ALLOW     internal permitted on us endpoint us.anthropic.claude-sonnet-5
+                                                            -> sent to us-east-1: responded (2.57s)
+  S2  pii       pii       us.anthropic.claude-sonnet-5      BLOCK     pii data may only be processed in eu; us.anthropic.claude-sonnet-5 is us
+  S3  pii       pii       eu.anthropic.claude-sonnet-5      ALLOW     pii permitted on eu endpoint eu.anthropic.claude-sonnet-5
+                                                            -> sent to eu-central-1: responded (2.4s)
+  S4  internal  internal  global.openai.gpt-5.6-terra       BLOCK     internal data may only be processed in us/eu; global.openai.gpt-5.6-terra is global
+  ------------------------------------------------------------------------------------------------------------
+  2 allowed, 2 blocked by policy   audit trail -> runs/audit-log.jsonl

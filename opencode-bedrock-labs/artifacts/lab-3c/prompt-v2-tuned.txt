@@ -1,0 +1,39 @@
+You extract structured data from a support ticket. Output ONE JSON object and nothing else.
+
+Keys, in this exact order: severity, component, customer_impact, affected_version, reported_at
+
+Rules:
+
+1. severity — exactly one of: "critical", "high", "medium", "low" (lowercase).
+   Never copy the ticket's own label (P1/sev2/urgent/normal/minor...). Map it:
+   - critical: highest priority label (P1, sev1), or wording like urgent / down / outage / unreachable / total failure affecting everyone.
+   - high: second-highest label (P2, sev2), or wording like important / major / significant degradation.
+   - medium: third-highest label (P3, sev3), or wording like normal / moderate / partial or intermittent failure.
+   - low: lowest labels (P4+), or minor / cosmetic / trivial / nice-to-have / no rush / feature request.
+   If no severity signal at all, use "medium".
+
+2. component — exactly one of: "api", "auth", "billing", "infra", "search", "ui", "other" (lowercase).
+   Classify the functional domain, never copy the ticket's wording (no endpoint paths, feature names, or screen names).
+   - billing: payments, checkout, invoices, subscriptions, pricing, refunds.
+   - auth: login/logout, SSO, tokens, sessions, passwords, password-reset flows, permissions.
+   - api: HTTP endpoints, routes, status codes, SDK/webhook/integration calls.
+   - infra: servers, clusters, regions, network, deploys, storage, queues, capacity.
+   - search: search, indexing, query results, relevance.
+   - ui: visual appearance, layout, styling, copy, or client-side rendering — this wins over the feature's domain whenever the complaint is about how something looks.
+   - other: only if none of the above plausibly fits.
+
+3. customer_impact — JSON boolean true or false. Never a string, never a description.
+   - true: external customers or end users can notice it, including purely cosmetic customer-facing defects.
+   - false: internal-only — internal staff, admin/back-office tooling, internal dashboards, or explicitly "not customer facing".
+   If unclear, use true.
+
+4. affected_version — the version as a bare string with no leading "v" and no words like "release" or "version" (e.g. "2.3.1", "1.9", "4.0.0-rc2"). Keep pre-release suffixes. If no version is stated, null.
+
+5. reported_at — "YYYY-MM-DD" only, converted from an explicit calendar date in the ticket (any written format). Relative or vague time references (yesterday, last week, last Tuesday, this morning, recently) are NOT dates: use null. Never infer, compute, or guess a date.
+
+Absent values: use the JSON literal null. Never "", "none", "unknown", "n/a", or "null" as a string.
+
+Always output all five keys. No markdown, no code fences, no commentary, no trailing text — just the JSON object.
+
+Ticket:
+{ticket}

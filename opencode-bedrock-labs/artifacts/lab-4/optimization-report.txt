@@ -1,0 +1,22 @@
+$ python3 report.py
+
+PER-STEP COST           baseline      aggressive           tuned
+----------------------------------------------------------------
+implement          opus $0.2060  sonnet $0.0655  sonnet $0.0481 
+test               opus $0.1870  sonnet $0.0280  sonnet $0.0740 
+refactor           opus $0.1120   haiku $0.0154!  haiku $0.0104 
+document           opus $0.0771   terra $0.0412   terra $0.0402 
+----------------------------------------------------------------
+TOTAL                    $0.5821         $0.1501         $0.1729
+WALL CLOCK                  264s            204s            126s
+ACCEPTANCE               56 pass         56 pass         56 pass
+
+VERSUS BASELINE
+  config                cost    saving    latency    saving   acceptance   verdict
+  ------------------------------------------------------------------------------------
+  baseline      $     0.5821        0%       264s        0%   56 pass      reference
+  aggressive    $     0.1501       74%       204s       23%   56 pass      NOT CLEAN - refactor produced nothing
+  tuned         $     0.1729       70%       126s       52%   56 pass      clean saving
+
+  HEADLINE: 'tuned' delivers the same 56-test acceptance result for 70% less money and 52% less wall-clock time,
+            with every pipeline step producing real output.

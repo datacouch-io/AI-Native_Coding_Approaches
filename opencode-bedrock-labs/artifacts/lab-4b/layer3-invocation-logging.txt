@@ -1,0 +1,14 @@
+$ aws bedrock get-model-invocation-logging-configuration --region us-east-1
+{
+    "loggingConfig": {
+        "cloudWatchConfig": {
+            "logGroupName": "<YOUR_LOG_GROUP>",
+            "roleArn": "arn:aws:iam::<ACCOUNT_ID>:role/service-role/<YOUR_LOGGING_ROLE>"
+        },
+        "textDataDeliveryEnabled": true,
+        "imageDataDeliveryEnabled": true,
+        "embeddingDataDeliveryEnabled": true,
+        "videoDataDeliveryEnabled": true,
+        "audioDataDeliveryEnabled": false
+    }
+}

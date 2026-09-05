@@ -1,0 +1,25 @@
+$ python3 run_eval.py --prompt prompts/v1-naive.txt --label v1-naive --split all
+
+prompt: prompts/v1-naive.txt   model: global.anthropic.claude-haiku-4-5-20251001-v1:0   cases: 15
+
+     t01 [train  ] 2/5   missed: severity, component, customer_impact
+     t02 [train  ] 1/5   missed: severity, component, customer_impact, reported_at
+     t03 [train  ] 2/5   missed: severity, component, customer_impact
+     t04 [train  ] 2/5   missed: severity, customer_impact, affected_version
+     t05 [train  ] 2/5   missed: severity, component, customer_impact
+     t06 [train  ] 3/5   missed: component, customer_impact
+     t07 [train  ] 2/5   missed: severity, component, customer_impact
+     t08 [train  ] 1/5   missed: component, customer_impact, affected_version, reported_at
+     t09 [holdout] 2/5   missed: severity, component, customer_impact
+     t10 [holdout] 0/5   missed: severity, component, customer_impact, affected_version, reported_at
+     t11 [holdout] 1/5   missed: severity, component, customer_impact, reported_at
+     t12 [holdout] 0/5   missed: severity, component, customer_impact, affected_version, reported_at
+     t13 [holdout] 2/5   missed: severity, component, customer_impact
+     t14 [holdout] 1/5   missed: severity, component, customer_impact, affected_version
+     t15 [holdout] 3/5   missed: component, customer_impact
+
+  records exact : 0/15   (0%)
+  fields correct: 24/75   (32%)
+  cost: $0.066698   ->  v1-naive--all.json
+
+

@@ -1,0 +1,11 @@
+{
+  "label": "tuned",
+  "note": "Same routing as 'aggressive', but the prompts are hardened for weak tiers. Tests whether the aggressive failure was a capability limit or an instruction-following one.",
+  "prompt_style": "strict",
+  "steps": {
+    "implement": "sonnet",
+    "test": "sonnet",
+    "refactor": "haiku",
+    "document": "terra"
+  }
+}
