@@ -1,0 +1,34 @@
+$ python3 matrix.py
+
+model    vendor     tier  task  score         time       cost
+--------------------------------------------------------------
+sonnet   Anthropic  mid   T1    12/12 (100%)    6.5s    $0.0306
+sonnet   Anthropic  mid   T2    20/20 (100%)   37.3s    $0.0444
+sonnet   Anthropic  mid   T3    15/15 (100%)   39.6s    $0.0440
+haiku    Anthropic  low   T1    12/12 (100%)    5.2s    $0.0114
+haiku    Anthropic  low   T2    NO CODE       6.2s    $0.0033
+haiku    Anthropic  low   T3    15/15 (100%)    5.2s    $0.0035
+sol      OpenAI     top   T1    12/12 (100%)    8.6s    $0.0615
+sol      OpenAI     top   T2    20/20 (100%)    8.8s    $0.0744
+sol      OpenAI     top   T3    15/15 (100%)   24.6s    $0.0890
+luna     OpenAI     mid   T1    12/12 (100%)    4.4s    $0.0031
+luna     OpenAI     mid   T2    20/20 (100%)    9.5s    $0.0043
+luna     OpenAI     mid   T3    15/15 (100%)    8.3s    $0.0039
+terra    OpenAI     low   T1    12/12 (100%)    3.7s    $0.0311
+terra    OpenAI     low   T2    20/20 (100%)    6.4s    $0.0382
+terra    OpenAI     low   T3    15/15 (100%)    4.7s    $0.0338
+--------------------------------------------------------------
+  17 cells   total $0.4764   -> runs/matrix.json
+
+
+resuming - 14 cells already recorded
+
+model    vendor     tier  task  score         time       cost
+--------------------------------------------------------------
+opus     Anthropic  top   T1    12/12 (100%)    7.3s    $0.0791
+opus     Anthropic  top   T2    20/20 (100%)   19.2s    $0.0558
+opus     Anthropic  top   T3    15/15 (100%)   11.5s    $0.0352
+--------------------------------------------------------------
+  18 cells   total $0.6465   -> runs/matrix.json
+
+

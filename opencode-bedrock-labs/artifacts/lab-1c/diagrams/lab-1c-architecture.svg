@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1460" height="1560" viewBox="0 0 1460 1560" xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b6480"/></marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8fd694"/></marker>
+    <marker id="arv" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c9aef6"/></marker>
+    <marker id="arh" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#e0b877"/></marker>
+  </defs>
+  <rect width="1460" height="1560" fill="#0f1117"/>
+
+  <text x="36" y="46" fill="#e8eaf0" font-size="22" font-weight="700">Lab 1C — Horizontal Routing vs Vertical Tiering</text>
+  <text x="36" y="72" fill="#9aa1b2" font-size="13">Two ways to spend less: descend inside a family, or switch vendor at the same tier. One task battery measures both, so they are comparable.</text>
+
+  <!-- 1 grid design -->
+  <text x="36" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">1 · THE 2 × 3 GRID — same three tasks, same hidden graders, every cell</text>
+  <rect x="36" y="124" width="1388" height="182" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <text x="230" y="156" fill="#6c7590" font-size="11" font-weight="700">TOP TIER</text>
+  <text x="470" y="156" fill="#6c7590" font-size="11" font-weight="700">MID TIER</text>
+  <text x="710" y="156" fill="#6c7590" font-size="11" font-weight="700">LOW TIER</text>
+
+  <text x="58" y="188" fill="#c9aef6" font-size="12.5" font-weight="700">Anthropic</text>
+  <rect x="200" y="170" width="200" height="30" rx="5" fill="#5c2a3a"/>
+  <text x="216" y="190" fill="#f6aec2" font-size="12">opus</text>
+  <rect x="440" y="170" width="200" height="30" rx="5" fill="#3a2a5c"/>
+  <text x="456" y="190" fill="#c9aef6" font-size="12">sonnet</text>
+  <rect x="680" y="170" width="200" height="30" rx="5" fill="#2a4a5c"/>
+  <text x="696" y="190" fill="#ade4f6" font-size="12">haiku</text>
+
+  <text x="58" y="230" fill="#aef6c2" font-size="12.5" font-weight="700">OpenAI</text>
+  <rect x="200" y="212" width="200" height="30" rx="5" fill="#5c2a3a"/>
+  <text x="216" y="232" fill="#f6aec2" font-size="12">gpt-5.6-sol</text>
+  <rect x="440" y="212" width="200" height="30" rx="5" fill="#3a2a5c"/>
+  <text x="456" y="232" fill="#c9aef6" font-size="12">gpt-5.6-luna</text>
+  <rect x="680" y="212" width="200" height="30" rx="5" fill="#2a4a5c"/>
+  <text x="696" y="232" fill="#ade4f6" font-size="12">gpt-5.6-terra</text>
+
+  <path d="M200 258 L880 258" stroke="#c9aef6" stroke-width="1.6" marker-end="url(#arv)"/>
+  <text x="900" y="262" fill="#c9aef6" font-size="12" font-weight="600">VERTICAL — descend inside one family</text>
+  <path d="M950 170 L950 240" stroke="#e0b877" stroke-width="1.6" marker-end="url(#arh)"/>
+  <text x="970" y="200" fill="#e0b877" font-size="12" font-weight="600">HORIZONTAL — switch vendor,</text>
+  <text x="970" y="218" fill="#e0b877" font-size="12" font-weight="600">hold the tier</text>
+
+  <text x="58" y="288" fill="#c4c9d6" font-size="11.5">T1 chunk (easy) · T2 compare_semver (medium, pre-release precedence) · T3 backoff_schedule (hard, interacting constraints) — 47 hidden tests total</text>
+
+  <!-- 2 harness bug -->
+  <text x="36" y="342" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">2 · A HARNESS BUG THAT NEARLY LIBELLED THE CHEAP TIERS</text>
+  <rect x="36" y="354" width="1388" height="164" rx="8" fill="#26161c" stroke="#5c2a3a"/>
+  <text x="58" y="382" fill="#f6aec2" font-size="12.5" font-weight="700">The first run scored haiku 0/3 and sonnet 0/1. Neither was a capability failure.</text>
+  <rect x="58" y="396" width="700" height="72" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="416" fill="#c4c9d6" font-size="10.5" font-family="ui-monospace,Menlo,monospace">haiku: "You've asked me to implement ... This creates</text>
+  <text x="72" y="434" fill="#c4c9d6" font-size="10.5" font-family="ui-monospace,Menlo,monospace">a conflict with being in plan mode. How would you</text>
+  <text x="72" y="452" fill="#c4c9d6" font-size="10.5" font-family="ui-monospace,Menlo,monospace">like me to proceed?"</text>
+
+  <text x="786" y="416" fill="#c4c9d6" font-size="12">The prompt said "implement the function in a module</text>
+  <text x="786" y="436" fill="#c4c9d6" font-size="12">named solution.py" while the agent was <tspan font-family="ui-monospace,Menlo,monospace">--agent plan</tspan></text>
+  <text x="786" y="456" fill="#c4c9d6" font-size="12">— read-only. The models were right to object.</text>
+
+  <text x="58" y="492" fill="#8fd694" font-size="12">Fixed by asking for the file's CONTENTS as response text, not for a file. haiku went from 0/3 cells to 2/3, scoring 12/12 and 15/15.</text>
+  <text x="58" y="510" fill="#6c7590" font-size="11.5">Scoring the original run would have reported a capability gap that did not exist. Check your harness before you blame a tier.</text>
+
+  <!-- 3 results -->
+  <text x="36" y="562" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">3 · THE MATRIX — 18 cells, every score is the hidden suite's, every cost is summed from step_finish</text>
+  <rect x="36" y="574" width="1388" height="150" rx="8" fill="#171b28" stroke="#3a4560"/>
+
+  <text x="250" y="606" fill="#6c7590" font-size="11" font-weight="700">TOP</text>
+  <text x="600" y="606" fill="#6c7590" font-size="11" font-weight="700">MID</text>
+  <text x="950" y="606" fill="#6c7590" font-size="11" font-weight="700">LOW</text>
+  <line x1="58" y1="616" x2="1402" y2="616" stroke="#262b3a" stroke-width="1"/>
+
+  <text x="58" y="648" fill="#c9aef6" font-size="12.5" font-weight="700">Anthropic</text>
+  <text x="250" y="648" fill="#c4c9d6" font-size="12.5">opus  100%  $0.1701</text>
+  <text x="600" y="648" fill="#c4c9d6" font-size="12.5">sonnet  100%  $0.1189</text>
+  <text x="950" y="648" fill="#c4c9d6" font-size="12.5">haiku  100%  $0.0182</text>
+  <text x="1210" y="648" fill="#e0b877" font-size="11.5">1 cell no code</text>
+
+  <text x="58" y="686" fill="#aef6c2" font-size="12.5" font-weight="700">OpenAI</text>
+  <text x="250" y="686" fill="#c4c9d6" font-size="12.5">sol  100%  $0.2248</text>
+  <rect x="590" y="668" width="240" height="26" rx="5" fill="#16261c"/>
+  <text x="600" y="686" fill="#8fd694" font-size="12.5" font-weight="700">luna  100%  $0.0113</text>
+  <text x="950" y="686" fill="#c4c9d6" font-size="12.5">terra  100%  $0.1031</text>
+
+  <text x="58" y="712" fill="#c4c9d6" font-size="12">Every model passed every task. At this difficulty the tier choice is <tspan font-weight="600">purely economic</tspan> — there is no quality axis to trade against.</text>
+
+  <!-- 4 the finding -->
+  <text x="36" y="766" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">4 · THE FINDING — "tier" does not predict price</text>
+
+  <rect x="36" y="778" width="686" height="222" rx="8" fill="#26161c" stroke="#5c2a3a"/>
+  <text x="58" y="806" fill="#f6aec2" font-size="12.5" font-weight="700">Vertical tiering is NOT monotonic in cost</text>
+  <text x="58" y="834" fill="#c4c9d6" font-size="12">Descending the OpenAI family:</text>
+  <rect x="58" y="848" width="642" height="76" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="72" y="870" fill="#c4c9d6" font-size="11.5" font-family="ui-monospace,Menlo,monospace">sol   $0.2248   top</text>
+  <text x="72" y="890" fill="#8fd694" font-size="11.5" font-family="ui-monospace,Menlo,monospace">luna  $0.0113   mid   <tspan fill="#8fd694">95% cheaper than top</tspan></text>
+  <text x="72" y="910" fill="#f6829a" font-size="11.5" font-family="ui-monospace,Menlo,monospace">terra $0.1031   low   <tspan fill="#f6829a">9x MORE than the mid tier</tspan></text>
+  <text x="58" y="950" fill="#c4c9d6" font-size="12">Going one rung further down the ladder made it</text>
+  <text x="58" y="970" fill="#c4c9d6" font-size="12"><tspan font-weight="600">nine times more expensive</tspan>, for the same 100%.</text>
+  <text x="58" y="990" fill="#6c7590" font-size="11">Token volumes were near-identical: this is pricing, not verbosity.</text>
+
+  <rect x="746" y="778" width="678" height="222" rx="8" fill="#16261c" stroke="#2a5c3a"/>
+  <text x="768" y="806" fill="#aef6c2" font-size="12.5" font-weight="700">Horizontal wins at every tier here</text>
+  <rect x="768" y="820" width="634" height="82" rx="5" fill="#0f1117" stroke="#262b3a"/>
+  <text x="782" y="842" fill="#c4c9d6" font-size="11.5" font-family="ui-monospace,Menlo,monospace">top   opus  $0.1701  vs sol   $0.2248   opus 1.3x</text>
+  <text x="782" y="862" fill="#8fd694" font-size="11.5" font-family="ui-monospace,Menlo,monospace">mid   sonnet $0.1189 vs luna  $0.0113   luna 10.5x</text>
+  <text x="782" y="882" fill="#c4c9d6" font-size="11.5" font-family="ui-monospace,Menlo,monospace">low   haiku $0.0182  vs terra $0.1031   haiku 5.7x</text>
+  <text x="768" y="928" fill="#c4c9d6" font-size="12">The cheaper vendor changes at every tier. There is no</text>
+  <text x="768" y="948" fill="#c4c9d6" font-size="12">"cheap vendor" — only a cheap cell, and it moves.</text>
+  <text x="768" y="976" fill="#c4c9d6" font-size="12">Cheapest flawless option overall: <tspan fill="#8fd694" font-weight="700">luna at $0.0113</tspan></text>
+  <text x="768" y="994" fill="#6c7590" font-size="11">15× cheaper than the cheaper of the two top tiers.</text>
+
+  <!-- 5 decision rule -->
+  <text x="36" y="1052" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">5 · THE DECISION RULE THIS PRODUCES</text>
+  <rect x="36" y="1064" width="1388" height="188" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="1092" fill="#e8eaf0" font-size="12.5" font-weight="700">Do not choose an axis. Measure the cells.</text>
+  <text x="58" y="1120" fill="#c4c9d6" font-size="12">1. Establish a quality floor first — a hidden acceptance suite. Without it, every cost comparison is meaningless.</text>
+  <text x="58" y="1144" fill="#c4c9d6" font-size="12">2. Find every cell that clears the floor. Here that was all six, so quality stopped being a discriminator.</text>
+  <text x="58" y="1168" fill="#c4c9d6" font-size="12">3. Among those, take the cheapest — <tspan font-style="italic">whichever axis it sits on</tspan>. Tier names and vendor loyalty both mislead.</text>
+  <text x="58" y="1192" fill="#c4c9d6" font-size="12">4. Re-measure when prices change. This entire ranking is a pricing snapshot, not a property of the models.</text>
+  <text x="58" y="1226" fill="#6c7590" font-size="11.5">The corollary: a team that assumed sol → luna → terra was a descending cost ladder would have routed to terra and paid 9× more for nothing.</text>
+
+  <rect x="36" y="1310" width="1388" height="110" rx="8" fill="#141a2a" stroke="#4a8fe7" stroke-width="1.5"/>
+  <text x="58" y="1340" fill="#e8eaf0" font-size="13" font-weight="700">★ THE DELIVERABLE — a routing decision matrix backed by your own measurements</text>
+  <text x="58" y="1366" fill="#c4c9d6" font-size="12">artifacts/lab-1c/matrix.json — 18 cells: score, cost, latency and full token breakdown for every model × task pair.</text>
+  <text x="58" y="1388" fill="#c4c9d6" font-size="12">Same 47-test floor cleared by all six models; the spread between cheapest and dearest cell is <tspan fill="#8fd694" font-weight="700">20×</tspan> ($0.0113 vs $0.2248).</text>
+  <text x="58" y="1408" fill="#6c7590" font-size="11.5">A number you can hand to whoever owns the routing config — and re-run the day pricing changes.</text>
+
+  <path d="M730 306 L730 348" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M730 518 L730 568" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M730 724 L730 772" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M730 1000 L730 1058" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M730 1252 L730 1304" stroke="#4a8fe7" stroke-width="1.6" fill="none" marker-end="url(#arg)"/>
+</svg>

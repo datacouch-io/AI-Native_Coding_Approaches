@@ -373,6 +373,29 @@ flawed module. Finding nothing is harder than finding something.
 
 ---
 
+### Step 9: Do it again yourself, with a defect you plant, unassisted
+
+**Why:** You verified a reviewer against three defects chosen to be findable. The honest test of a verification system is whether it catches a bug *you* designed to hide.
+
+**Your task.** Plant a new defect in the corrected module and run the loop against it.
+
+Take `reviews/terra/lru_cache_fixed.py` as your starting point and introduce **one** defect that the existing hidden suite does not catch — that constraint is the whole exercise. Candidates: an eviction that is correct until capacity is exactly 1; a `keys_in_lru_order` that returns the live list instead of a copy, so a caller can corrupt internal state; a `get` that refreshes recency on a *miss*.
+
+Then extend `tests/test_hidden.py` with a test that does catch it, and run the full verification loop.
+
+**You get the acceptance criteria and nothing else:**
+
+- your new defect passes the *original* 9-test hidden suite — if it does not, it was too easy
+- your extended hidden suite fails on it
+- the reviewer submits a reproducing test that the harness marks **CONFIRMED** (fails on your flawed module, passes on the reference)
+- the revision clears both your new test and all the original ones
+
+**Done when** you can say whether the reviewer found your defect unprompted — and if it did not, what about the defect made it invisible to review but visible to a test.
+
+No commands are given here. Steps 4–8 have them; the exercise is designing a defect worth catching.
+
+---
+
 ## 5. Validation / Verification
 
 ```bash

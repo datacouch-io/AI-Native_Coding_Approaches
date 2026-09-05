@@ -511,6 +511,29 @@ without one, "failover" never triggers because the primary never finishes failin
 
 ---
 
+### Step 9: Do it again yourself, with a deeper routing table, unassisted
+
+**Why:** A two-entry routing table survives one outage. Real incidents are rarely that tidy — the fallback is degraded too, or the failure is slow rather than clean.
+
+**Your task.** Extend the router to three routes and add a fault the current injector cannot produce.
+
+- Add a **second fallback** on a third model, so the table is primary → fallback → last resort.
+- Add a `slow` fault mode to `mock_outage.py`: it responds *successfully*, but only after a delay that breaches your latency budget. A 200 that arrives too late is still a failure, and the current classifier has no concept of it.
+- Give the router a per-attempt latency SLO and treat a breach as failover-worthy.
+
+**You get the acceptance criteria and nothing else:**
+
+- with `--fault slow` on the primary, the trace shows the primary *succeeding* and being rejected anyway, then a fallback delivering
+- with the primary and the first fallback both faulted, the trace shows **two** hops and the last resort answering
+- a `400` on the primary still halts the whole chain — a deeper table must not become a reason to retry your own bugs
+- every attempt records `error_class`, `status_code` and `elapsed_s`
+
+**Done when** all three traces are on disk and you can state, from the trace alone, how long a full three-hop failover costs you in wall-clock time.
+
+No commands are given here. Steps 4–7 have the pattern; the exercise is extending it.
+
+---
+
 ## 5. Validation / Verification
 
 ```bash

@@ -1,0 +1,26 @@
+$ python3 report.py
+
+                                   TOP                       MID                       LOW
+--------------------------------------------------------------------------------------------
+Anthropic            opus 100% $0.1701       sonnet 100% $0.1189   haiku 100% $0.0182 !1nc
+OpenAI                sol 100% $0.2248         luna 100% $0.0113        terra 100% $0.1031
+--------------------------------------------------------------------------------------------
+  ACROSS a row = vertical tiering   DOWN a column = horizontal routing   !Nnc = N cells returned no code
+
+VERTICAL - what descending inside one family actually buys you
+  Anthropic
+    top  opus        100%  $0.1701    38.0s   reference
+    mid  sonnet      100%  $0.1189    83.4s   +30% vs top
+    low  haiku       100%  $0.0182    16.6s   +89% vs top
+  OpenAI
+    top  sol         100%  $0.2248    42.0s   reference
+    mid  luna        100%  $0.0113    22.2s   +95% vs top
+    low  terra       100%  $0.1031    14.9s   +54% vs top
+
+HORIZONTAL - what switching vendor at a fixed tier buys you
+  top  opus 100% $0.1701   vs   sol 100% $0.2248   -> opus is 1.3x cheaper
+  mid  sonnet 100% $0.1189   vs   luna 100% $0.0113   -> luna is 10.5x cheaper
+  low  haiku 100% $0.0182   vs   terra 100% $0.1031   -> haiku is 5.7x cheaper
+
+  cheapest overall     : luna at $0.0113
+  cheapest FLAWLESS    : luna at $0.0113 (15x cheaper than the cheaper top tier)

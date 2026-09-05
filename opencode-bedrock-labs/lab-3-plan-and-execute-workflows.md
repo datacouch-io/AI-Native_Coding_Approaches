@@ -390,6 +390,27 @@ CRLF terminators — all of it built by a fast model following a plan it never d
 
 ---
 
+### Step 9: Do it again yourself, on a new module, unassisted
+
+**Why:** You ran plan-and-execute once on milestones somebody else defined. Defining the milestones is the part that transfers — a plan is only as good as the checkpoints it can be graded against.
+
+**Your task.** Build `paths.py` end to end with the same two-model workflow.
+
+It should provide `normalise(path)` (collapse `.`/`..` without touching the filesystem, reject escaping a root), `match_glob(path, pattern)` (support `*`, `?`, `**`), and `common_root(paths)`. Decompose it into **your own** four milestones, write a milestone-marked acceptance suite first, and only then run the plan hop.
+
+**You get the acceptance criteria and nothing else:**
+
+- your acceptance suite passes against a reference implementation you wrote yourself, before any model call
+- `plan.py` produces a `PLAN.md` that names all four milestones and states what each later one reuses
+- `execute.py` reaches 4/4 accepted with the cumulative gate green
+- `execution_ledger.json` shows the plan/execute cost split for your module
+
+**Done when** you can compare your split against this lab's ($0.3635 plan / $0.1896 execute) and say whether design was a bigger or smaller share of *your* feature — and why.
+
+No commands are given here. Steps 3–8 have them; the exercise is choosing the milestones.
+
+---
+
 ## 5. Validation / Verification
 
 ```bash

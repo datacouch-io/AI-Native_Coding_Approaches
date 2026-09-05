@@ -373,6 +373,27 @@ the full-transcript prompt grows without bound, while the contract handoff stays
 
 ---
 
+### Step 8: Do it again yourself, with a fourth hop, unassisted
+
+**Why:** Three hops is where handoff problems appear. Four is where the *cost* of the naive fix appears, because the full-transcript strategy grows with every hop while the contract strategy does not.
+
+**Your task.** Add a REVIEW hop after the test hop, and run all three strategies again.
+
+The reviewer receives the module and the test file, and must return an improved `test_expenses.py` adding at least three cases the original missed. Under `contract` it sees `STATE.md` plus the contract; under `full` it sees the entire implementation *and* the entire existing test file; under `isolated` it sees only `TASK.md`.
+
+**You get the acceptance criteria and nothing else:**
+
+- `runs/contract/` still collects and passes after the review hop replaces the test file
+- `runs/isolated/` still fails — a fourth hop must not accidentally repair the broken chain
+- `compare.py` reports the review hop's prompt size for each strategy
+- the gap between `contract` and `full` prompt sizes is **larger** at four hops than it was at three
+
+**Done when** you can state the growth rate: how many characters does each strategy's prompt gain per hop, and at what hop count does `full` stop being viable for your context window?
+
+No commands are given here. Steps 2–7 have the pattern; the exercise is extending the chain.
+
+---
+
 ## 5. Validation / Verification
 
 ```bash

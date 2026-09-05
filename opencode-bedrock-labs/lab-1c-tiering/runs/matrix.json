@@ -1,0 +1,346 @@
+{
+  "cells": [
+    {
+      "vendor": "Anthropic",
+      "tier": "mid",
+      "model": "sonnet",
+      "task": "T1",
+      "passed": 12,
+      "total": 12,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.030612,
+      "elapsed_s": 6.45,
+      "tokens": {
+        "input": 1,
+        "output": 201,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 11440
+      }
+    },
+    {
+      "vendor": "Anthropic",
+      "tier": "mid",
+      "model": "sonnet",
+      "task": "T2",
+      "passed": 20,
+      "total": 20,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.044371,
+      "elapsed_s": 37.33,
+      "tokens": {
+        "input": 1,
+        "output": 3940,
+        "reasoning": 0,
+        "cache_read": 10533,
+        "cache_write": 1145
+      }
+    },
+    {
+      "vendor": "Anthropic",
+      "tier": "mid",
+      "model": "sonnet",
+      "task": "T3",
+      "passed": 15,
+      "total": 15,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.043951,
+      "elapsed_s": 39.58,
+      "tokens": {
+        "input": 1,
+        "output": 3907,
+        "reasoning": 0,
+        "cache_read": 10533,
+        "cache_write": 1109
+      }
+    },
+    {
+      "vendor": "Anthropic",
+      "tier": "low",
+      "model": "haiku",
+      "task": "T1",
+      "passed": 12,
+      "total": 12,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.011427,
+      "elapsed_s": 5.23,
+      "tokens": {
+        "input": 2,
+        "output": 154,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 8524
+      }
+    },
+    {
+      "vendor": "Anthropic",
+      "tier": "low",
+      "model": "haiku",
+      "task": "T2",
+      "passed": 0,
+      "total": 0,
+      "format_ok": false,
+      "cost_usd": 0.00327,
+      "elapsed_s": 6.17,
+      "tokens": {
+        "input": 2,
+        "output": 240,
+        "reasoning": 0,
+        "cache_read": 7656,
+        "cache_write": 1042
+      },
+      "raw_reply_chars": 969
+    },
+    {
+      "vendor": "Anthropic",
+      "tier": "low",
+      "model": "haiku",
+      "task": "T3",
+      "passed": 15,
+      "total": 15,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.003548,
+      "elapsed_s": 5.16,
+      "tokens": {
+        "input": 2,
+        "output": 305,
+        "reasoning": 0,
+        "cache_read": 7656,
+        "cache_write": 1004
+      }
+    },
+    {
+      "vendor": "OpenAI",
+      "tier": "top",
+      "model": "sol",
+      "task": "T1",
+      "passed": 12,
+      "total": 12,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.061454,
+      "elapsed_s": 8.64,
+      "tokens": {
+        "input": 6456,
+        "output": 168,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 6454
+      }
+    },
+    {
+      "vendor": "OpenAI",
+      "tier": "top",
+      "model": "sol",
+      "task": "T2",
+      "passed": 20,
+      "total": 20,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.074373,
+      "elapsed_s": 8.82,
+      "tokens": {
+        "input": 6607,
+        "output": 746,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 6605
+      }
+    },
+    {
+      "vendor": "OpenAI",
+      "tier": "top",
+      "model": "sol",
+      "task": "T3",
+      "passed": 15,
+      "total": 15,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.088957,
+      "elapsed_s": 24.55,
+      "tokens": {
+        "input": 6583,
+        "output": 1486,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 6581
+      }
+    },
+    {
+      "vendor": "OpenAI",
+      "tier": "mid",
+      "model": "luna",
+      "task": "T1",
+      "passed": 12,
+      "total": 12,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.003108,
+      "elapsed_s": 4.38,
+      "tokens": {
+        "input": 6458,
+        "output": 169,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 6456
+      }
+    },
+    {
+      "vendor": "OpenAI",
+      "tier": "mid",
+      "model": "luna",
+      "task": "T2",
+      "passed": 20,
+      "total": 20,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.004292,
+      "elapsed_s": 9.48,
+      "tokens": {
+        "input": 6609,
+        "output": 1099,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 6607
+      }
+    },
+    {
+      "vendor": "OpenAI",
+      "tier": "mid",
+      "model": "luna",
+      "task": "T3",
+      "passed": 15,
+      "total": 15,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.003943,
+      "elapsed_s": 8.32,
+      "tokens": {
+        "input": 6585,
+        "output": 817,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 6583
+      }
+    },
+    {
+      "vendor": "OpenAI",
+      "tier": "low",
+      "model": "terra",
+      "task": "T1",
+      "passed": 12,
+      "total": 12,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.03111,
+      "elapsed_s": 3.74,
+      "tokens": {
+        "input": 6458,
+        "output": 76,
+        "reasoning": 0,
+        "cache_read": 5710,
+        "cache_write": 6456
+      }
+    },
+    {
+      "vendor": "OpenAI",
+      "tier": "low",
+      "model": "terra",
+      "task": "T2",
+      "passed": 20,
+      "total": 20,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.038185,
+      "elapsed_s": 6.4,
+      "tokens": {
+        "input": 6609,
+        "output": 609,
+        "reasoning": 0,
+        "cache_read": 5710,
+        "cache_write": 6607
+      }
+    },
+    {
+      "vendor": "OpenAI",
+      "tier": "low",
+      "model": "terra",
+      "task": "T3",
+      "passed": 15,
+      "total": 15,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.033806,
+      "elapsed_s": 4.74,
+      "tokens": {
+        "input": 6585,
+        "output": 253,
+        "reasoning": 0,
+        "cache_read": 5710,
+        "cache_write": 6583
+      }
+    },
+    {
+      "vendor": "Anthropic",
+      "tier": "top",
+      "model": "opus",
+      "task": "T1",
+      "passed": 12,
+      "total": 12,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.079079,
+      "elapsed_s": 7.33,
+      "tokens": {
+        "input": 2,
+        "output": 321,
+        "reasoning": 0,
+        "cache_read": 0,
+        "cache_write": 11367
+      }
+    },
+    {
+      "vendor": "Anthropic",
+      "tier": "top",
+      "model": "opus",
+      "task": "T2",
+      "passed": 20,
+      "total": 20,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.055766,
+      "elapsed_s": 19.16,
+      "tokens": {
+        "input": 2,
+        "output": 1735,
+        "reasoning": 0,
+        "cache_read": 10461,
+        "cache_write": 1144
+      }
+    },
+    {
+      "vendor": "Anthropic",
+      "tier": "top",
+      "model": "opus",
+      "task": "T3",
+      "passed": 15,
+      "total": 15,
+      "format_ok": true,
+      "imported": true,
+      "cost_usd": 0.035215,
+      "elapsed_s": 11.47,
+      "tokens": {
+        "input": 2,
+        "output": 922,
+        "reasoning": 0,
+        "cache_read": 10461,
+        "cache_write": 1108
+      }
+    }
+  ]
+}

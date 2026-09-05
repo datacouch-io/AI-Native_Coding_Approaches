@@ -318,6 +318,27 @@ The three layers, honestly labelled:
 
 ---
 
+### Step 7: Do it again yourself, with a policy of your own, unassisted
+
+**Why:** The policy you enforced has one interesting rule. A real policy has a dozen, they interact, and the interactions are where compliance failures live.
+
+**Your task.** Add a third data classification and a rule that conflicts with an existing one.
+
+Add `regulated`: it requires EU residency **and** a named allow-list of specific endpoints — being EU-resident is no longer sufficient on its own. Add a detector for it that overlaps with the PII detector, so at least one payload matches both. Then decide, and encode, which classification wins when two match.
+
+**You get the acceptance criteria and nothing else:**
+
+- a payload matching both `pii` and `regulated` is classified deterministically, and your policy file states the precedence rule explicitly rather than relying on dict ordering
+- you produce a blocked/allowed pair for `regulated` the way Step 3 did for `pii`
+- an endpoint that is EU-resident but *not* on the allow-list is blocked, with a reason naming the allow-list rather than residency
+- the audit log distinguishes the two block reasons
+
+**Done when** you can answer the question an auditor actually asks: *"a payload matched two classifications — which rule applied, and where is that decision written down?"*
+
+No commands are given here. Steps 2–6 have the pattern; the exercise is writing a policy whose rules interact.
+
+---
+
 ## 5. Validation / Verification
 
 ```bash

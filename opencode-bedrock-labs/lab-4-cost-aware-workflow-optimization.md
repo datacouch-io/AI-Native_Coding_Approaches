@@ -356,6 +356,27 @@ someone reading code that was supposed to have been cleaned up.
 
 ---
 
+### Step 7: Do it again yourself, and find the actual floor, unassisted
+
+**Why:** The `tuned` config saved 70%, but nothing in this lab establishes that it is the *cheapest* configuration that still works. You stopped at the first config that passed. The floor is one config further down, and you have not found it.
+
+**Your task.** Push the pipeline down until the gate goes red, then back off one step.
+
+Move `implement` — the most expensive step and the one most likely to break — to progressively cheaper tiers. Then do the same for `test`. Use `"prompt_style": "strict"` throughout, so you are measuring capability rather than repeating the instruction-following failure from Step 4.
+
+**You get the acceptance criteria and nothing else:**
+
+- at least one config drives the 56-test acceptance suite **red** — if everything passes, you have not reached the floor
+- for every config, `format_failures` is empty, so a red gate means a real quality failure rather than a step that produced nothing
+- `report.py` shows each config with an honest verdict
+- your final recommended config is the cheapest one that is green *and* clean
+
+**Done when** you can name the step and tier at which quality actually breaks, and state your recommended config's saving against the all-Opus baseline — with the caveat that it is a snapshot of today's prices.
+
+No commands are given here. Steps 3–6 have them; the exercise is finding where the floor is rather than stopping at the first success.
+
+---
+
 ## 5. Validation / Verification
 
 ```bash

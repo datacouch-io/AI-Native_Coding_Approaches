@@ -1,0 +1,73 @@
+{
+  "features": {
+    "search endpoint": {
+      "design (plan mode)": {
+        "cost_usd": 0.474177,
+        "output_tokens": 12712,
+        "steps": 5,
+        "tier": "opus",
+        "run": "plan-opus5.jsonl"
+      },
+      "build (implement)": {
+        "cost_usd": 0.219509,
+        "output_tokens": 7084,
+        "steps": 12,
+        "tier": "sonnet",
+        "run": "build-sonnet5.jsonl"
+      },
+      "_summary": {
+        "design_usd": 0.474177,
+        "build_usd": 0.219509,
+        "total_usd": 0.693686,
+        "design_share_pct": 68.4,
+        "design_to_build_ratio": 2.2
+      }
+    },
+    "bulk delete": {
+      "design (plan mode)": {
+        "cost_usd": 0.46766,
+        "output_tokens": 9794,
+        "steps": 7,
+        "tier": "opus",
+        "run": "plan2-opus5-bulkdelete.jsonl"
+      },
+      "build (implement)": {
+        "cost_usd": 0.093061,
+        "output_tokens": 1987,
+        "steps": 6,
+        "tier": "sonnet",
+        "run": "build2-sonnet5-bulkdelete.jsonl"
+      },
+      "_summary": {
+        "design_usd": 0.46766,
+        "build_usd": 0.093061,
+        "total_usd": 0.560721,
+        "design_share_pct": 83.4,
+        "design_to_build_ratio": 5.0
+      }
+    }
+  },
+  "variants": [
+    {
+      "run": "plan-opus5.jsonl",
+      "label": "full prompt, repo readable",
+      "cost_usd": 0.474177,
+      "output_tokens": 12712,
+      "steps": 5
+    },
+    {
+      "run": "plan-opus5-NAIVE-PROMPT.jsonl",
+      "label": "one-line prompt",
+      "cost_usd": 0.386597,
+      "output_tokens": 7538,
+      "steps": 7
+    },
+    {
+      "run": "plan-opus5-NO-REPO.jsonl",
+      "label": "full prompt, repo NOT readable",
+      "cost_usd": 0.278516,
+      "output_tokens": 5566,
+      "steps": 4
+    }
+  ]
+}

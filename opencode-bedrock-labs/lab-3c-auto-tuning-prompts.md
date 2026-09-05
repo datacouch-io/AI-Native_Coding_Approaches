@@ -394,6 +394,27 @@ set's fault.
 
 ---
 
+### Step 8: Do it again yourself, on a different extraction task, unassisted
+
+**Why:** One tuning run on one schema could be luck. The claim worth making to your team is that the *method* transfers — and the only way to know is to run it on a task whose failure modes you have not already seen.
+
+**Your task.** Build a new eval set and tune against it.
+
+Pick an extraction task from your own domain: parsing log lines into structured events, pulling shipment fields out of carrier emails, normalising job titles to a fixed taxonomy. Write **15 cases with a train/holdout split**, a naive v1 prompt, and run the full tune-and-measure cycle on the same cheap model both times.
+
+**You get the acceptance criteria and nothing else:**
+
+- your holdout split is never shown to the tuning model — verify this in your own harness, do not assume it
+- v1 scores below 70% on the holdout, or the task is too easy to demonstrate anything
+- the tuned v2 improves the **holdout** score, not just the train score
+- the same cheap model runs both passes; if you changed model, you measured the wrong thing
+
+**Done when** you can report a before/after holdout figure for your own task, and say whether the train-to-holdout gap grew — because a tuned prompt that only helps on seen cases is overfitting, not tuning.
+
+No commands are given here. Steps 3–7 have the cycle; the exercise is building an eval set worth tuning against.
+
+---
+
 ## 5. Validation / Verification
 
 ```bash

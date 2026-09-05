@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440" height="1460" viewBox="0 0 1440 1460" xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b6480"/></marker>
+    <marker id="arg" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8fd694"/></marker>
+  </defs>
+  <rect width="1440" height="1460" fill="#0f1117"/>
+
+  <text x="36" y="46" fill="#e8eaf0" font-size="22" font-weight="700">Lab 2 — Multi-Model Task Orchestration</text>
+  <text x="36" y="72" fill="#9aa1b2" font-size="13">One feature, two model tiers, two OpenCode agents — and a cost split that shows where the money in a plan-and-build workflow actually goes</text>
+
+  <!-- 1 the handoff -->
+  <text x="36" y="112" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">1 · THE HANDOFF — two agents, two tiers, one repository</text>
+  <rect x="36" y="124" width="1368" height="216" rx="8" fill="#171b28" stroke="#262b3a"/>
+
+  <rect x="58" y="146" width="620" height="86" rx="6" fill="#5c2a3a"/>
+  <text x="76" y="170" fill="#f6aec2" font-size="12.5" font-weight="700">PLAN MODE · claude-opus-5</text>
+  <text x="76" y="192" fill="#c4c9d6" font-size="11" font-family="ui-monospace,Menlo,monospace">opencode run --agent plan --model &lt;opus&gt;</text>
+  <text x="76" y="212" fill="#c4c9d6" font-size="11.5">reads the repo, writes nothing · produces DESIGN_*.md</text>
+
+  <rect x="722" y="146" width="660" height="86" rx="6" fill="#3a2a5c"/>
+  <text x="740" y="170" fill="#c9aef6" font-size="12.5" font-weight="700">BUILD MODE · claude-sonnet-5</text>
+  <text x="740" y="192" fill="#c4c9d6" font-size="11" font-family="ui-monospace,Menlo,monospace">opencode run --agent build --model &lt;sonnet&gt; --auto</text>
+  <text x="740" y="212" fill="#c4c9d6" font-size="11.5">edits main.py and db.py to the agreed design</text>
+
+  <line x1="678" y1="189" x2="716" y2="189" stroke="#5b6480" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <text x="58" y="264" fill="#c4c9d6" font-size="12">The two agents differ in <tspan font-weight="600">permission</tspan>, not just model. `plan` cannot write, so a design hop cannot quietly start implementing;</text>
+  <text x="58" y="284" fill="#c4c9d6" font-size="12">`build --auto` can edit files without stopping to ask. The design document is the only thing crossing between them.</text>
+  <text x="58" y="312" fill="#6c7590" font-size="11.5">Both hops run against the same working tree — this is a real feature landing in a real FastAPI app, not a sandboxed exercise.</text>
+
+  <!-- 2 features -->
+  <text x="36" y="376" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">2 · TWO FEATURES, BUILT THE SAME WAY</text>
+  <rect x="36" y="388" width="1368" height="132" rx="8" fill="#171b28" stroke="#262b3a"/>
+  <text x="58" y="416" fill="#e8eaf0" font-size="12.5" font-weight="600">GET /tasks/search</text>
+  <text x="58" y="440" fill="#c4c9d6" font-size="11.5">substring + status + priority-range filters, and cursor pagination that stays stable when rows are inserted mid-page</text>
+  <text x="58" y="472" fill="#e8eaf0" font-size="12.5" font-weight="600">POST /tasks/bulk-delete</text>
+  <text x="58" y="496" fill="#c4c9d6" font-size="11.5">filtered bulk deletion, rejecting an unfiltered request rather than emptying the table</text>
+
+  <!-- 3 cost -->
+  <text x="36" y="556" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">3 · WHAT THE HANDOFF ACTUALLY COSTS — summed from the captured event streams</text>
+  <rect x="36" y="568" width="1368" height="256" rx="8" fill="#171b28" stroke="#3a4560"/>
+
+  <text x="58" y="598" fill="#6c7590" font-size="11" font-weight="700">FEATURE</text>
+  <text x="270" y="598" fill="#6c7590" font-size="11" font-weight="700">PHASE</text>
+  <text x="500" y="598" fill="#6c7590" font-size="11" font-weight="700">TIER</text>
+  <text x="640" y="598" fill="#6c7590" font-size="11" font-weight="700">STEPS</text>
+  <text x="760" y="598" fill="#6c7590" font-size="11" font-weight="700">OUTPUT TOKENS</text>
+  <text x="960" y="598" fill="#6c7590" font-size="11" font-weight="700">COST</text>
+  <text x="1090" y="598" fill="#6c7590" font-size="11" font-weight="700">DESIGN SHARE</text>
+  <line x1="58" y1="608" x2="1382" y2="608" stroke="#262b3a" stroke-width="1"/>
+
+  <text x="58" y="636" fill="#c4c9d6" font-size="12">search endpoint</text>
+  <text x="270" y="636" fill="#f6aec2" font-size="12">design (plan)</text>
+  <text x="500" y="636" fill="#f6aec2" font-size="12">opus</text>
+  <text x="640" y="636" fill="#c4c9d6" font-size="12">5</text>
+  <text x="760" y="636" fill="#c4c9d6" font-size="12">12,712</text>
+  <text x="960" y="636" fill="#e8eaf0" font-size="12" font-weight="600">$0.4742</text>
+  <text x="1090" y="636" fill="#e0b877" font-size="12" font-weight="700">68%</text>
+
+  <text x="270" y="662" fill="#c9aef6" font-size="12">build (implement)</text>
+  <text x="500" y="662" fill="#c9aef6" font-size="12">sonnet</text>
+  <text x="640" y="662" fill="#c4c9d6" font-size="12">12</text>
+  <text x="760" y="662" fill="#c4c9d6" font-size="12">7,084</text>
+  <text x="960" y="662" fill="#c4c9d6" font-size="12">$0.2195</text>
+  <text x="1090" y="662" fill="#6c7590" font-size="11.5">2× the build</text>
+
+  <line x1="58" y1="676" x2="1382" y2="676" stroke="#262b3a" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <text x="58" y="702" fill="#c4c9d6" font-size="12">bulk delete</text>
+  <text x="270" y="702" fill="#f6aec2" font-size="12">design (plan)</text>
+  <text x="500" y="702" fill="#f6aec2" font-size="12">opus</text>
+  <text x="640" y="702" fill="#c4c9d6" font-size="12">7</text>
+  <text x="760" y="702" fill="#c4c9d6" font-size="12">9,794</text>
+  <text x="960" y="702" fill="#e8eaf0" font-size="12" font-weight="600">$0.4677</text>
+  <text x="1090" y="702" fill="#e0b877" font-size="12" font-weight="700">83%</text>
+
+  <text x="270" y="728" fill="#c9aef6" font-size="12">build (implement)</text>
+  <text x="500" y="728" fill="#c9aef6" font-size="12">sonnet</text>
+  <text x="640" y="728" fill="#c4c9d6" font-size="12">6</text>
+  <text x="760" y="728" fill="#c4c9d6" font-size="12">1,987</text>
+  <text x="960" y="728" fill="#c4c9d6" font-size="12">$0.0931</text>
+  <text x="1090" y="728" fill="#6c7590" font-size="11.5">5× the build</text>
+
+  <rect x="50" y="746" width="1340" height="62" rx="5" fill="#141a2a" stroke="#26324a"/>
+  <text x="66" y="768" fill="#e8eaf0" font-size="12" font-weight="600">Design is 68–83% of the cost of shipping a feature this way — the expensive hop is the thinking, not the typing.</text>
+  <text x="66" y="792" fill="#c4c9d6" font-size="11.5">Which is exactly why it is the hop worth buying from the top tier, and the build hop worth pushing down. Lab 4 pursues that further.</text>
+
+  <!-- 4 gotcha -->
+  <text x="36" y="862" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">4 · A MEASUREMENT TRAP IN THE EVENT STREAM</text>
+  <rect x="36" y="874" width="1368" height="126" rx="8" fill="#26161c" stroke="#5c2a3a"/>
+  <text x="58" y="902" fill="#f6aec2" font-size="12.5" font-weight="700">One `opencode run` emits SEVERAL step_finish events — the cost of a run is their SUM</text>
+  <text x="58" y="930" fill="#c4c9d6" font-size="12">The search design hop recorded <tspan font-family="ui-monospace,Menlo,monospace">5</tspan> steps and the build hop <tspan font-family="ui-monospace,Menlo,monospace">12</tspan>, because a build agent makes tool-use round trips as it reads and edits files.</text>
+  <text x="58" y="954" fill="#c4c9d6" font-size="12">Reading only the last event reports <tspan font-family="ui-monospace,Menlo,monospace" fill="#f6829a">$0.2784</tspan> for that design hop instead of <tspan font-family="ui-monospace,Menlo,monospace" fill="#8fd694">$0.4742</tspan> — a 41% undercount, and it gets worse the more tools a step uses.</text>
+  <text x="58" y="982" fill="#6c7590" font-size="11.5">Any cost dashboard you build on this event stream has to sum. Lab 1's single-call benchmark hid this, because a single call has one step.</text>
+
+  <!-- 5 prompt variants -->
+  <text x="36" y="1042" fill="#6c7590" font-size="11" font-weight="700" letter-spacing="1.1">5 · THE DESIGN HOP IS ONLY AS GOOD AS WHAT IT CAN SEE</text>
+  <rect x="36" y="1054" width="1368" height="150" rx="8" fill="#171b28" stroke="#3a4560"/>
+  <text x="58" y="1082" fill="#c4c9d6" font-size="12">Same model, same feature, same plan agent — only the prompt and the repo access change:</text>
+
+  <text x="58" y="1114" fill="#8fd694" font-size="12">full prompt, repo readable</text>
+  <text x="420" y="1114" fill="#c4c9d6" font-size="12">12,712 output tokens</text>
+  <text x="640" y="1114" fill="#e8eaf0" font-size="12" font-weight="600">$0.4742</text>
+  <text x="770" y="1114" fill="#6c7590" font-size="11.5">cites the actual route order and schema it read</text>
+
+  <text x="58" y="1142" fill="#e0b877" font-size="12">one-line prompt</text>
+  <text x="420" y="1142" fill="#c4c9d6" font-size="12">7,538 output tokens</text>
+  <text x="640" y="1142" fill="#c4c9d6" font-size="12">$0.3866</text>
+  <text x="770" y="1142" fill="#6c7590" font-size="11.5">generic design, plausible and unanchored</text>
+
+  <text x="58" y="1170" fill="#f6829a" font-size="12">full prompt, repo NOT readable</text>
+  <text x="420" y="1170" fill="#c4c9d6" font-size="12">5,566 output tokens</text>
+  <text x="640" y="1170" fill="#c4c9d6" font-size="12">$0.2785</text>
+  <text x="770" y="1170" fill="#6c7590" font-size="11.5">cheapest, and the least usable — it had to guess</text>
+
+  <text x="58" y="1194" fill="#c4c9d6" font-size="11.5">The cheapest design hop is the one that knew least about your codebase. Cost alone would have picked it.</text>
+
+  <rect x="36" y="1252" width="1368" height="106" rx="8" fill="#141a2a" stroke="#4a8fe7" stroke-width="1.5"/>
+  <text x="58" y="1282" fill="#e8eaf0" font-size="13" font-weight="700">★ THE DELIVERABLE — a working endpoint you can hit, plus the design that produced it</text>
+  <text x="58" y="1308" fill="#c4c9d6" font-size="12">16 tests passing (5 CRUD + 6 search + 5 bulk-delete) · both features live on a running uvicorn server · DESIGN_*.md from the plan hop</text>
+  <text x="58" y="1330" fill="#c4c9d6" font-size="12">artifacts/lab-2/cost-ledger.json — the per-hop cost split, extracted from the captured runs rather than estimated.</text>
+  <text x="58" y="1350" fill="#6c7590" font-size="11.5">You can read the blueprint, curl the endpoint, and say what each half of the workflow cost.</text>
+
+  <path d="M720 340 L720 382" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M720 520 L720 562" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M720 824 L720 868" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M720 1000 L720 1048" stroke="#5b6480" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+  <path d="M720 1204 L720 1246" stroke="#4a8fe7" stroke-width="1.6" fill="none" marker-end="url(#arg)"/>
+</svg>

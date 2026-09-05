@@ -25,6 +25,12 @@ cp ../opencode.json .   # reuse the Bedrock config from Lab 1
 
 ## 3. Architecture
 
+![Lab 2 architecture: a plan-mode hop on a high tier produces a design document, a build-mode hop on a lower tier implements it, and a measured cost ledger shows design accounting for 68-83% of each feature's spend](artifacts/lab-2/diagrams/lab-2-architecture.png)
+
+*Vector version: [`lab-2-architecture.svg`](artifacts/lab-2/diagrams/lab-2-architecture.svg)*
+
+The same flow, linear:
+
 ```
  lab-2-taskapi/                     Incomplete FastAPI + SQLite task manager
    main.py         <-- CRUD implemented; GET /tasks/search missing
@@ -465,6 +471,58 @@ curl -X DELETE "http://127.0.0.1:8420/tasks/bulk?status=done"
 
 ![Bulk-delete live demo: no-filter request rejected, filtered request deletes exactly the matching tasks](artifacts/lab-2/screenshots/02-bulk-delete-live-demo.png)
 
+### Step 8: Price the handoff
+
+**Why:** You have now paid for four model calls across two tiers. The whole argument for splitting
+design from implementation is economic, so put a number on it rather than trusting the intuition.
+
+Every `opencode run` in this lab was captured with `--format json`, so the cost is already on disk.
+[`ledger.py`](lab-2-taskapi/ledger.py) totals it per hop:
+
+```bash
+python3 ledger.py
+```
+
+**Expected output:**
+
+```
+FEATURE           PHASE                 TIER      STEPS  OUT TOK       COST
+---------------------------------------------------------------------------
+search endpoint   design (plan mode)    opus          5    12712    $0.4742
+search endpoint   build (implement)     sonnet       12     7084    $0.2195
+bulk delete       design (plan mode)    opus          7     9794    $0.4677
+bulk delete       build (implement)     sonnet        6     1987    $0.0931
+
+FEATURE                 DESIGN       BUILD       TOTAL   DESIGN SHARE
+---------------------------------------------------------------------------
+search endpoint        $0.4742     $0.2195     $0.6937   68%  (2x the build)
+bulk delete            $0.4677     $0.0931     $0.5607   83%  (5x the build)
+```
+
+**Design is 68–83% of the cost of shipping a feature this way.** The expensive hop is the
+thinking, not the typing — which is precisely why it is the one worth buying from the top tier,
+and why the build hop is the one worth pushing down. Lab 4 takes that further and measures what
+happens when you push every step down.
+
+> **A measurement trap worth knowing before you build any cost dashboard on this data.** One
+> `opencode run` emits **several** `step_finish` events — the search design hop recorded 5 and the
+> build hop 12, because a build agent makes tool-use round trips as it reads and edits files. The
+> cost of a run is their **sum**. Reading only the last event reports `$0.2784` for that design hop
+> instead of `$0.4742` — a 41% undercount, and it gets worse the more tools a step uses. Lab 1's
+> benchmark hid this because a single non-agentic call has exactly one step.
+
+The ledger also prices the three design variants from Step 4:
+
+```
+  full prompt, repo readable            12712    $0.4742
+  one-line prompt                        7538    $0.3866
+  full prompt, repo NOT readable         5566    $0.2785
+```
+
+**The cheapest design hop is the one that knew least about your codebase.** Optimising this
+workflow on cost alone would have selected the worst design in the set — which is the argument for
+keeping a quality gate in the loop before you start economising.
+
 ## 5. Validation / Verification
 
 ```bash
@@ -472,6 +530,42 @@ python3 -m pytest tests/ -v
 ```
 
 **Expected output:** `16 passed` — all 5 CRUD tests, all 6 search tests, and all 5 bulk-delete tests, run together, confirming the second feature didn't break the first.
+
+Then confirm the economics you were told about are the economics you actually got:
+
+```bash
+python3 -c "
+import json, subprocess
+subprocess.run(['python3','ledger.py','--json-out','/tmp/lab2-ledger.json'],
+               check=True, capture_output=True)
+led = json.load(open('/tmp/lab2-ledger.json'))
+
+for feature, phases in led['features'].items():
+    s = phases['_summary']
+    assert s['design_usd'] > s['build_usd'], f'{feature}: design was not the expensive hop'
+    print(f\"[OK] {feature:<18} design \${s['design_usd']:.4f} vs build \${s['build_usd']:.4f} \"
+          f\"- design is {s['design_share_pct']:.0f}% of \${s['total_usd']:.4f}\")
+
+steps = [p['steps'] for ph in led['features'].values()
+         for k, p in ph.items() if k != '_summary']
+assert max(steps) > 1, 'expected multi-step runs - are you summing step_finish events?'
+print(f'[OK] runs recorded up to {max(steps)} steps each - cost must be summed, not read once')
+
+best = max(led['variants'], key=lambda v: v['output_tokens'])
+cheapest = min(led['variants'], key=lambda v: v['cost_usd'])
+assert best['label'] != cheapest['label']
+print(f\"[OK] cheapest design variant was '{cheapest['label']}' - not the most thorough one\")
+"
+```
+
+**Expected output:**
+
+```
+[OK] search endpoint    design $0.4742 vs build $0.2195 - design is 68% of $0.6937
+[OK] bulk delete        design $0.4677 vs build $0.0931 - design is 83% of $0.5607
+[OK] runs recorded up to 12 steps each - cost must be summed, not read once
+[OK] cheapest design variant was 'full prompt, repo NOT readable' - not the most thorough one
+```
 
 ## 6. Troubleshooting Tips
 

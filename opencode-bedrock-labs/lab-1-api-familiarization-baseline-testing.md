@@ -701,6 +701,29 @@ the entire argument for multi-model routing that Modules 2–4 build on.
 
 ---
 
+### Step 9: Do it again yourself, on your own workload, unassisted
+
+**Why:** The scorecard you just built ranks four models on four prompts somebody else chose. That is a demonstration. A scorecard that changes a decision has to be built from prompts your team actually sends.
+
+**Your task.** Rebuild the benchmark with a fifth model tier and a fifth prompt of your own.
+
+- Add `claude-haiku-4-5` (or `gpt-5.6-luna` — Lab 1C found it 15× cheaper than the top tier) to `MODELS`.
+- Replace at least one of the four prompts with a real task from your own backlog — something you actually asked a model to do last week.
+- Re-run the whole pipeline: benchmark → extract → verify → score → dashboard.
+
+**You get the acceptance criteria and nothing else:**
+
+- `benchmark_results.json` holds 25 results, every one with a real positive `cost_usd`
+- every result carries a `quality_1_5` you assigned *after* running the generated code, not after reading it
+- `dashboard.html` renders 5 model cards and a verdict line
+- you can name the model you would route your own prompt to, and say what it costs per 1,000 calls
+
+**Done when** the validation block in §5 passes with 25 rather than 16, and you can defend the choice to someone who has to pay for it.
+
+No commands are given here. Steps 3–7 have them all; the exercise is assembling the pipeline yourself.
+
+---
+
 ## 5. Validation / Verification
 
 Run all three checks. Each one proves a different part of the pipeline actually worked.
